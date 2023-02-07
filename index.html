@@ -30,45 +30,64 @@
         </div>
     </nav>
     <div>
+        <script src = "js/phaser.min.js" ></script>
+        <script src = "js/phaser-plugin-isometric.min.js" ></script> 
         <script>
-            var config = {
-                type: Phaser.AUTO,
-                parent: 'phaser-example',
-                width: 1280,
-                height: 720,
-                scene: {
-                    preload: preload,
-                    create: create
+            var game = new Phaser.Game(1150, 720, Phaser.AUTO, 'test', null, true, false);
+
+            var BasicGame = function (game) { };
+
+            BasicGame.Boot = function (game) { };
+
+            var isoGroup, cursorPos, cursor;
+
+            BasicGame.Boot.prototype =
+            {
+                preload: function () {
+                    game.load.image('tile', 'assets/grass.png');
+
+                    game.time.advancedTiming = true;
+
+                    game.plugins.add(new Phaser.Plugin.Isometric(game));
+                    game.iso.anchor.setTo(0.5, 0.0);
+                },
+                create: function () {
+                    isoGroup = game.add.group();
+                    this.spawnTiles();
+                    cursorPos = new Phaser.Plugin.Isometric.Point3();
+                },
+                update: function () {
+                    game.iso.unproject(game.input.activePointer.position, cursorPos);
+                    isoGroup.forEach(function (tile) {
+                        var inBounds = tile.isoBounds.containsXY(cursorPos.x, cursorPos.y);
+                        if (!tile.selected && inBounds) {
+                            tile.selected = true;
+                            tile.tint = 0x86bfda;
+                            game.add.tween(tile).to({ isoZ: 4 }, 200, Phaser.Easing.Quadratic.InOut, true);
+                        }
+                        else if (tile.selected && !inBounds) {
+                            tile.selected = false;
+                            tile.tint = 0xffffff;
+                            game.add.tween(tile).to({ isoZ: 0 }, 200, Phaser.Easing.Quadratic.InOut, true);
+                        }
+                    });
+                },
+                render: function () {
+                    game.debug.text(game.time.fps || '--', 2, 14, "#a7aebe");
+                },
+                spawnTiles: function () {
+                    var tile;
+                    for (var xx = 0; xx < 716; xx += 35.8) {
+                        for (var yy = 0; yy < 716; yy += 35.8) {
+                            tile = game.add.isoSprite(xx, yy, 0, 'tile', 0, isoGroup);
+                            tile.anchor.set(0.5, 0);
+                        }
+                    }
                 }
             };
 
-            var game = new Phaser.Game(config);
-
-            function preload() {
-                this.load.image('tile', 'assets/grass.png');
-            }
-
-            function create() {
-                // Obliczenie położenia pierwszego kafelka w siatce
-                var tileWidth = 64;
-                var tileHeight = 32;
-                var startX = config.width / 2;
-                var startY = config.height /2 - (tileHeight*10)+(tileHeight/2);
-
-                // Tworzenie siatki 20x20 kafelków
-                for (var i = 0; i < 20; i++) {
-                    for (var j = 0; j < 20; j++) {
-                        var x = startX + (j * tileWidth / 2) - (i * tileWidth / 2);
-                        var y = startY + (j * tileHeight / 2) + (i * tileHeight / 2);
-                        this.add.image(x, y, 'tile');
-                    }
-                }
-            }
-
-            function update() {
-
-            }
-
+            game.state.add('Boot', BasicGame.Boot);
+            game.state.start('Boot');
         </script>
     </div>
 
