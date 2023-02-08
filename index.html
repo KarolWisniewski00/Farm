@@ -12,26 +12,51 @@
 </head>
 
 <body class="min-vh-100 min-vw-100 d-flex justify-content-center align-items-center bg-secondary">
-    <nav class="navbar fixed-top navbar-dark bg-dark" id="navtop">
-        <div class="container-fluid">
-            <div class="d-flex justify-content-end w-100">
+    <nav class="navbar fixed-top navbar-dark p-0" id="navtop">
+        <div class="container-fluid w-100 bg-dark">
+            <div class="d-flex justify-content-between w-100">
+                <div class="navbar-brand d-flex justify-content-between align-items-center m-0">
+                    <buttom class="btn btn-outline-light p-2 m-2" id="seeding"><img src="assets/seeding.png"
+                            class="img-fluid max-height-64" alt="seeding"></buttom>
+                    <buttom class="btn btn-outline-light p-2 m-2" id="mission"><img src="assets/target.png"
+                            class="img-fluid max-height-64" alt="target"></buttom>
+                </div>
                 <div class="navbar-brand d-flex justify-content-center align-items-center m-0">
                     <img src="assets/dollar.png" alt="coin" width="64" height="64">
                     <span id="coins" class="mx-2"></span>
                 </div>
             </div>
         </div>
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark bg-dark w-100 bg-opacity-25" id="side-seeding"
+            style="visibility: hidden;">
+            <div class="text-white text-center">
+                <span class="fs-1">Seeding</span>
+            </div>
+            <hr>
+            <div class="container">
+                <div class="row overflow-auto" style="max-height: 50vh;">
+                    <div class="col d-flex justify-content-center align-items-center">
+                        <buttom class="btn btn-outline-light p-2 m-2" id="wheat-icon">
+                            <div>Wheat</div><img src="assets/wheat-icon.png"
+                                class="img-fluid max-height-64" alt="wheat-icon">
+                            <div>10</div>
+                        </buttom>
+                    </div>
+                </div>
+            </div>
+        </div>
     </nav>
+
     <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark" id="navbot">
         <div class="container-fluid">
             <div class="d-flex justify-content-between w-100">
-                <buttom class="btn btn-success p-2 m-2" id="shovel"><img src="assets/shovel.png"
+                <buttom class="btn btn-outline-light p-2 m-2" id="shovel"><img src="assets/shovel.png"
                         class="img-fluid max-height-64" alt="shovel"></buttom>
-                <buttom class="btn btn-success p-2 m-2" id="plant"><img src="assets/plant.png" alt="plant"
+                <buttom class="btn btn-outline-light p-2 m-2" id="plant"><img src="assets/plant.png" alt="plant"
                         class="img-fluid max-height-64"></buttom>
-                <buttom class="btn btn-success p-2 m-2" id="watering-can"><img src="assets/watering-can.png"
+                <buttom class="btn btn-outline-light p-2 m-2" id="watering-can"><img src="assets/watering-can.png"
                         alt="watering-can" class="img-fluid max-height-64"></buttom>
-                <buttom class="btn btn-success p-2 m-2" id="scythe"><img src="assets/scythe.png" alt="scythe"
+                <buttom class="btn btn-outline-light p-2 m-2" id="scythe"><img src="assets/scythe.png" alt="scythe"
                         class="img-fluid max-height-64"></buttom>
             </div>
         </div>
@@ -39,17 +64,24 @@
     <script src="js/phaser.min.js"></script>
     <script src="js/phaser-plugin-isometric.min.js"></script>
     <script>
+        //LAYOUT
+        document.getElementById("seeding").addEventListener("click", function () {
+            var div = document.getElementById('side-seeding');
+            if (div.style.visibility === "hidden") {
+                div.style.visibility = "visible";
+            } else {
+                div.style.visibility = "hidden";
+            }
+        });
         //CONFIG
         var navTop = document.getElementById("navtop");
-        var navTopStyles = window.getComputedStyle(navTop);
         var navTopHeight = navTop.offsetHeight;
 
         var navBot = document.getElementById("navbot");
-        var navBotStyles = window.getComputedStyle(navBot);
         var navBotHeight = navBot.offsetHeight;
 
-        var width = window.innerWidth * 0.75;
-        var height = window.innerHeight - navTopHeight - navBotHeight;
+        var width = window.innerWidth * 0.85;
+        var height = window.innerHeight - navTopHeight;
 
         if (height > 720) {
             height = 720
@@ -281,8 +313,8 @@
                                 var diffY = 1000000;
                                 isoGroupSecond.forEach(function (tileSecond) {
                                     if (tileSecond.key == 'wheat') {
-                                        var currDiffX = Math.abs(player.position.x - tileSecond.position.x);
-                                        var currDiffY = Math.abs(player.position.y - tileSecond.position.y);
+                                        var currDiffX = Math.abs(tile.position.x - tileSecond.position.x);
+                                        var currDiffY = Math.abs(tile.position.y - tileSecond.position.y);
                                         if (currDiffX < diffX || currDiffY < diffY) {
                                             diffX = currDiffX;
                                             diffY = currDiffY;
@@ -386,4 +418,7 @@
     https://www.flaticon.com/search?word=scythe
     https://www.flaticon.com/search?word=coin
     https://www.flaticon.com/search?word=plant
+    https://www.flaticon.com/search?word=planting
+    https://www.flaticon.com/search?word=mission
+    https://www.flaticon.com/search?word=wheat
 -->
