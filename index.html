@@ -12,185 +12,226 @@
 </head>
 
 <body class="min-vh-100 min-vw-100 d-flex justify-content-center align-items-center bg-secondary">
-    <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar fixed-top navbar-dark bg-dark" id="navtop">
         <div class="container-fluid">
             <div class="d-flex justify-content-end w-100">
-                <h2 class="navbar-brand"><img src="assets/dollar.png" alt="coin" width="64" height="64"> 0</h2>
+                <div class="navbar-brand d-flex justify-content-center align-items-center m-0">
+                    <img src="assets/dollar.png" alt="coin" width="64" height="64">
+                    <span id="coins" class="mx-2"></span>
+                </div>
             </div>
         </div>
     </nav>
-    <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark" id="navbot">
         <div class="container-fluid">
             <div class="d-flex justify-content-between w-100">
-                <buttom class="btn btn-success" id="1"><img src="assets/plant.png" alt="" width="64" height="64">
-                </buttom>
-                <buttom class="btn btn-success"><img src="assets/watering-can.png" alt="" width="64" height="64">
-                </buttom>
-                <buttom class="btn btn-success"><img src="assets/scythe.png" alt="" width="64" height="64"></buttom>
+                <buttom class="btn btn-success p-2 m-2" id="shovel"><img src="assets/shovel.png" class="img-fluid max-height-64" alt="shovel"></buttom>
+                <buttom class="btn btn-success p-2 m-2" id="plant"><img src="assets/plant.png" alt="plant" class="img-fluid max-height-64"></buttom>
+                <buttom class="btn btn-success p-2 m-2" id="watering-can"><img src="assets/watering-can.png" alt="watering-can" class="img-fluid max-height-64"></buttom>
+                <buttom class="btn btn-success p-2 m-2" id="scythe"><img src="assets/scythe.png" alt="scythe" class="img-fluid max-height-64"></buttom>
             </div>
         </div>
     </nav>
-    <div>
-        <script src="js/phaser.min.js"></script>
-        <script src="js/phaser-plugin-isometric.min.js"></script>
-        <script>
-            //CONFIG
-            var game = new Phaser.Game(1080, 720, Phaser.AUTO, 'test', null, true, false);
-            var BasicGame = function (game) { };
-            BasicGame.Boot = function (game) { };
-            var isoGroup, cursorPos, cursor;
+    <script src="js/phaser.min.js"></script>
+    <script src="js/phaser-plugin-isometric.min.js"></script>
+    <script>
+        //CONFIG
+        var navTop = document.getElementById("navtop");
+        var navTopStyles = window.getComputedStyle(navTop);
+        var navTopHeight = navTop.offsetHeight;
 
-            //VARIABLES
-            var map = [
-                [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0],
-                [2, 1, 1, 3, 2, 3, 1, 1, 2, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0],
-                [2, 1, 1, 3, 2, 3, 1, 1, 2, 1, 3, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0],
-                [2, 1, 1, 3, 2, 3, 1, 1, 2, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0],
-                [2, 1, 1, 3, 2, 3, 1, 1, 2, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0],
-                [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1],
-                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-            ];
+        var navBot = document.getElementById("navbot");
+        var navBotStyles = window.getComputedStyle(navBot);
+        var navBotHeight = navBot.offsetHeight;
 
-            const size = 35.8;
-            const speed = 100;
+        var width = window.innerWidth * 0.75;
+        var height = window.innerHeight - navTopHeight - navBotHeight;
 
-            BasicGame.Boot.prototype =
-            {
-                //--------------------------------------------------------------------------------
-                preload: function () {
-                    //LOAD IMAGES
-                    game.load.image('grass', 'assets/grass.png');
-                    game.load.image('nograss', 'assets/nograss.png');
-                    game.load.image('character', 'assets/character.png');
-                    game.load.image('tree', 'assets/tree.png');
-                    game.load.image('wheat', 'assets/wheat.png');
+        if (height>720){
+            height=720
+        }
 
-                    //SET UP GAME
-                    game.time.advancedTiming = true;
-                    game.plugins.add(new Phaser.Plugin.Isometric(game));
-                    game.world.setBounds(0, 0, 1496, 1024);
-                    game.physics.startSystem(Phaser.Plugin.Isometric.ISOARCADE);
-                    game.iso.anchor.setTo(0.5, 0.0);
-                },
-                //--------------------------------------------------------------------------------
-                create: function () {
-                    //GRAVITY
-                    game.physics.isoArcade.gravity.setTo(0, 0, -1000);
+        var game = new Phaser.Game(width, height, Phaser.AUTO, 'test', null, true, false);
+        var BasicGame = function (game) { };
+        BasicGame.Boot = function (game) { };
+        var isoGroup, cursorPos, cursor;
 
-                    //SPAWN
-                    isoGroupPlatform = game.add.group();
-                    this.spawnTilesPlatform();
-                    isoGroupSecond = game.add.group();
-                    this.spawnTilesSecond();
+        //VARIABLES
+        var map = [
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0],
+        ];
 
-                    //CHARACTER
-                    player = game.add.isoSprite(size * 10, size * 10, 0, 'character', 0, isoGroupSecond);
-                    player.anchor.set(0.5);
-                    game.physics.isoArcade.enable(player);
-                    player.body.collideWorldBounds = true;
+        var coins = 100;
 
-                    //ADD KEY TO MOVE
-                    this.cursors = game.input.keyboard.createCursorKeys();
-                    this.game.input.keyboard.addKeyCapture([
-                        Phaser.Keyboard.LEFT,
-                        Phaser.Keyboard.RIGHT,
-                        Phaser.Keyboard.UP,
-                        Phaser.Keyboard.DOWN,
-                        Phaser.Keyboard.SPACEBAR
-                    ]);
+        const size = 35.8;
+        const speed = 100;
 
-                    //CAMERA MOVE
-                    game.camera.follow(player);
+        BasicGame.Boot.prototype =
+        {
+            //--------------------------------------------------------------------------------
+            preload: function () {
+                //LOAD IMAGES
+                game.load.image('grass', 'assets/grass.png');
+                game.load.image('nograss', 'assets/nograss.png');
+                game.load.image('character', 'assets/character.png');
+                game.load.image('tree', 'assets/tree.png');
+                game.load.image('wheat', 'assets/wheat.png');
 
-                },
-                //--------------------------------------------------------------------------------
-                update: function () {
-                    //MOVE UPDATE
-                    player.body.velocity.y = (this.cursors.up.isDown ? -speed : (this.cursors.down.isDown ? speed : 0));
-                    player.body.velocity.x = (this.cursors.left.isDown ? -speed : (this.cursors.right.isDown ? speed : 0));
+                //SET UP GAME
+                game.time.advancedTiming = true;
+                game.plugins.add(new Phaser.Plugin.Isometric(game));
+                game.world.setBounds(0, 0, 1496, 1024);
+                game.physics.startSystem(Phaser.Plugin.Isometric.ISOARCADE);
+                game.iso.anchor.setTo(0.5, 0.0);
 
-                    document.getElementById("1").addEventListener("click", function () {
-                        var counter = 0;
-                        isoGroupPlatform.forEach(function (tile) {
-                            var inBounds = tile.isoBounds.containsXY(player.body.position.x, player.body.position.y);
-                            if (!tile.selected && inBounds) {
-                                tile.selected = true;
-                                if (isoGroupPlatform.children[counter].key === "grass") {
+                //LAYOUT SET UP
+                document.getElementById("coins").innerHTML += coins;
+            },
+            //--------------------------------------------------------------------------------
+            create: function () {
+                //GRAVITY
+                game.physics.isoArcade.gravity.setTo(0, 0, -1000);
+
+                //SPAWN
+                isoGroupPlatform = game.add.group();
+                this.spawnTilesPlatform();
+                isoGroupSecond = game.add.group();
+                this.spawnTilesSecond();
+
+                //CHARACTER
+                player = game.add.isoSprite(size * 10, size * 10, 0, 'character', 0, isoGroupSecond);
+                player.anchor.set(0.5);
+                game.physics.isoArcade.enable(player);
+                player.body.collideWorldBounds = true;
+
+                //ADD KEY TO MOVE
+                this.cursors = game.input.keyboard.createCursorKeys();
+                this.game.input.keyboard.addKeyCapture([
+                    Phaser.Keyboard.LEFT,
+                    Phaser.Keyboard.RIGHT,
+                    Phaser.Keyboard.UP,
+                    Phaser.Keyboard.DOWN,
+                    Phaser.Keyboard.SPACEBAR
+                ]);
+
+                //CAMERA MOVE
+                game.camera.follow(player);
+
+            },
+            //--------------------------------------------------------------------------------
+            update: function () {
+                //MOVE UPDATE
+                player.body.velocity.y = (this.cursors.up.isDown ? -speed : (this.cursors.down.isDown ? speed : 0));
+                player.body.velocity.x = (this.cursors.left.isDown ? -speed : (this.cursors.right.isDown ? speed : 0));
+
+                //ACTION ON CLICK SHOVEL
+                document.getElementById("shovel").addEventListener("click", function () {
+                    var counter = 0;
+                    isoGroupPlatform.forEach(function (tile) {
+                        var inBounds = tile.isoBounds.containsXY(player.body.position.x + (size / 2), player.body.position.y + (size / 2));
+                        if (!tile.selected && inBounds) {
+                            tile.selected = true;
+
+                            x = Math.floor(counter / (map.length))
+                            y = counter % map.length
+
+                            //CHANGE FROM GRASS TO NOGRASS
+                            if (isoGroupPlatform.children[counter].key == "grass") {
+                                if (coins >= 10) {
                                     isoGroupPlatform.children[counter].loadTexture('nograss');
-                                } else if (isoGroupPlatform.children[counter].key === "nograss"){
+                                    map[x][y] = 1;
+                                    coins -= 10;
+                                    document.getElementById("coins").innerHTML = coins;
+                                }
+
+                                //CHANGE FROM NO GRASS TO GRASS
+                            } else if (isoGroupPlatform.children[counter].key == "nograss") {
+                                if (coins >= 10) {
                                     isoGroupPlatform.children[counter].loadTexture('grass');
+                                    map[x][y] = 0;
+                                    coins -= 10;
+                                    document.getElementById("coins").innerHTML = coins;
                                 }
                             }
-                            counter++;
-                        });
+                        }
+                        else if (tile.selected && !inBounds) {
+                            tile.selected = false;
+                        }
+                        counter++;
                     });
+                });
 
-                    game.physics.isoArcade.collide(isoGroupPlatform);
-                    game.iso.topologicalSort(isoGroupPlatform);
-                    game.physics.isoArcade.collide(isoGroupSecond);
-                    game.iso.topologicalSort(isoGroupSecond);
+                game.physics.isoArcade.collide(isoGroupPlatform);
+                game.iso.topologicalSort(isoGroupPlatform);
+                game.physics.isoArcade.collide(isoGroupSecond);
+                game.iso.topologicalSort(isoGroupSecond);
 
-                },
-                //--------------------------------------------------------------------------------
-                spawnTilesPlatform: function () {
-                    for (var xx = 0; xx < map[0].length * size - size; xx += size) {
-                        for (var yy = 0; yy < map.length * size - size; yy += size) {
-                            if ((map[parseInt(xx / size)][parseInt(yy / size)] == 0) || (map[parseInt(xx / size)][parseInt(yy / size)] == 2)) {
-                                //GRASS
-                                grass = game.add.isoSprite(xx, yy, 0, 'grass', 0, isoGroupPlatform);
-                                grass.anchor.set(0.5, 0);
-                            } else if (map[parseInt(xx / size)][parseInt(yy / size)] == 1 || (map[parseInt(xx / size)][parseInt(yy / size)] == 3)) {
-                                //NOGRASS
-                                nograss = game.add.isoSprite(xx, yy, 0, 'nograss', 0, isoGroupPlatform);
-                                nograss.anchor.set(0.5, 0);
-                            }
+            },
+            //--------------------------------------------------------------------------------
+            spawnTilesPlatform: function () {
+                for (var xx = 0; xx < map[0].length * size - size; xx += size) {
+                    for (var yy = 0; yy < map.length * size - size; yy += size) {
+                        if ((map[parseInt(xx / size)][parseInt(yy / size)] == 0) || (map[parseInt(xx / size)][parseInt(yy / size)] == 2)) {
+                            //GRASS
+                            grass = game.add.isoSprite(xx, yy, 0, 'grass', 0, isoGroupPlatform);
+                            grass.anchor.set(0.5, 0);
+                        } else if (map[parseInt(xx / size)][parseInt(yy / size)] == 1 || (map[parseInt(xx / size)][parseInt(yy / size)] == 3)) {
+                            //NOGRASS
+                            nograss = game.add.isoSprite(xx, yy, 0, 'nograss', 0, isoGroupPlatform);
+                            nograss.anchor.set(0.5, 0);
                         }
                     }
-                },
-                //--------------------------------------------------------------------------------
-                spawnTilesSecond: function () {
-                    for (var xx = 0; xx < map[0].length * size; xx += size) {
-                        for (var yy = 0; yy < map.length * size; yy += size) {
-                            if (map[parseInt(xx / size)][parseInt(yy / size)] == 2) {
-                                //TREE
-                                tree = game.add.isoSprite(xx, yy, 0, 'tree', 0, isoGroupSecond);
-                                tree.anchor.set(0.5);
-                                game.physics.isoArcade.enable(tree);
-                                tree.body.collideWorldBounds = true;
-                                tree.body.immovable = true;
-                            } else if (map[parseInt(xx / size)][parseInt(yy / size)] == 3) {
-                                //WHEAT
-                                wheat = game.add.isoSprite(xx, yy, 0, 'wheat', 0, isoGroupSecond);
-                                wheat.anchor.set(0.5);
-                            }
+                }
+            },
+            //--------------------------------------------------------------------------------
+            spawnTilesSecond: function () {
+                for (var xx = 0; xx < map[0].length * size; xx += size) {
+                    for (var yy = 0; yy < map.length * size; yy += size) {
+                        if (map[parseInt(xx / size)][parseInt(yy / size)] == 2) {
+                            //TREE
+                            tree = game.add.isoSprite(xx, yy, 0, 'tree', 0, isoGroupSecond);
+                            tree.anchor.set(0.5);
+                            game.physics.isoArcade.enable(tree);
+                            tree.body.collideWorldBounds = true;
+                            tree.body.immovable = true;
+                        } else if (map[parseInt(xx / size)][parseInt(yy / size)] == 3) {
+                            //WHEAT
+                            wheat = game.add.isoSprite(xx, yy, 0, 'wheat', 0, isoGroupSecond);
+                            wheat.anchor.set(0.5);
                         }
                     }
-                },
-                //--------------------------------------------------------------------------------
-                render: function () {
-                    game.debug.text(game.time.fps || '--', 2, 14, "#a7aebe");
-                },
-            };
+                }
+            },
+            //--------------------------------------------------------------------------------
+            render: function () {
+                game.debug.text(game.time.fps || '--', 2, 14, "#a7aebe");
+            },
+        };
 
-            //CONFIG
-            game.state.add('Boot', BasicGame.Boot);
-            game.state.start('Boot');
-        </script>
-    </div>
+        //CONFIG
+        game.state.add('Boot', BasicGame.Boot);
+        game.state.start('Boot');
+    </script>
 
 </body>
 

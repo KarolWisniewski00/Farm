@@ -1,21 +1,3 @@
-#display-game{
-    width: 320px;
-    height: 640px;
-    overflow: auto;
-}
-.p-events{
-    pointer-events: none;
-}
-@media only screen and (min-width: 820px) {
-    #display-game{
-        width: 640px;
-        height: 640px;
-        overflow: auto;
-    }
-}
-@media only screen and (min-width: 1200px) {
-    #display-game{
-        width: 1150px;
-        height: 640px;
-    }
+.max-height-64{
+    max-height: 64px;
 }
