@@ -92,12 +92,13 @@
                     game.physics.isoArcade.gravity.setTo(0, 0, -1000);
 
                     //SPAWN
-                    this.spawnTiles();
-                    isoGroup = game.add.group();
+                    isoGroupPlatform = game.add.group();
+                    this.spawnTilesPlatform();
+                    isoGroupSecond = game.add.group();
                     this.spawnTilesSecond();
 
                     //CHARACTER
-                    player = game.add.isoSprite(size * 10, size * 10, 0, 'character', 0, isoGroup);
+                    player = game.add.isoSprite(size * 10, size * 10, 0, 'character', 0, isoGroupSecond);
                     player.anchor.set(0.5);
                     game.physics.isoArcade.enable(player);
                     player.body.collideWorldBounds = true;
@@ -121,21 +122,40 @@
                     //MOVE UPDATE
                     player.body.velocity.y = (this.cursors.up.isDown ? -speed : (this.cursors.down.isDown ? speed : 0));
                     player.body.velocity.x = (this.cursors.left.isDown ? -speed : (this.cursors.right.isDown ? speed : 0));
-                    
-                    game.physics.isoArcade.collide(isoGroup);
-                    game.iso.topologicalSort(isoGroup);
+
+                    document.getElementById("1").addEventListener("click", function () {
+                        var counter = 0;
+                        isoGroupPlatform.forEach(function (tile) {
+                            var inBounds = tile.isoBounds.containsXY(player.body.position.x, player.body.position.y);
+                            if (!tile.selected && inBounds) {
+                                tile.selected = true;
+                                if (isoGroupPlatform.children[counter].key === "grass") {
+                                    isoGroupPlatform.children[counter].loadTexture('nograss');
+                                } else if (isoGroupPlatform.children[counter].key === "nograss"){
+                                    isoGroupPlatform.children[counter].loadTexture('grass');
+                                }
+                            }
+                            counter++;
+                        });
+                    });
+
+                    game.physics.isoArcade.collide(isoGroupPlatform);
+                    game.iso.topologicalSort(isoGroupPlatform);
+                    game.physics.isoArcade.collide(isoGroupSecond);
+                    game.iso.topologicalSort(isoGroupSecond);
+
                 },
                 //--------------------------------------------------------------------------------
-                spawnTiles: function () {
+                spawnTilesPlatform: function () {
                     for (var xx = 0; xx < map[0].length * size - size; xx += size) {
                         for (var yy = 0; yy < map.length * size - size; yy += size) {
                             if ((map[parseInt(xx / size)][parseInt(yy / size)] == 0) || (map[parseInt(xx / size)][parseInt(yy / size)] == 2)) {
                                 //GRASS
-                                grass = game.add.isoSprite(xx, yy, 0, 'grass', 0, isoGroup);
+                                grass = game.add.isoSprite(xx, yy, 0, 'grass', 0, isoGroupPlatform);
                                 grass.anchor.set(0.5, 0);
                             } else if (map[parseInt(xx / size)][parseInt(yy / size)] == 1 || (map[parseInt(xx / size)][parseInt(yy / size)] == 3)) {
                                 //NOGRASS
-                                nograss = game.add.isoSprite(xx, yy, 0, 'nograss', 0, isoGroup);
+                                nograss = game.add.isoSprite(xx, yy, 0, 'nograss', 0, isoGroupPlatform);
                                 nograss.anchor.set(0.5, 0);
                             }
                         }
@@ -147,14 +167,14 @@
                         for (var yy = 0; yy < map.length * size; yy += size) {
                             if (map[parseInt(xx / size)][parseInt(yy / size)] == 2) {
                                 //TREE
-                                tree = game.add.isoSprite(xx, yy, 0, 'tree', 0, isoGroup);
+                                tree = game.add.isoSprite(xx, yy, 0, 'tree', 0, isoGroupSecond);
                                 tree.anchor.set(0.5);
                                 game.physics.isoArcade.enable(tree);
                                 tree.body.collideWorldBounds = true;
                                 tree.body.immovable = true;
                             } else if (map[parseInt(xx / size)][parseInt(yy / size)] == 3) {
                                 //WHEAT
-                                wheat = game.add.isoSprite(xx, yy, 0, 'wheat', 0, isoGroup);
+                                wheat = game.add.isoSprite(xx, yy, 0, 'wheat', 0, isoGroupSecond);
                                 wheat.anchor.set(0.5);
                             }
                         }
