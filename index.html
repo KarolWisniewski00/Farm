@@ -25,10 +25,14 @@
     <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark" id="navbot">
         <div class="container-fluid">
             <div class="d-flex justify-content-between w-100">
-                <buttom class="btn btn-success p-2 m-2" id="shovel"><img src="assets/shovel.png" class="img-fluid max-height-64" alt="shovel"></buttom>
-                <buttom class="btn btn-success p-2 m-2" id="plant"><img src="assets/plant.png" alt="plant" class="img-fluid max-height-64"></buttom>
-                <buttom class="btn btn-success p-2 m-2" id="watering-can"><img src="assets/watering-can.png" alt="watering-can" class="img-fluid max-height-64"></buttom>
-                <buttom class="btn btn-success p-2 m-2" id="scythe"><img src="assets/scythe.png" alt="scythe" class="img-fluid max-height-64"></buttom>
+                <buttom class="btn btn-success p-2 m-2" id="shovel"><img src="assets/shovel.png"
+                        class="img-fluid max-height-64" alt="shovel"></buttom>
+                <buttom class="btn btn-success p-2 m-2" id="plant"><img src="assets/plant.png" alt="plant"
+                        class="img-fluid max-height-64"></buttom>
+                <buttom class="btn btn-success p-2 m-2" id="watering-can"><img src="assets/watering-can.png"
+                        alt="watering-can" class="img-fluid max-height-64"></buttom>
+                <buttom class="btn btn-success p-2 m-2" id="scythe"><img src="assets/scythe.png" alt="scythe"
+                        class="img-fluid max-height-64"></buttom>
             </div>
         </div>
     </nav>
@@ -47,8 +51,8 @@
         var width = window.innerWidth * 0.75;
         var height = window.innerHeight - navTopHeight - navBotHeight;
 
-        if (height>720){
-            height=720
+        if (height > 720) {
+            height = 720
         }
 
         var game = new Phaser.Game(width, height, Phaser.AUTO, 'test', null, true, false);
@@ -62,23 +66,23 @@
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 2, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 2, 3, 6, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 2, 3, 6, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 2, 3, 6, 5, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 2, 3, 6, 5, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 1],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 1],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0],
         ];
 
         var coins = 100;
@@ -96,6 +100,7 @@
                 game.load.image('character', 'assets/character.png');
                 game.load.image('tree', 'assets/tree.png');
                 game.load.image('wheat', 'assets/wheat.png');
+                game.load.image('shoot', 'assets/shoot.png');
 
                 //SET UP GAME
                 game.time.advancedTiming = true;
@@ -156,22 +161,141 @@
                             y = counter % map.length
 
                             //CHANGE FROM GRASS TO NOGRASS
-                            if (isoGroupPlatform.children[counter].key == "grass") {
+                            if (map[x][y] == 0) {
                                 if (coins >= 10) {
-                                    isoGroupPlatform.children[counter].loadTexture('nograss');
+                                    tile.loadTexture('nograss');
                                     map[x][y] = 1;
                                     coins -= 10;
                                     document.getElementById("coins").innerHTML = coins;
                                 }
 
-                                //CHANGE FROM NO GRASS TO GRASS
-                            } else if (isoGroupPlatform.children[counter].key == "nograss") {
+                                //CHANGE FROM NOGRASS TO GRASS
+                            } else if (map[x][y] == 1) {
                                 if (coins >= 10) {
-                                    isoGroupPlatform.children[counter].loadTexture('grass');
+                                    tile.loadTexture('grass');
                                     map[x][y] = 0;
                                     coins -= 10;
                                     document.getElementById("coins").innerHTML = coins;
                                 }
+                            }
+                        }
+                        else if (tile.selected && !inBounds) {
+                            tile.selected = false;
+                        }
+                        counter++;
+                    });
+                });
+
+                //ACTION ON CLICK PLANT
+                document.getElementById("plant").addEventListener("click", function () {
+                    var counter = 0;
+                    isoGroupPlatform.forEach(function (tile) {
+                        var inBounds = tile.isoBounds.containsXY(player.body.position.x + (size / 2), player.body.position.y + (size / 2));
+                        if (!tile.selected && inBounds) {
+                            tile.selected = true;
+
+                            x = Math.floor(counter / (map.length))
+                            y = counter % map.length
+
+                            //CHANGE FROM NOGRASS TO SHOOT
+                            if (map[x][y] == 1) {
+                                if (coins >= 5) {
+                                    shoot = game.add.isoSprite(x * size, y * size, 0, 'shoot', 0, isoGroupSecond);
+                                    shoot.anchor.set(0.5);
+                                    map[x][y] = 4;
+                                    coins -= 5;
+                                    document.getElementById("coins").innerHTML = coins;
+                                }
+
+                                //CHANGE FROM NOGRASS TO SHOOT
+                            } else if (map[x][y] == 5) {
+                                if (coins >= 5) {
+                                    shoot = game.add.isoSprite(x * size, y * size, 0, 'shoot', 0, isoGroupSecond);
+                                    shoot.anchor.set(0.5);
+                                    map[x][y] = 6;
+                                    coins -= 5;
+                                    document.getElementById("coins").innerHTML = coins;
+                                }
+                            }
+                        }
+                        else if (tile.selected && !inBounds) {
+                            tile.selected = false;
+                        }
+                        counter++;
+                    });
+                });
+
+                //ACTION ON CLICK WATERING-CAN
+                document.getElementById("watering-can").addEventListener("click", function () {
+                    var counter = 0;
+                    isoGroupPlatform.forEach(function (tile) {
+                        var inBounds = tile.isoBounds.containsXY(player.body.position.x + (size / 2), player.body.position.y + (size / 2));
+                        if (!tile.selected && inBounds) {
+                            tile.selected = true;
+
+                            x = Math.floor(counter / (map.length))
+                            y = counter % map.length
+
+                            //CHANGE FROM NOGRASS TO WATERINGNOGRASS
+                            if (map[x][y] == 1) {
+                                if (coins >= 5) {
+                                    tile.tint = 0x86bfda;
+                                    map[x][y] = 5;
+                                    coins -= 5;
+                                    document.getElementById("coins").innerHTML = coins;
+                                }
+
+                                //CHANGE FROM SHOOT NOGRASS TO SHOOT WATERINGNOGRASS
+                            } else if (map[x][y] == 4) {
+                                if (coins >= 5) {
+                                    tile.tint = 0x86bfda;
+                                    map[x][y] = 6;
+                                    coins -= 5;
+                                    document.getElementById("coins").innerHTML = coins;
+                                }
+                            }
+                        }
+                        else if (tile.selected && !inBounds) {
+                            tile.selected = false;
+                        }
+                        counter++;
+                    });
+                });
+
+                //ACTION ON CLICK SCYTHE
+                document.getElementById("scythe").addEventListener("click", function () {
+                    var counter = 0;
+                    isoGroupPlatform.forEach(function (tile) {
+                        var inBounds = tile.isoBounds.containsXY(player.body.position.x + (size / 2), player.body.position.y + (size / 2));
+                        if (!tile.selected && inBounds) {
+                            tile.selected = true;
+
+                            x = Math.floor(counter / (map.length))
+                            y = counter % map.length
+
+                            //CHANGE FROM WHEAT TO GRASS
+                            if (map[x][y] == 3) {
+                                var counterSecond = 0;
+                                var index = 0;
+                                var diffX = 1000000;
+                                var diffY = 1000000;
+                                isoGroupSecond.forEach(function (tileSecond) {
+                                    if (tileSecond.key == 'wheat') {
+                                        var currDiffX = Math.abs(player.position.x - tileSecond.position.x);
+                                        var currDiffY = Math.abs(player.position.y - tileSecond.position.y);
+                                        if (currDiffX < diffX || currDiffY < diffY) {
+                                            diffX = currDiffX;
+                                            diffY = currDiffY;
+                                            index = counterSecond;
+                                        }
+                                    }
+                                    counterSecond++;
+                                });
+                                tile.loadTexture('grass');
+                                map[x][y] = 0;
+                                coins += 30;
+                                document.getElementById("coins").innerHTML = coins;
+                                isoGroupSecond.children[index].destroy();
                             }
                         }
                         else if (tile.selected && !inBounds) {
@@ -195,10 +319,15 @@
                             //GRASS
                             grass = game.add.isoSprite(xx, yy, 0, 'grass', 0, isoGroupPlatform);
                             grass.anchor.set(0.5, 0);
-                        } else if (map[parseInt(xx / size)][parseInt(yy / size)] == 1 || (map[parseInt(xx / size)][parseInt(yy / size)] == 3)) {
+                        } else if (map[parseInt(xx / size)][parseInt(yy / size)] == 1 || (map[parseInt(xx / size)][parseInt(yy / size)] == 3) || (map[parseInt(xx / size)][parseInt(yy / size)] == 4)) {
                             //NOGRASS
                             nograss = game.add.isoSprite(xx, yy, 0, 'nograss', 0, isoGroupPlatform);
                             nograss.anchor.set(0.5, 0);
+                        } else if (map[parseInt(xx / size)][parseInt(yy / size)] == 5 || (map[parseInt(xx / size)][parseInt(yy / size)] == 6)) {
+                            //NOGRASS
+                            nograss = game.add.isoSprite(xx, yy, 0, 'nograss', 0, isoGroupPlatform);
+                            nograss.anchor.set(0.5, 0);
+                            nograss.tint = 0x86bfda;
                         }
                     }
                 }
@@ -218,6 +347,10 @@
                             //WHEAT
                             wheat = game.add.isoSprite(xx, yy, 0, 'wheat', 0, isoGroupSecond);
                             wheat.anchor.set(0.5);
+                        } else if (map[parseInt(xx / size)][parseInt(yy / size)] == 4 || (map[parseInt(xx / size)][parseInt(yy / size)] == 6)) {
+                            //SHOOT
+                            shoot = game.add.isoSprite(xx, yy, 0, 'shoot', 0, isoGroupSecond);
+                            shoot.anchor.set(0.5);
                         }
                     }
                 }
@@ -237,12 +370,18 @@
 
 </html>
 <!--
+    0 - /grass
+    1 - /nograss
+    2 - tree/grass
+    3 - wheat/nograss
+    4 - shoot/nograss
+    5 - /wateringnograss
+    6 - shoot/wateringnograss
+
     todo:
     prszyciski ekranowe do navigacji
     lista zadań
-    mapa
     przedmioty
-    interfejs podlewanie sadzenie
     https://www.flaticon.com/search?word=watering%20can
     https://www.flaticon.com/search?word=scythe
     https://www.flaticon.com/search?word=coin
