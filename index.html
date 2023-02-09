@@ -127,7 +127,36 @@
             //LEFT                                                   //DOWN
         ];
 
+        var mapShoot = [
+            //TOP                                                   //RIGHT
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            //LEFT                                                   //DOWN
+        ];
+
         var coins = 10000;
+        var platformInfo = '';
+        var playerInfo = '';
+        var colorInfo = '#a7aebe';
 
         //CONST
         const size = 35.8;
@@ -138,6 +167,8 @@
         const cropsRevenue = 30;
         const characterStartX = 10;
         const characterStartY = 10;
+        const infoY = 16;
+        const infoX = 2;
         const dict = {
             grass: 0,
             noGrass: 1,
@@ -148,6 +179,10 @@
             shootWateringNoGrass: 6,
             tomatoNoGrass: 7,
             rockGrass: 8,
+        };
+        const dictShoot = {
+            wheat: 1,
+            tomato: 2,
         };
 
         BasicGame.Boot.prototype =
@@ -276,21 +311,38 @@
                 //INSIDE FUNCTIONS
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
                 function actionOnclick(todo) {
-                    var counter = 0;                                //helper variable to find coords
-                    isoGroupPlatform.forEach(function (tile) {      //loop for each element at platform
-                        var inBounds = tile.isoBounds.containsXY(player.body.position.x + (size / 2), player.body.position.y + (size / 2));//check player in bounds
-                        if (!tile.selected && inBounds) {           //if player in bounds is true and tile is false
-                            tile.selected = true;                   //change state
-                            y = counter % map.length                //get coord y                                                                   
-                            x = Math.floor(counter / (map.length))  //get coord x
-                            todo(y, x, tile);                       //fuction to do - takes from argument
-                            console.log(map)
+                    var counter = 0;                                                                                                        //helper variable to find coords
+                    isoGroupPlatform.forEach(function (tile) {                                                                              //loop for each element at platform
+                        var inBounds = tile.isoBounds.containsXY(player.body.position.x + (size / 2), player.body.position.y + (size / 2)); //check player in bounds
+                        if (!tile.selected && inBounds) {                                                                                   //if player in bounds is true and tile is false
+                            tile.selected = true;                                                                                           //change state
+                            y = counter % map.length                                                                                        //get coord y                                                                   
+                            x = Math.floor(counter / (map.length))                                                                          //get coord x
+                            todo(y, x, tile);                                                                                               //fuction to do - takes from argument
                         }
-                        else if (tile.selected && !inBounds) {      //if player in bounds is false and tile is true
-                            tile.selected = false;                  //change state
+                        else if (tile.selected && !inBounds) {                                                                              //if player in bounds is false and tile is true
+                            tile.selected = false;                                                                                          //change state
                         };
-                        counter++;                                  //add to counter
+                        counter++;                                                                                                          //add to counter
                     });
+                };
+                //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+                function info(y, x, tile) {
+                    switch (map[y][x]) {
+                        case dict.grass: platformInfo = 'Grass'; playerInfo = 'Air'; colorInfo = '#a7aebe'; break;
+                        case dict.noGrass: platformInfo = 'No Grass'; playerInfo = 'Air'; colorInfo = '#a7aebe'; break;
+                        case dict.treeGrass: platformInfo = 'Grass'; playerInfo = 'Tree'; colorInfo = '#a7aebe'; break;
+                        case dict.wheatNoGrass: platformInfo = 'No Grass'; playerInfo = 'Wheat'; colorInfo = '#00ff00'; break;
+                        case dict.shootNoGrass: platformInfo = 'No Grass'; playerInfo = 'Shoot'; colorInfo = '#ffff00'; break;
+                        case dict.wateringNoGrass: platformInfo = 'Watering No Grass'; playerInfo = 'Air'; colorInfo = '#a7aebe'; break;
+                        case dict.shootWateringNoGrass: platformInfo = 'Watering No Grass'; playerInfo = 'Shoot'; colorInfo = '#ffff00'; break;
+                        case dict.tomatoNoGrass: platformInfo = 'No Grass'; playerInfo = 'Tomato'; colorInfo = '#00ff00'; break;
+                        case dict.rockGrass: platformInfo = 'Grass'; playerInfo = 'Rock'; colorInfo = '#a7aebe'; break;
+                    };
+                    switch (mapShoot[y][x]) {
+                        case dictShoot.wheat: playerInfo += ' | Wheat'; break;
+                        case dictShoot.tomato: playerInfo += ' | Tomato'; break;
+                    };
                 };
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
                 function digInside(y, x, tile, to, toDict, watering = false) {
@@ -299,7 +351,7 @@
                         map[y][x] = toDict;                                     //update map
                         coins -= digCost;                                       //add coins
                         document.getElementById("coins").innerHTML = coins;     //update coins
-                        if (watering){                                          //in case watering
+                        if (watering) {                                         //in case watering
                             tile.tint = 0xffffff;                               //return color
                         };
                     }
@@ -350,7 +402,7 @@
                     };
                 };
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-                function cropsInside(y,x,tile, key) {
+                function cropsInside(y, x, tile, key) {
                     var counter = 0;                                                            //helper variable
                     var index = 0;                                                              //index of the object from isoGroupSecond
                     var diffX = 1000000;                                                        //helper variable
@@ -375,8 +427,8 @@
                 };
                 function crops(y, x, tile) {
                     switch (map[y][x]) {
-                        case dict.wheatNoGrass: cropsInside(y,x,tile, 'wheat'); break;
-                        case dict.tomatoNoGrass: cropsInside(y,x,tile, 'tomato'); break;
+                        case dict.wheatNoGrass: cropsInside(y, x, tile, 'wheat'); break;
+                        case dict.tomatoNoGrass: cropsInside(y, x, tile, 'tomato'); break;
                     };
                 };
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -405,6 +457,10 @@
                     actionOnclick(todo = crops);
 
                 });
+
+                //UPDATE INFO
+                actionOnclick(todo = info);
+
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
                 //ADD COLLLIDE AND TOPOLOGIC VIEW
@@ -416,7 +472,9 @@
             },
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------
             render: function () {
-                game.debug.text(game.time.fps || '--', 2, 14, "#a7aebe");
+                game.debug.text('FPS: ' + game.time.fps || '--', infoX, infoY, '#a7aebe');
+                game.debug.text('Platform: ' + platformInfo, infoX, infoY * 2, '#a7aebe');
+                game.debug.text('Player: ' + playerInfo, infoX, infoY * 3, colorInfo);
             },
         };
 
