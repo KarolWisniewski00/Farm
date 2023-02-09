@@ -102,34 +102,36 @@
 
         //VARIABLES
         var map = [
+            //TOP                                                   //RIGHT
+            [2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [2, 3, 3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [2, 3, 3, 1, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [2, 3, 3, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [5, 5, 5, 4, 4, 4, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [5, 5, 5, 4, 4, 4, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [6, 0, 0, 0, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [6, 6, 6, 0, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [8, 6, 6, 8, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0],
-            [0, 0, 0, 0, 2, 3, 3, 3, 3, 3, 0, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0],
-            [0, 0, 0, 0, 2, 3, 6, 6, 6, 6, 0, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0],
-            [0, 0, 0, 0, 2, 3, 6, 5, 5, 5, 0, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0],
-            [0, 0, 0, 0, 2, 3, 6, 5, 4, 4, 0, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0],
-            [0, 0, 0, 0, 2, 3, 6, 5, 4, 1, 0, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 0, 8, 8, 0, 0, 8, 8, 0, 0, 0, 0],
-            [0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 0, 8, 0, 0, 0, 0, 8, 0, 0, 0, 0],
-            [0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 0, 8, 0, 0, 0, 0, 8, 0, 0, 0, 0],
-            [0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 0, 8, 8, 0, 0, 8, 8, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            //LEFT                                                   //DOWN
         ];
 
-        var coins = 100;
+        var coins = 10000;
 
         //CONST
         const size = 35.8;
-        const speed = 100;
+        const speed = 200;
         const digCost = 10;
         const plantCost = 5;
         const wateringCost = 5;
@@ -152,15 +154,15 @@
         {
             //INSIDE CREATE FUNCTIONS
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-            gameAdd: function (xx, yy, kind, group, asx, asy, wet = false) {    //player move on
-                obj = game.add.isoSprite(xx, yy, 0, kind, 0, group);            //add sprite
+            gameAdd: function (yy, xx, kind, group, asx, asy, wet = false) {    //player move on
+                obj = game.add.isoSprite(yy, xx, 0, kind, 0, group);            //add sprite
                 obj.anchor.set(asx, asy);                                       //set anchor
                 if (wet == true) {                                              //in case WateringNoGrass
                     obj.tint = 0x86bfda;                                        //change color
                 }
             },
-            gameAddWall: function (xx, yy, kind, group, asx, asy) {             //player move off
-                obj = game.add.isoSprite(xx, yy, 0, kind, 0, group);            //add sprite
+            gameAddWall: function (yy, xx, kind, group, asx, asy) {             //player move off
+                obj = game.add.isoSprite(yy, xx, 0, kind, 0, group);            //add sprite
                 obj.anchor.set(asx, asy);                                       //set anchor
                 game.physics.isoArcade.enable(obj);                             //turn on physics
                 obj.body.collideWorldBounds = true;                             //turn on collide
@@ -175,34 +177,38 @@
                     };
                 };
                 */
+                //TABLE ITERATION
                 for (var i = 0; i < map[0].length * map.length; i++) {
-                    var xx = (i % map[0].length) * size;
                     var yy = Math.floor(i / map[0].length) * size;
+                    var xx = (i % map[0].length) * size;
+
                     switch (map[parseInt(xx / size)][parseInt(yy / size)]) {
-                        case dict.grass: this.gameAdd(xx, yy, 'grass', isoGroupPlatform, 0.5, 0); break;
-                        case dict.treeGrass: this.gameAdd(xx, yy, 'grass', isoGroupPlatform, 0.5, 0); break;
-                        case dict.rockGrass: this.gameAdd(xx, yy, 'grass', isoGroupPlatform, 0.5, 0); break;
-                        case dict.noGrass: this.gameAdd(xx, yy, 'nograss', isoGroupPlatform, 0.5, 0); break;
-                        case dict.shootNoGrass: this.gameAdd(xx, yy, 'nograss', isoGroupPlatform, 0.5, 0); break;
-                        case dict.wheatNoGrass: this.gameAdd(xx, yy, 'nograss', isoGroupPlatform, 0.5, 0); break;
-                        case dict.tomatoNoGrass: this.gameAdd(xx, yy, 'nograss', isoGroupPlatform, 0.5, 0); break;
-                        case dict.shootWateringNoGrass: this.gameAdd(xx, yy, 'nograss', isoGroupPlatform, 0.5, 0, true); break;
-                        case dict.wateringNoGrass: this.gameAdd(xx, yy, 'nograss', isoGroupPlatform, 0.5, 0, true); break;
+                        case dict.grass: this.gameAdd(yy, xx, 'grass', isoGroupPlatform, 0.5, 0); break;
+                        case dict.treeGrass: this.gameAdd(yy, xx, 'grass', isoGroupPlatform, 0.5, 0); break;
+                        case dict.rockGrass: this.gameAdd(yy, xx, 'grass', isoGroupPlatform, 0.5, 0); break;
+                        case dict.noGrass: this.gameAdd(yy, xx, 'nograss', isoGroupPlatform, 0.5, 0); break;
+                        case dict.shootNoGrass: this.gameAdd(yy, xx, 'nograss', isoGroupPlatform, 0.5, 0); break;
+                        case dict.wheatNoGrass: this.gameAdd(yy, xx, 'nograss', isoGroupPlatform, 0.5, 0); break;
+                        case dict.tomatoNoGrass: this.gameAdd(yy, xx, 'nograss', isoGroupPlatform, 0.5, 0); break;
+                        case dict.shootWateringNoGrass: this.gameAdd(yy, xx, 'nograss', isoGroupPlatform, 0.5, 0, true); break;
+                        case dict.wateringNoGrass: this.gameAdd(yy, xx, 'nograss', isoGroupPlatform, 0.5, 0, true); break;
                     };
                 }
             },
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------
             spawnTilesSecond: function () {
+                //TABLE ITERATION
                 for (var i = 0; i < map[0].length * map.length; i++) {
-                    var xx = (i % map[0].length) * size;
                     var yy = Math.floor(i / map[0].length) * size;
+                    var xx = (i % map[0].length) * size;
+
                     switch (map[parseInt(xx / size)][parseInt(yy / size)]) {
-                        case dict.treeGrass: this.gameAddWall(xx, yy, 'tree', isoGroupSecond, 0.5); break;
-                        case dict.wheatNoGrass: this.gameAdd(xx, yy, 'wheat', isoGroupSecond, 0.5); break;
-                        case dict.shootNoGrass: this.gameAdd(xx, yy, 'shoot', isoGroupSecond, 0.5); break;
-                        case dict.shootWateringNoGrass: this.gameAdd(xx, yy, 'shoot', isoGroupSecond, 0.5); break;
-                        case dict.tomatoNoGrass: this.gameAdd(xx, yy, 'tomato', isoGroupSecond, 0.5); break;
-                        case dict.rockGrass: this.gameAddWall(xx, yy, 'rock', isoGroupSecond, 0.5); break;
+                        case dict.treeGrass: this.gameAddWall(yy, xx, 'tree', isoGroupSecond, 0.5); break;
+                        case dict.wheatNoGrass: this.gameAdd(yy, xx, 'wheat', isoGroupSecond, 0.5); break;
+                        case dict.shootNoGrass: this.gameAdd(yy, xx, 'shoot', isoGroupSecond, 0.5); break;
+                        case dict.shootWateringNoGrass: this.gameAdd(yy, xx, 'shoot', isoGroupSecond, 0.5); break;
+                        case dict.tomatoNoGrass: this.gameAdd(yy, xx, 'tomato', isoGroupSecond, 0.5); break;
+                        case dict.rockGrass: this.gameAddWall(yy, xx, 'rock', isoGroupSecond, 0.5); break;
                     };
                 }
             },
@@ -227,7 +233,7 @@
                 game.physics.startSystem(Phaser.Plugin.Isometric.ISOARCADE);    //add plugin physics
                 game.iso.anchor.setTo(0.5, 0.0);                                //set anchor
 
-                //LAYOUT SET UP
+                //LAYOUT SET UP COMUNICATION
                 document.getElementById("coins").innerHTML += coins;
             },
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -266,18 +272,19 @@
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------
             //UPDATE
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-            update: function (todo) {
+            update: function () {
                 //INSIDE FUNCTIONS
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-                function actionOnclick() {
+                function actionOnclick(todo) {
                     var counter = 0;                                //helper variable to find coords
                     isoGroupPlatform.forEach(function (tile) {      //loop for each element at platform
                         var inBounds = tile.isoBounds.containsXY(player.body.position.x + (size / 2), player.body.position.y + (size / 2));//check player in bounds
                         if (!tile.selected && inBounds) {           //if player in bounds is true and tile is false
-                            tile.selected = true;                   //change state                                                                            
+                            tile.selected = true;                   //change state
+                            y = counter % map.length                //get coord y                                                                   
                             x = Math.floor(counter / (map.length))  //get coord x
-                            y = counter % map.length                //get coord y
-                            todo(x, y, tile);                       //fuction to do - takes from argument
+                            todo(y, x, tile);                       //fuction to do - takes from argument
+                            console.log(map)
                         }
                         else if (tile.selected && !inBounds) {      //if player in bounds is false and tile is true
                             tile.selected = false;                  //change state
@@ -286,59 +293,64 @@
                     });
                 };
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-                function digInside(x, y, tile) {
+                function digInside(y, x, tile, to, toDict, watering = false) {
                     if (coins >= digCost) {                                     //check how many coins has player
-                        tile.loadTexture('nograss');                            //change texture
-                        map[x][y] = dict.noGrass;                               //update map
+                        tile.loadTexture(to);                                   //change texture
+                        map[y][x] = toDict;                                     //update map
                         coins -= digCost;                                       //add coins
                         document.getElementById("coins").innerHTML = coins;     //update coins
+                        if (watering){                                          //in case watering
+                            tile.tint = 0xffffff;                               //return color
+                        };
                     }
                 };
-                function dig(x, y, tile) {
-                    switch (map[x][y]) {
+                function dig(y, x, tile) {
+                    switch (map[y][x]) {
                         //CHANGE FROM GRASS TO NOGRASS
-                        case dict.grass: digInside(x, y, tile); break;
+                        case dict.grass: digInside(y, x, tile, 'nograss', dict.noGrass); break;
                         //CHANGE FROM NOGRASS TO GRASS
-                        case dict.noGrass: digInside(x, y, tile); break;
+                        case dict.noGrass: digInside(y, x, tile, 'grass', dict.grass); break;
+                        //CHANGE FROM WATERINGNOGRASS TO GRASS
+                        case dict.wateringNoGrass: digInside(y, x, tile, 'grass', dict.grass, true); break;
                     };
                 };
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-                function plantIndide(x, y, tile) {
+                function plantIndide(y, x, tile, toDict) {
                     if (coins >= plantCost) {                                                           //check how many coins has player
                         shoot = game.add.isoSprite(x * size, y * size, 0, 'shoot', 0, isoGroupSecond);  //add sprite
                         shoot.anchor.set(0.5);                                                          //set anchor
-                        map[x][y] = dict.shootNoGrass;                                                  //update map
+                        map[y][x] = toDict;                                                             //update map
                         coins -= plantCost;                                                             //add coins
                         document.getElementById("coins").innerHTML = coins;                             //update coins
                     };
                 };
-                function plant(x, y, tile) {
-                    switch (map[x][y]) {
+                function plant(y, x, tile) {
+                    switch (map[y][x]) {
                         //CHANGE FROM NOGRASS TO SHOOT
-                        case dict.noGrass: plantIndide(x, y, tile); break;
+                        case dict.noGrass: plantIndide(y, x, tile, dict.shootNoGrass); break;
                         //CHANGE FROM WATERINGNOGRASS TO SHOOTWATERINGNOGRASS
-                        case dict.wateringNoGrass: plantIndide(x, y, tile); break;
+                        case dict.wateringNoGrass: plantIndide(y, x, tile, dict.shootWateringNoGrass); break;
                     };
                 };
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-                function wateringInside(x, y, tile) {
+                function wateringInside(y, x, tile, toDict) {
                     if (coins >= wateringCost) {                                //check how many coins has player
                         tile.tint = 0x86bfda;                                   //change color
-                        map[x][y] = dict.wateringNoGrass;                       //update map
+                        map[y][x] = toDict;                                     //update map
                         coins -= wateringCost;                                  //add coins
                         document.getElementById("coins").innerHTML = coins;     //update coins
                     };
                 };
-                function watering(x, y, tile) {
-                    switch (map[x][y]) {
+                function watering(y, x, tile) {
+                    switch (map[y][x]) {
                         //CHANGE FROM NOGRASS TO WATERINGNOGRASS
-                        case dict.noGrass: wateringInside(x, y, tile); break;
+                        case dict.noGrass: wateringInside(y, x, tile, dict.wateringNoGrass); break;
                         //CHANGE FROM SHOOT NOGRASS TO SHOOT WATERINGNOGRASS
-                        case dict.shootNoGrass: wateringInside(x, y, tile); break;
+                        case dict.shootNoGrass: wateringInside(y, x, tile, dict.shootWateringNoGrass); break;
                     };
                 };
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-                function cropsInside(tile, key) {
+                function cropsInside(y,x,tile, key) {
                     var counter = 0;                                                            //helper variable
                     var index = 0;                                                              //index of the object from isoGroupSecond
                     var diffX = 1000000;                                                        //helper variable
@@ -356,20 +368,19 @@
                         counter++;                                                              //add to counter
                     });
                     tile.loadTexture('grass');                                                  //change texture
-                    map[x][y] = dict.grass;                                                     //update map
+                    map[y][x] = dict.grass;                                                     //update map
                     coins += cropsRevenue;                                                      //add to coins
                     document.getElementById("coins").innerHTML = coins;                         //update coins
                     isoGroupSecond.children[index].destroy();                                   //destroy element from gameplay
                 };
-                function crops(x, y, tile) {
-                    switch (map[x][y]) {
-                        //CHANGE TO GRASS
-                        case dict.wheatNoGrass: cropsInside(tile, 'wheat'); break;
-                        case dict.tomatoNoGrass: cropsInside(tile, 'tomato'); break;
+                function crops(y, x, tile) {
+                    switch (map[y][x]) {
+                        case dict.wheatNoGrass: cropsInside(y,x,tile, 'wheat'); break;
+                        case dict.tomatoNoGrass: cropsInside(y,x,tile, 'tomato'); break;
                     };
                 };
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-                //MOVE UPDATE
+                //MOVE UPDATE PLAYER
                 player.body.velocity.y = (this.cursors.up.isDown ? -speed : (this.cursors.down.isDown ? speed : 0));    //move top down
                 player.body.velocity.x = (this.cursors.left.isDown ? -speed : (this.cursors.right.isDown ? speed : 0)); //move left right
 
