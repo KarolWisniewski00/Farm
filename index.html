@@ -36,17 +36,19 @@
             <div class="container">
                 <div class="row overflow-auto" style="max-height: 50vh;">
                     <div class="col d-flex justify-content-center align-items-center">
-                        <buttom class="btn btn-outline-light p-2 m-2" id="wheat-icon">
+                        <buttom class="btn btn-outline-light p-2 m-2" id="wheat-icon"
+                            onclick="kindSet(dictKind.wheat, dictColor.yellow, 'wheat-icon')">
                             <div>Wheat</div><img src="assets/wheat-icon.png" class="img-fluid max-height-64"
                                 alt="wheat-icon">
-                            <div>10</div>
+                            <div id="wheat-seeding-count"></div>
                         </buttom>
                     </div>
                     <div class="col d-flex justify-content-center align-items-center">
-                        <buttom class="btn btn-outline-light p-2 m-2" id="wheat-icon">
+                        <buttom class="btn btn-outline-light p-2 m-2" id="tomato-icon"
+                            onclick="kindSet(dictKind.tomato, dictColor.red,'tomato-icon')">
                             <div>Tomato</div><img src="assets/tomato-icon.png" class="img-fluid max-height-64"
-                                alt="wheat-icon">
-                            <div>6</div>
+                                alt="tomato-icon">
+                            <div id="tomato-seeding-count"></div>
                         </buttom>
                     </div>
                 </div>
@@ -71,17 +73,9 @@
     <script src="js/phaser.min.js"></script>
     <script src="js/phaser-plugin-isometric.min.js"></script>
     <script>
-        //LAYOUT
-        document.getElementById("seeding").addEventListener("click", function () {
-            var div = document.getElementById('side-seeding');
-            if (div.style.visibility === "hidden") {
-                div.style.visibility = "visible";
-            } else {
-                div.style.visibility = "hidden";
-            }
-        });
-
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------
         //CONFIG
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------
         var navTop = document.getElementById("navtop");
         var navTopHeight = navTop.offsetHeight;
 
@@ -95,43 +89,23 @@
             height = 720
         }
 
-        var game = new Phaser.Game(width, height, Phaser.AUTO, 'test', null, true, false);
+        var game = new Phaser.Game({
+            width: width,
+            height: height,
+            type: Phaser.AUTO,
+            parent: 'farm',
+            canvas: {
+                id: 'canvas'
+            },
+            transparent: true,
+            antialias: false,
+        });
         var BasicGame = function (game) { };
         BasicGame.Boot = function (game) { };
         var isoGroup, cursorPos, cursor;
 
-        //VARIABLES
-        var map = [
-            [{ platform: 0, platformSecond: 1 }, { platform: 0, platformSecond: 1 }, { platform: 0, platformSecond: 1 }, { platform: 0, platformSecond: 1 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 1 }, { platform: 1, platformSecond: 0 }, { platform: 1, platformSecond: 0 }, { platform: 1, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 1 }, { platform: 1, platformSecond: 0 }, { platform: 1, platformSecond: 0 }, { platform: 1, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 1, platformSecond: 5 }, { platform: 1, platformSecond: 5 }, { platform: 1, platformSecond: 5 }, { platform: 0, platformSecond: 0 }, { platform: 1, platformSecond: 4 }, { platform: 2, platformSecond: 4 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 1 }, { platform: 1, platformSecond: 0 }, { platform: 1, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 1, platformSecond: 5 }, { platform: 1, platformSecond: 5 }, { platform: 1, platformSecond: 5 }, { platform: 0, platformSecond: 0 }, { platform: 1, platformSecond: 4 }, { platform: 2, platformSecond: 4 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 1 }, { platform: 0, platformSecond: 2 }, { platform: 0, platformSecond: 2 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 1, platformSecond: 5 }, { platform: 1, platformSecond: 5 }, { platform: 1, platformSecond: 5 }, { platform: 0, platformSecond: 0 }, { platform: 1, platformSecond: 4 }, { platform: 2, platformSecond: 4 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 1 }, { platform: 2, platformSecond: 0 }, { platform: 2, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 1 }, { platform: 2, platformSecond: 0 }, { platform: 2, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 1 }, { platform: 2, platformSecond: 0 }, { platform: 2, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 1 }, { platform: 2, platformSecond: 0 }, { platform: 2, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 1, platformSecond: 3 }, { platform: 1, platformSecond: 3 }, { platform: 1, platformSecond: 3 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 1 }, { platform: 2, platformSecond: 0 }, { platform: 2, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 1, platformSecond: 3 }, { platform: 1, platformSecond: 3 }, { platform: 1, platformSecond: 3 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 2 }, { platform: 0, platformSecond: 2 }, { platform: 0, platformSecond: 2 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 1, platformSecond: 3 }, { platform: 1, platformSecond: 3 }, { platform: 1, platformSecond: 3 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
-        ];
-
-        var coins = 10000;
-        var platformInfoColor = '#a7aebe';
-        var platformInfo = '';
-        var platformSecondInfoColor = '#a7aebe';
-        var platformSecondInfo = '';
-
         //CONST
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------
         const dictPlatform = {
             grass: 0,
             noGrass: 1,
@@ -145,6 +119,19 @@
             shoot: 4,
             tomato: 5,
         };
+        const dictKind = {
+            null: 0,
+            wheat: 1,
+            tomato: 2,
+        };
+        const dictColor = {
+            normal: '#a7aebe',
+            blue: '#0096FF',
+            green: '#00ff00',
+            yellow: '#ffff00',
+            brown: '#CD7F32',
+            red: '#ff0000',
+        }
         const size = 35.8;
         const speed = 200;
         const digCost = 10;
@@ -155,6 +142,48 @@
         const characterStartY = 10;
         const infoY = 16;
         const infoX = 2;
+
+        //VARIABLES
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+        var map = [
+            [{ platform: 0, platformSecond: 1, kind: 0 }, { platform: 0, platformSecond: 1, kind: 0 }, { platform: 1, platformSecond: 0, kind: 0 }, { platform: 1, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 1, kind: 0 }, { platform: 1, platformSecond: 0, kind: 0 }, { platform: 1, platformSecond: 0, kind: 0 }, { platform: 1, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 1, kind: 0 }, { platform: 1, platformSecond: 0, kind: 0 }, { platform: 1, platformSecond: 0, kind: 0 }, { platform: 1, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 1, platformSecond: 5, kind: 0 }, { platform: 1, platformSecond: 5, kind: 0 }, { platform: 1, platformSecond: 5, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 1, platformSecond: 4, kind: 1 }, { platform: 2, platformSecond: 4, kind: 2 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 1, kind: 0 }, { platform: 1, platformSecond: 0, kind: 0 }, { platform: 1, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 1, platformSecond: 5, kind: 0 }, { platform: 1, platformSecond: 5, kind: 0 }, { platform: 1, platformSecond: 5, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 1, platformSecond: 4, kind: 1 }, { platform: 2, platformSecond: 4, kind: 2 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 1, kind: 0 }, { platform: 0, platformSecond: 2, kind: 0 }, { platform: 0, platformSecond: 2, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 1, platformSecond: 5, kind: 0 }, { platform: 1, platformSecond: 5, kind: 0 }, { platform: 1, platformSecond: 5, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 1, platformSecond: 4, kind: 1 }, { platform: 2, platformSecond: 4, kind: 2 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 1, kind: 0 }, { platform: 2, platformSecond: 0, kind: 0 }, { platform: 2, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 1, kind: 0 }, { platform: 2, platformSecond: 0, kind: 0 }, { platform: 2, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 1, kind: 0 }, { platform: 2, platformSecond: 0, kind: 0 }, { platform: 2, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 2, kind: 0 }, { platform: 0, platformSecond: 2, kind: 0 }, { platform: 0, platformSecond: 2, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 1, platformSecond: 3, kind: 0 }, { platform: 1, platformSecond: 3, kind: 0 }, { platform: 1, platformSecond: 3, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 1, kind: 0 }, { platform: 2, platformSecond: 0, kind: 0 }, { platform: 2, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 1, platformSecond: 3, kind: 0 }, { platform: 1, platformSecond: 3, kind: 0 }, { platform: 1, platformSecond: 3, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 1, kind: 0 }, { platform: 2, platformSecond: 0, kind: 0 }, { platform: 2, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 1, platformSecond: 3, kind: 0 }, { platform: 1, platformSecond: 3, kind: 0 }, { platform: 1, platformSecond: 3, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+            [{ platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }, { platform: 0, platformSecond: 0, kind: 0 }],
+        ];
+
+        var coins = 10000;
+        var platformInfo = null;
+        var platformSecondInfo = null;
+        var kindInfo = null;
+        var lastX = null;
+        var lastY = null;
+        var kind = dictKind.null;
+
+        var platformSecondInfoColor = dictColor.normal;
+        var platformInfoColor = dictColor.normal;
+        var kindInfoColor = dictColor.normal;
+        var kindColor = dictColor.normal
+
+        var tomatoSeedingCount = 8;
+        var wheatSeedingCount = 10;
 
         BasicGame.Boot.prototype =
         {
@@ -289,20 +318,7 @@
                         counter++;                                                                                                          //add to counter
                     });
                 };
-                //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-                function info(y, x, tile) {
-                    switch (map[y][x].platform) {
-                        case dictPlatform.grass: platformInfo = 'Grass'; platformInfoColor = '#a7aebe'; break;
-                        case dictPlatform.noGrass: platformInfo = 'No Grass'; platformInfoColor = '#CD7F32'; break;
-                        case dictPlatform.wateringNoGrass: platformInfo = 'Watering No Grass'; platformInfoColor = '#0096FF'; break;
-                    };
-                    switch (map[y][x].platformSecond) {
-                        case dictPlatformSecond.null: platformSecondInfo = 'Air'; platformSecondInfoColor = '#a7aebe'; break;
-                        case dictPlatformSecond.wheat: platformSecondInfo = 'Wheat'; platformSecondInfoColor = '#00ff00'; break;
-                        case dictPlatformSecond.shoot: platformSecondInfo = 'Shoot'; platformSecondInfoColor = '#ffff00'; break;
-                        case dictPlatformSecond.tomato: platformSecondInfo = 'Tomato'; platformSecondInfoColor = '#00ff00'; break;
-                    };
-                };
+
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
                 function digInside(y, x, tile, to, toDict, watering = false) {
                     if (coins >= digCost) {                                     //check how many coins has player
@@ -329,11 +345,16 @@
                 };
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
                 function plantIndide(y, x, tile, toDict) {
-                    if (coins >= plantCost) {                                                                   //check how many coins has player
+                    if (coins >= plantCost && kind != dictKind.null) {                                          //check how many coins has player and protection before no tooken kind
                         shoot = game.add.isoSprite(x * size, y * size, 0, 'shoot', 0, isoGroupPlatformSecond);  //add sprite
                         shoot.anchor.set(0.5);                                                                  //set anchor
                         map[y][x].platformSecond = toDict;                                                      //update map
+                        map[y][x].kind = kind;                                                                  //update map
                         coins -= plantCost;                                                                     //add coins
+                        switch (kind){
+                            case dictKind.tomato: tomatoSeedingCount--;break;
+                            case dictKind.wheat: wheatSeedingCount--;break;
+                        }
                         document.getElementById("coins").innerHTML = coins;                                     //update coins
                     };
                 };
@@ -399,7 +420,7 @@
                 //MOVE UPDATE PLAYER
                 player.body.velocity.y = (this.cursors.up.isDown ? -speed : (this.cursors.down.isDown ? speed : 0));    //move top down
                 player.body.velocity.x = (this.cursors.left.isDown ? -speed : (this.cursors.right.isDown ? speed : 0)); //move left right
-                var test = info;
+
                 //ON CLICK SHOVEL
                 document.getElementById("shovel").addEventListener("click", function () {
                     actionOnClick(dig);
@@ -419,11 +440,6 @@
                 document.getElementById("scythe").addEventListener("click", function () {
                     actionOnClick(crops);
                 });
-                
-                //UPDATE INFO
-                //TODO: FIX IF THAT LINE EXIST OTHER actionOnClick DOESN'T WORK
-                //actionOnClick(info);
-
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
                 //ADD COLLLIDE AND TOPOLOGIC VIEW
@@ -435,9 +451,38 @@
             },
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------
             render: function () {
-                game.debug.text('FPS: ' + game.time.fps || '--', infoX, infoY, '#a7aebe');
+                xx = (player.body.position.x / size);
+                yy = (player.body.position.y / size);
+                switch (map[Math.floor(yy)][Math.floor(xx)].platformSecond) {
+                    case dictPlatformSecond.null: platformSecondInfo = 'Air'; platformSecondInfoColor = dictColor.normal; break;
+                    case dictPlatformSecond.wheat: platformSecondInfo = 'Wheat'; platformSecondInfoColor = dictColor.green; break;
+                    case dictPlatformSecond.shoot: platformSecondInfo = 'Shoot'; platformSecondInfoColor = dictColor.yellow; break;
+                    case dictPlatformSecond.tomato: platformSecondInfo = 'Tomato'; platformSecondInfoColor = dictColor.green; break;
+                };
+                switch (map[Math.floor(player.body.position.y / size)][Math.floor(player.body.position.x / size)].platform) {
+                    case dictPlatform.grass: platformInfo = 'Grass'; platformInfoColor = dictColor.normal; break;
+                    case dictPlatform.noGrass: platformInfo = 'No Grass'; platformInfoColor = dictColor.brown; break;
+                    case dictPlatform.wateringNoGrass: platformInfo = 'Watering No Grass'; platformInfoColor = dictColor.blue; break;
+                };
+                switch (map[Math.floor(player.body.position.y / size)][Math.floor(player.body.position.x / size)].kind) {
+                    case dictKind.null: kindInfo = null; kindInfoColor = dictColor.normal; break;
+                    case dictKind.wheat: kindInfo = 'wheat'; kindInfoColor = dictColor.yellow; break;
+                    case dictKind.tomato: kindInfo = 'tomato'; kindInfoColor = dictColor.red; break;
+                };
+                switch (kind) {
+                    case dictKind.wheat: _kindInfo = 'wheat'; break;
+                    case dictKind.tomato: _kindInfo = 'tomato'; break;
+                };
+                game.debug.text('FPS: ' + game.time.fps || '--', infoX, infoY, dictColor.normal);
                 game.debug.text('Platform: ' + platformInfo, infoX, infoY * 2, platformInfoColor);
                 game.debug.text('Player: ' + platformSecondInfo, infoX, infoY * 3, platformSecondInfoColor);
+                if (kindInfo != null) {
+                    game.debug.text('Kind: ' + kindInfo, infoX, infoY * 4, kindInfoColor);
+                } else if (kind != dictKind.null) {
+                    game.debug.text('Active seeding: ' + _kindInfo, infoX, infoY * 4, kindColor);
+                } else {
+
+                };
             },
         };
 
@@ -445,7 +490,39 @@
         game.state.add('Boot', BasicGame.Boot);
         game.state.start('Boot');
     </script>
+    <script>
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //LAYOUT
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //SIDE BAR
+        document.getElementById("seeding").addEventListener("click", function () {
+            var div = document.getElementById('side-seeding');
+            if (div.style.visibility === "hidden") {
+                div.style.visibility = "visible";
+            } else {
+                div.style.visibility = "hidden";
+            }
+            document.getElementById("wheat-seeding-count").innerHTML = wheatSeedingCount;
+            document.getElementById("tomato-seeding-count").innerHTML = tomatoSeedingCount;
+        });
 
+        document.addEventListener("click", function (event) {
+            var div = document.getElementById('side-seeding');
+            var buttom = document.getElementById('seeding');
+            var canvas = document.getElementById('seeding');
+            if (event.target != div && event.target.parentNode != div && event.target != buttom && event.target.parentNode != buttom) {
+                div.style.visibility = "hidden";
+            }
+        });
+        //BUTTONS
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+        function kindSet(newKind, newColor, id) {
+            kind = newKind;
+            kindColor = newColor;
+            document.getElementById(id).className = 'btn btn-outline-light p-2 m-2 active';
+        };
+        
+    </script>
 </body>
 
 </html>
