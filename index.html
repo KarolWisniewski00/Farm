@@ -102,63 +102,49 @@
 
         //VARIABLES
         var map = [
-            //TOP                                                   //RIGHT
-            [2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [2, 3, 3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [2, 3, 3, 1, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [2, 3, 3, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [5, 5, 5, 4, 4, 4, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [5, 5, 5, 4, 4, 4, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [6, 0, 0, 0, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [6, 6, 6, 0, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [8, 6, 6, 8, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            //LEFT                                                   //DOWN
-        ];
-
-        var mapShoot = [
-            //TOP                                                   //RIGHT
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            //LEFT                                                   //DOWN
+            [{ platform: 0, platformSecond: 1 }, { platform: 0, platformSecond: 1 }, { platform: 0, platformSecond: 1 }, { platform: 0, platformSecond: 1 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 1 }, { platform: 1, platformSecond: 0 }, { platform: 1, platformSecond: 0 }, { platform: 1, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 1 }, { platform: 1, platformSecond: 0 }, { platform: 1, platformSecond: 0 }, { platform: 1, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 1, platformSecond: 5 }, { platform: 1, platformSecond: 5 }, { platform: 1, platformSecond: 5 }, { platform: 0, platformSecond: 0 }, { platform: 1, platformSecond: 4 }, { platform: 2, platformSecond: 4 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 1 }, { platform: 1, platformSecond: 0 }, { platform: 1, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 1, platformSecond: 5 }, { platform: 1, platformSecond: 5 }, { platform: 1, platformSecond: 5 }, { platform: 0, platformSecond: 0 }, { platform: 1, platformSecond: 4 }, { platform: 2, platformSecond: 4 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 1 }, { platform: 0, platformSecond: 2 }, { platform: 0, platformSecond: 2 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 1, platformSecond: 5 }, { platform: 1, platformSecond: 5 }, { platform: 1, platformSecond: 5 }, { platform: 0, platformSecond: 0 }, { platform: 1, platformSecond: 4 }, { platform: 2, platformSecond: 4 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 1 }, { platform: 2, platformSecond: 0 }, { platform: 2, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 1 }, { platform: 2, platformSecond: 0 }, { platform: 2, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 1 }, { platform: 2, platformSecond: 0 }, { platform: 2, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 1 }, { platform: 2, platformSecond: 0 }, { platform: 2, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 1, platformSecond: 3 }, { platform: 1, platformSecond: 3 }, { platform: 1, platformSecond: 3 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 1 }, { platform: 2, platformSecond: 0 }, { platform: 2, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 1, platformSecond: 3 }, { platform: 1, platformSecond: 3 }, { platform: 1, platformSecond: 3 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 2 }, { platform: 0, platformSecond: 2 }, { platform: 0, platformSecond: 2 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 1, platformSecond: 3 }, { platform: 1, platformSecond: 3 }, { platform: 1, platformSecond: 3 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
+            [{ platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }, { platform: 0, platformSecond: 0 }],
         ];
 
         var coins = 10000;
+        var platformInfoColor = '#a7aebe';
         var platformInfo = '';
-        var playerInfo = '';
-        var colorInfo = '#a7aebe';
+        var platformSecondInfoColor = '#a7aebe';
+        var platformSecondInfo = '';
 
         //CONST
+        const dictPlatform = {
+            grass: 0,
+            noGrass: 1,
+            wateringNoGrass: 2,
+        };
+        const dictPlatformSecond = {
+            null: 0,
+            tree: 1,
+            rock: 2,
+            wheat: 3,
+            shoot: 4,
+            tomato: 5,
+        };
         const size = 35.8;
         const speed = 200;
         const digCost = 10;
@@ -169,21 +155,6 @@
         const characterStartY = 10;
         const infoY = 16;
         const infoX = 2;
-        const dict = {
-            grass: 0,
-            noGrass: 1,
-            treeGrass: 2,
-            wheatNoGrass: 3,
-            shootNoGrass: 4,
-            wateringNoGrass: 5,
-            shootWateringNoGrass: 6,
-            tomatoNoGrass: 7,
-            rockGrass: 8,
-        };
-        const dictShoot = {
-            wheat: 1,
-            tomato: 2,
-        };
 
         BasicGame.Boot.prototype =
         {
@@ -217,33 +188,26 @@
                     var yy = Math.floor(i / map[0].length) * size;
                     var xx = (i % map[0].length) * size;
 
-                    switch (map[parseInt(xx / size)][parseInt(yy / size)]) {
-                        case dict.grass: this.gameAdd(yy, xx, 'grass', isoGroupPlatform, 0.5, 0); break;
-                        case dict.treeGrass: this.gameAdd(yy, xx, 'grass', isoGroupPlatform, 0.5, 0); break;
-                        case dict.rockGrass: this.gameAdd(yy, xx, 'grass', isoGroupPlatform, 0.5, 0); break;
-                        case dict.noGrass: this.gameAdd(yy, xx, 'nograss', isoGroupPlatform, 0.5, 0); break;
-                        case dict.shootNoGrass: this.gameAdd(yy, xx, 'nograss', isoGroupPlatform, 0.5, 0); break;
-                        case dict.wheatNoGrass: this.gameAdd(yy, xx, 'nograss', isoGroupPlatform, 0.5, 0); break;
-                        case dict.tomatoNoGrass: this.gameAdd(yy, xx, 'nograss', isoGroupPlatform, 0.5, 0); break;
-                        case dict.shootWateringNoGrass: this.gameAdd(yy, xx, 'nograss', isoGroupPlatform, 0.5, 0, true); break;
-                        case dict.wateringNoGrass: this.gameAdd(yy, xx, 'nograss', isoGroupPlatform, 0.5, 0, true); break;
+                    switch (map[parseInt(xx / size)][parseInt(yy / size)].platform) {
+                        case dictPlatform.grass: this.gameAdd(yy, xx, 'grass', isoGroupPlatform, 0.5, 0); break;
+                        case dictPlatform.noGrass: this.gameAdd(yy, xx, 'nograss', isoGroupPlatform, 0.5, 0); break;
+                        case dictPlatform.wateringNoGrass: this.gameAdd(yy, xx, 'nograss', isoGroupPlatform, 0.5, 0, true); break;
                     };
                 }
             },
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-            spawnTilesSecond: function () {
+            spawnTilesPlatformSecond: function () {
                 //TABLE ITERATION
                 for (var i = 0; i < map[0].length * map.length; i++) {
                     var yy = Math.floor(i / map[0].length) * size;
                     var xx = (i % map[0].length) * size;
 
-                    switch (map[parseInt(xx / size)][parseInt(yy / size)]) {
-                        case dict.treeGrass: this.gameAddWall(yy, xx, 'tree', isoGroupSecond, 0.5); break;
-                        case dict.wheatNoGrass: this.gameAdd(yy, xx, 'wheat', isoGroupSecond, 0.5); break;
-                        case dict.shootNoGrass: this.gameAdd(yy, xx, 'shoot', isoGroupSecond, 0.5); break;
-                        case dict.shootWateringNoGrass: this.gameAdd(yy, xx, 'shoot', isoGroupSecond, 0.5); break;
-                        case dict.tomatoNoGrass: this.gameAdd(yy, xx, 'tomato', isoGroupSecond, 0.5); break;
-                        case dict.rockGrass: this.gameAddWall(yy, xx, 'rock', isoGroupSecond, 0.5); break;
+                    switch (map[parseInt(xx / size)][parseInt(yy / size)].platformSecond) {
+                        case dictPlatformSecond.tree: this.gameAddWall(yy, xx, 'tree', isoGroupPlatformSecond, 0.5); break;
+                        case dictPlatformSecond.rock: this.gameAddWall(yy, xx, 'rock', isoGroupPlatformSecond, 0.5); break;
+                        case dictPlatformSecond.wheat: this.gameAdd(yy, xx, 'wheat', isoGroupPlatformSecond, 0.5); break;
+                        case dictPlatformSecond.shoot: this.gameAdd(yy, xx, 'shoot', isoGroupPlatformSecond, 0.5); break;
+                        case dictPlatformSecond.tomato: this.gameAdd(yy, xx, 'tomato', isoGroupPlatformSecond, 0.5); break;
                     };
                 }
             },
@@ -279,16 +243,16 @@
                 game.physics.isoArcade.gravity.setTo(0, 0, -1000);
 
                 //SPAWN
-                isoGroupPlatform = game.add.group();        //create group
-                this.spawnTilesPlatform();                  //spawn
-                isoGroupSecond = game.add.group();          //create group
-                this.spawnTilesSecond();                    //spawn
+                isoGroupPlatform = game.add.group();                //create group
+                this.spawnTilesPlatform();                          //spawn
+                isoGroupPlatformSecond = game.add.group();          //create group
+                this.spawnTilesPlatformSecond();                    //spawn
 
                 //CHARACTER
-                player = game.add.isoSprite(size * characterStartX, size * characterStartY, 0, 'character', 0, isoGroupSecond); //add sprite
-                player.anchor.set(0.5);                                                                                         //set anchor
-                game.physics.isoArcade.enable(player);                                                                          //turn on physics
-                player.body.collideWorldBounds = true;                                                                          //turn on collide
+                player = game.add.isoSprite(size * characterStartX, size * characterStartY, 0, 'character', 0, isoGroupPlatformSecond); //add sprite
+                player.anchor.set(0.5);                                                                                                 //set anchor
+                game.physics.isoArcade.enable(player);                                                                                  //turn on physics
+                player.body.collideWorldBounds = true;                                                                                  //turn on collide
 
                 //ADD KEY TO MOVE
                 this.cursors = game.input.keyboard.createCursorKeys();  //add keyboard
@@ -297,7 +261,6 @@
                     Phaser.Keyboard.RIGHT,
                     Phaser.Keyboard.UP,
                     Phaser.Keyboard.DOWN,
-                    Phaser.Keyboard.SPACEBAR
                 ]);
 
                 //CAMERA MOVE
@@ -310,7 +273,7 @@
             update: function () {
                 //INSIDE FUNCTIONS
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-                function actionOnclick(todo) {
+                function actionOnClick(todo) {
                     var counter = 0;                                                                                                        //helper variable to find coords
                     isoGroupPlatform.forEach(function (tile) {                                                                              //loop for each element at platform
                         var inBounds = tile.isoBounds.containsXY(player.body.position.x + (size / 2), player.body.position.y + (size / 2)); //check player in bounds
@@ -328,27 +291,23 @@
                 };
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
                 function info(y, x, tile) {
-                    switch (map[y][x]) {
-                        case dict.grass: platformInfo = 'Grass'; playerInfo = 'Air'; colorInfo = '#a7aebe'; break;
-                        case dict.noGrass: platformInfo = 'No Grass'; playerInfo = 'Air'; colorInfo = '#a7aebe'; break;
-                        case dict.treeGrass: platformInfo = 'Grass'; playerInfo = 'Tree'; colorInfo = '#a7aebe'; break;
-                        case dict.wheatNoGrass: platformInfo = 'No Grass'; playerInfo = 'Wheat'; colorInfo = '#00ff00'; break;
-                        case dict.shootNoGrass: platformInfo = 'No Grass'; playerInfo = 'Shoot'; colorInfo = '#ffff00'; break;
-                        case dict.wateringNoGrass: platformInfo = 'Watering No Grass'; playerInfo = 'Air'; colorInfo = '#a7aebe'; break;
-                        case dict.shootWateringNoGrass: platformInfo = 'Watering No Grass'; playerInfo = 'Shoot'; colorInfo = '#ffff00'; break;
-                        case dict.tomatoNoGrass: platformInfo = 'No Grass'; playerInfo = 'Tomato'; colorInfo = '#00ff00'; break;
-                        case dict.rockGrass: platformInfo = 'Grass'; playerInfo = 'Rock'; colorInfo = '#a7aebe'; break;
+                    switch (map[y][x].platform) {
+                        case dictPlatform.grass: platformInfo = 'Grass'; platformInfoColor = '#a7aebe'; break;
+                        case dictPlatform.noGrass: platformInfo = 'No Grass'; platformInfoColor = '#CD7F32'; break;
+                        case dictPlatform.wateringNoGrass: platformInfo = 'Watering No Grass'; platformInfoColor = '#0096FF'; break;
                     };
-                    switch (mapShoot[y][x]) {
-                        case dictShoot.wheat: playerInfo += ' | Wheat'; break;
-                        case dictShoot.tomato: playerInfo += ' | Tomato'; break;
+                    switch (map[y][x].platformSecond) {
+                        case dictPlatformSecond.null: platformSecondInfo = 'Air'; platformSecondInfoColor = '#a7aebe'; break;
+                        case dictPlatformSecond.wheat: platformSecondInfo = 'Wheat'; platformSecondInfoColor = '#00ff00'; break;
+                        case dictPlatformSecond.shoot: platformSecondInfo = 'Shoot'; platformSecondInfoColor = '#ffff00'; break;
+                        case dictPlatformSecond.tomato: platformSecondInfo = 'Tomato'; platformSecondInfoColor = '#00ff00'; break;
                     };
                 };
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
                 function digInside(y, x, tile, to, toDict, watering = false) {
                     if (coins >= digCost) {                                     //check how many coins has player
                         tile.loadTexture(to);                                   //change texture
-                        map[y][x] = toDict;                                     //update map
+                        map[y][x].platform = toDict;                            //update map
                         coins -= digCost;                                       //add coins
                         document.getElementById("coins").innerHTML = coins;     //update coins
                         if (watering) {                                         //in case watering
@@ -357,48 +316,52 @@
                     }
                 };
                 function dig(y, x, tile) {
-                    switch (map[y][x]) {
-                        //CHANGE FROM GRASS TO NOGRASS
-                        case dict.grass: digInside(y, x, tile, 'nograss', dict.noGrass); break;
-                        //CHANGE FROM NOGRASS TO GRASS
-                        case dict.noGrass: digInside(y, x, tile, 'grass', dict.grass); break;
-                        //CHANGE FROM WATERINGNOGRASS TO GRASS
-                        case dict.wateringNoGrass: digInside(y, x, tile, 'grass', dict.grass, true); break;
+                    if (map[y][x].platformSecond == dictPlatformSecond.null) {  //protection
+                        switch (map[y][x].platform) {
+                            //CHANGE FROM GRASS TO NOGRASS
+                            case dictPlatform.grass: digInside(y, x, tile, 'nograss', dictPlatform.noGrass); break;
+                            //CHANGE FROM NOGRASS TO GRASS
+                            case dictPlatform.noGrass: digInside(y, x, tile, 'grass', dictPlatform.grass); break;
+                            //CHANGE FROM WATERINGNOGRASS TO GRASS
+                            case dictPlatform.wateringNoGrass: digInside(y, x, tile, 'grass', dictPlatform.grass, true); break;
+                        };
                     };
                 };
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
                 function plantIndide(y, x, tile, toDict) {
-                    if (coins >= plantCost) {                                                           //check how many coins has player
-                        shoot = game.add.isoSprite(x * size, y * size, 0, 'shoot', 0, isoGroupSecond);  //add sprite
-                        shoot.anchor.set(0.5);                                                          //set anchor
-                        map[y][x] = toDict;                                                             //update map
-                        coins -= plantCost;                                                             //add coins
-                        document.getElementById("coins").innerHTML = coins;                             //update coins
+                    if (coins >= plantCost) {                                                                   //check how many coins has player
+                        shoot = game.add.isoSprite(x * size, y * size, 0, 'shoot', 0, isoGroupPlatformSecond);  //add sprite
+                        shoot.anchor.set(0.5);                                                                  //set anchor
+                        map[y][x].platformSecond = toDict;                                                      //update map
+                        coins -= plantCost;                                                                     //add coins
+                        document.getElementById("coins").innerHTML = coins;                                     //update coins
                     };
                 };
                 function plant(y, x, tile) {
-                    switch (map[y][x]) {
-                        //CHANGE FROM NOGRASS TO SHOOT
-                        case dict.noGrass: plantIndide(y, x, tile, dict.shootNoGrass); break;
-                        //CHANGE FROM WATERINGNOGRASS TO SHOOTWATERINGNOGRASS
-                        case dict.wateringNoGrass: plantIndide(y, x, tile, dict.shootWateringNoGrass); break;
+                    if (map[y][x].platformSecond == dictPlatformSecond.null) {                                  //protection
+                        switch (map[y][x].platform) {
+                            //CHANGE FROM NOGRASS TO SHOOT
+                            case dictPlatform.noGrass: plantIndide(y, x, tile, dictPlatformSecond.shoot); break;
+                            //CHANGE FROM WATERINGNOGRASS TO SHOOTWATERINGNOGRASS
+                            case dictPlatform.wateringNoGrass: plantIndide(y, x, tile, dictPlatformSecond.shoot); break;
+                        };
                     };
                 };
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
                 function wateringInside(y, x, tile, toDict) {
                     if (coins >= wateringCost) {                                //check how many coins has player
                         tile.tint = 0x86bfda;                                   //change color
-                        map[y][x] = toDict;                                     //update map
+                        map[y][x].platform = toDict;                            //update map
                         coins -= wateringCost;                                  //add coins
                         document.getElementById("coins").innerHTML = coins;     //update coins
                     };
                 };
                 function watering(y, x, tile) {
-                    switch (map[y][x]) {
-                        //CHANGE FROM NOGRASS TO WATERINGNOGRASS
-                        case dict.noGrass: wateringInside(y, x, tile, dict.wateringNoGrass); break;
-                        //CHANGE FROM SHOOT NOGRASS TO SHOOT WATERINGNOGRASS
-                        case dict.shootNoGrass: wateringInside(y, x, tile, dict.shootWateringNoGrass); break;
+                    if ((map[y][x].platformSecond == dictPlatformSecond.null) || (map[y][x].platformSecond == dictPlatformSecond.shoot)) {
+                        switch (map[y][x].platform) {
+                            //CHANGE FROM NOGRASS TO WATERINGNOGRASS
+                            case dictPlatform.noGrass: wateringInside(y, x, tile, dictPlatform.wateringNoGrass); break;
+                        };
                     };
                 };
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -407,7 +370,7 @@
                     var index = 0;                                                              //index of the object from isoGroupSecond
                     var diffX = 1000000;                                                        //helper variable
                     var diffY = 1000000;                                                        //helper variable
-                    isoGroupSecond.forEach(function (tileSecond) {                              //loop for each element at 
+                    isoGroupPlatformSecond.forEach(function (tileSecond) {                      //loop for each element at 
                         if (tileSecond.key == key) {                                            //do it for key(kind) of object
                             var currDiffX = Math.abs(tile.position.x - tileSecond.position.x);  //take difference x
                             var currDiffY = Math.abs(tile.position.y - tileSecond.position.y);  //take difference y
@@ -420,61 +383,61 @@
                         counter++;                                                              //add to counter
                     });
                     tile.loadTexture('grass');                                                  //change texture
-                    map[y][x] = dict.grass;                                                     //update map
+                    map[y][x].platformSecond = dictPlatformSecond.null;                         //update map
+                    map[y][x].platform = dictPlatform.grass;                                    //update map
                     coins += cropsRevenue;                                                      //add to coins
                     document.getElementById("coins").innerHTML = coins;                         //update coins
-                    isoGroupSecond.children[index].destroy();                                   //destroy element from gameplay
+                    isoGroupPlatformSecond.children[index].destroy();                           //destroy element from gameplay
                 };
                 function crops(y, x, tile) {
-                    switch (map[y][x]) {
-                        case dict.wheatNoGrass: cropsInside(y, x, tile, 'wheat'); break;
-                        case dict.tomatoNoGrass: cropsInside(y, x, tile, 'tomato'); break;
+                    switch (map[y][x].platformSecond) {
+                        case dictPlatformSecond.wheat: cropsInside(y, x, tile, 'wheat'); break;
+                        case dictPlatformSecond.tomato: cropsInside(y, x, tile, 'tomato'); break;
                     };
                 };
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
                 //MOVE UPDATE PLAYER
                 player.body.velocity.y = (this.cursors.up.isDown ? -speed : (this.cursors.down.isDown ? speed : 0));    //move top down
                 player.body.velocity.x = (this.cursors.left.isDown ? -speed : (this.cursors.right.isDown ? speed : 0)); //move left right
-
-
+                var test = info;
                 //ON CLICK SHOVEL
                 document.getElementById("shovel").addEventListener("click", function () {
-                    actionOnclick(todo = dig);
+                    actionOnClick(dig);
                 });
 
                 //ON CLICK PLANT
                 document.getElementById("plant").addEventListener("click", function () {
-                    actionOnclick(todo = plant);
+                    actionOnClick(plant);
                 });
 
                 //ON CLICK WATERING-CAN
                 document.getElementById("watering-can").addEventListener("click", function () {
-                    actionOnclick(todo = watering);
+                    actionOnClick(watering);
                 });
 
                 //ON CLICK SCYTHE
                 document.getElementById("scythe").addEventListener("click", function () {
-                    actionOnclick(todo = crops);
-
+                    actionOnClick(crops);
                 });
-
+                
                 //UPDATE INFO
-                actionOnclick(todo = info);
+                //TODO: FIX IF THAT LINE EXIST OTHER actionOnClick DOESN'T WORK
+                //actionOnClick(info);
 
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
                 //ADD COLLLIDE AND TOPOLOGIC VIEW
                 game.physics.isoArcade.collide(isoGroupPlatform);
                 game.iso.topologicalSort(isoGroupPlatform);
-                game.physics.isoArcade.collide(isoGroupSecond);
-                game.iso.topologicalSort(isoGroupSecond);
+                game.physics.isoArcade.collide(isoGroupPlatformSecond);
+                game.iso.topologicalSort(isoGroupPlatformSecond);
 
             },
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------
             render: function () {
                 game.debug.text('FPS: ' + game.time.fps || '--', infoX, infoY, '#a7aebe');
-                game.debug.text('Platform: ' + platformInfo, infoX, infoY * 2, '#a7aebe');
-                game.debug.text('Player: ' + playerInfo, infoX, infoY * 3, colorInfo);
+                game.debug.text('Platform: ' + platformInfo, infoX, infoY * 2, platformInfoColor);
+                game.debug.text('Player: ' + platformSecondInfo, infoX, infoY * 3, platformSecondInfoColor);
             },
         };
 
@@ -487,16 +450,6 @@
 
 </html>
 <!--
-    0 - /grass
-    1 - /nograss
-    2 - tree/grass
-    3 - wheat/nograss
-    4 - shoot/nograss
-    5 - /wateringnograss
-    6 - shoot/wateringnograss
-    7 - tomato/nograss
-    8 - rock/grass
-
     https://www.flaticon.com/search?word=watering%20can
     https://www.flaticon.com/search?word=scythe
     https://www.flaticon.com/search?word=coin
