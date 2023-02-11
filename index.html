@@ -11,8 +11,11 @@
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.54.0/dist/phaser.js"></script>
 </head>
 
-<body class="min-vh-100 min-vw-100 d-flex justify-content-center align-items-center bg-secondary">
+<body class="min-vh-100 min-vw-100 d-flex justify-content-center align-items-center"
+    style="background-image: url('assets/BG.png');background-size: cover;  background-position: center;">
+    <!--TOP NAV-->
     <nav class="navbar fixed-top navbar-dark p-0" id="navtop">
+        <!--MAIN-->
         <div class="container-fluid w-100 bg-dark">
             <div class="d-flex justify-content-between w-100">
                 <div class="navbar-brand d-flex justify-content-between align-items-center m-0">
@@ -22,40 +25,87 @@
                             class="img-fluid max-height-64" alt="target"></buttom>
                 </div>
                 <div class="navbar-brand d-flex justify-content-center align-items-center m-0">
-                    <img src="assets/dollar.png" alt="coin" width="64" height="64">
+                    <img src="assets/coin-icon.png" alt="coin-icon" width="64" height="64">
                     <span id="coins" class="mx-2"></span>
                 </div>
             </div>
         </div>
-        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark bg-dark w-100 bg-opacity-25" id="side-seeding"
-            style="visibility: hidden;">
-            <div class="text-white text-center">
-                <span class="fs-1">Seeding</span>
-            </div>
-            <hr>
-            <div class="container">
-                <div class="row overflow-auto" style="max-height: 50vh;">
-                    <div class="col d-flex justify-content-center align-items-center">
-                        <buttom class="btn btn-outline-light p-2 m-2" id="wheat-icon"
-                            onclick="kindSeedingSet(dictKind.wheat, 'wheat-icon','tomato-icon')">
-                            <div>Wheat</div><img src="assets/wheat-icon.png" class="img-fluid max-height-64"
-                                alt="wheat-icon">
-                            <div id="wheat-seeding-count"></div>
-                        </buttom>
-                    </div>
-                    <div class="col d-flex justify-content-center align-items-center">
-                        <buttom class="btn btn-outline-light p-2 m-2" id="tomato-icon"
-                            onclick="kindSeedingSet(dictKind.tomato,'tomato-icon','wheat-icon')">
-                            <div>Tomato</div><img src="assets/tomato-icon.png" class="img-fluid max-height-64"
-                                alt="tomato-icon">
-                            <div id="tomato-seeding-count"></div>
-                        </buttom>
-                    </div>
+    </nav>
+    <!--WINDOW SEEDING-->
+    <div class="position-absolute w-auto mx-3 p-3 bg-dark bg-opacity-50 text-bg-dark overflow-auto d-flex flex-column align-items-center px-5 shadow"
+        id="window-seeding" style="top:auto; left: auto; max-height: 60vh; visibility: hidden;">
+        <div class="w-100 text-center my-3">
+            <h2>Seeding</h2>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col d-flex justify-content-center align-items-center">
+                    <buttom class="btn btn-outline-light p-2 m-2" id="wheat-icon"
+                        onclick="kindSeedingSet(dictKind.wheat, 'wheat-icon','tomato-icon')">
+                        <div>Wheat</div><img src="assets/wheat-icon.png" class="img-fluid max-height-64"
+                            alt="wheat-icon">
+                        <div id="wheat-seeding-count"></div>
+                    </buttom>
+                </div>
+                <div class="col d-flex justify-content-center align-items-center">
+                    <buttom class="btn btn-outline-light p-2 m-2" id="tomato-icon"
+                        onclick="kindSeedingSet(dictKind.tomato,'tomato-icon','wheat-icon')">
+                        <div>Tomato</div><img src="assets/tomato-icon.png" class="img-fluid max-height-64"
+                            alt="tomato-icon">
+                        <div id="tomato-seeding-count"></div>
+                    </buttom>
+                </div>
+                <div class="col d-flex justify-content-center align-items-center">
+                    <buttom class="btn btn-outline-light p-2 m-2" id="carrot-icon"
+                        onclick="kindSeedingSet(dictKind.carrot,'carrot-icon','wheat-icon')">
+                        <div>Carrot</div><img src="assets/carrot-icon.png" class="img-fluid max-height-64"
+                            alt="carrot-icon">
+                        <div id="carrot-seeding-count"></div>
+                    </buttom>
                 </div>
             </div>
         </div>
-    </nav>
+    </div>
+    <!--WINDOW MISSION-->
+    <div class="position-absolute w-auto mx-3 p-3 bg-dark bg-opacity-50 text-bg-dark overflow-auto d-flex flex-column align-items-center px-5 shadow"
+        id="window-mission" style="top:auto; left: auto; max-height: 60vh; visibility: hidden;">
+        <div class="w-100 text-center my-3">
+            <h2>Missions</h2>
+        </div>
+        <div class="list-group mb-5" id="missions">
+            <!--MISSION
+            <div
+                class="list-group-item list-group-item-action bg-transparent border-1 rounded-0 border-white text-white d-flex flex-column justify-content-between">
+                <div class="d-flex flex-row">
+                    <div class="d-flex flex-column w-100 text-center">
+                        <h5 class="mb-1">Collect:</h5>
+                        <div class="w-100">
+                            <buttom class="btn btn-outline-light p-2 m-2">
+                                <div>Wheat</div><img src="assets/wheat-icon.png" class="img-fluid max-height-64"
+                                    alt="wheat-icon">
+                                <div>x<span id="mission-0-collect-0-count">12</span></div>
+                            </buttom>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column w-100 text-center">
+                        <h5 class="mb-1">Award:</h5>
+                        <div class="w-100">
+                            <buttom class="btn btn-outline-light p-2 m-2">
+                                <div>Tomato</div><img src="assets/tomato-icon.png" class="img-fluid max-height-64"
+                                    alt="tomato-icon">
+                                <div>x<span id="mission-0-award-0-count">1</span></div>
+                            </buttom>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column text-center w-100">
+                    <div><button class="btn btn-light">Do it!</button></div>
+                </div>
+            </div>-->
 
+        </div>
+    </div>
+    <!--BOTTOM NAV-->
     <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark" id="navbot">
         <div class="container-fluid">
             <div class="d-flex justify-content-between w-100">
@@ -82,8 +132,9 @@
         var navBot = document.getElementById("navbot");
         var navBotHeight = navBot.offsetHeight;
 
+
         var width = window.innerWidth * 0.85;
-        var height = window.innerHeight - navTopHeight;
+        var height = (window.innerHeight * 0.9) - navTopHeight - navBotHeight;
 
         if (height > 720) {
             height = 720
@@ -110,6 +161,7 @@
             grass: 0,
             noGrass: 1,
             wateringNoGrass: 2,
+            water: 3,
         };
         const dictPlatformSecond = {
             null: 0,
@@ -118,11 +170,14 @@
             wheat: 3,
             shoot: 4,
             tomato: 5,
+            transparent: 6,
+            carrot: 7,
         };
         const dictKind = {
             null: 0,
             wheat: 1,
             tomato: 2,
+            carrot: 4,
         };
         const dictColor = {
             normal: '#a7aebe',
@@ -132,11 +187,13 @@
             brown: '#CD7F32',
             red: '#ff0000',
             white: '#ffffff',
+            orange: '#FFA500',
         };
         const dictSeedingTime = {
             tomato: 2,
             wheat: 1,
-        }
+            carrot: 5,
+        };
         const size = 35.8;
         const speed = 200;
         const digCost = 10;
@@ -147,34 +204,11 @@
         const characterStartY = 10;
         const infoY = 16;
         const infoX = 2;
+        const walls = 100;
 
         //VARIABLES
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-        var map = [
-            [{ platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 5, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 5, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 5, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 4, kindGrowing: 1, dateStart: 0, dateEnd: 0 }, { platform: 2, platformSecond: 4, kindGrowing: 2, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 5, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 5, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 5, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 4, kindGrowing: 1, dateStart: 0, dateEnd: 0 }, { platform: 2, platformSecond: 4, kindGrowing: 2, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 2, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 2, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 5, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 5, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 5, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 4, kindGrowing: 1, dateStart: 0, dateEnd: 0 }, { platform: 2, platformSecond: 4, kindGrowing: 2, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 2, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 2, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 2, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 2, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 2, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 2, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 2, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 2, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 2, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 3, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 3, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 3, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 2, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 2, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 3, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 3, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 3, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 2, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 2, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 3, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 3, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 1, platformSecond: 3, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
-        ];
-
-        var coins = 10000;
+        var count;
         var platformInfo = null;
         var platformSecondInfo = null;
         var lastX = null;
@@ -187,10 +221,48 @@
         var kindGrowingInfoColor = dictColor.normal;
         var timeLeftColor = dictColor.normal;
 
-        var tomatoSeedingCount = 8;
-        var wheatSeedingCount = 10;
 
         var timeLeft;
+
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //DB VARIABLES
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+        var map = [
+            [{ platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 2, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 2, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 2, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 2, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 2, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 2, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 2, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 3, platformSecond: 6, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 1, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+            [{ platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }, { platform: 0, platformSecond: 0, kindGrowing: 0, dateStart: 0, dateEnd: 0 }],
+        ];
+        var coins = 100;
+        var missions = [
+            { collect: [{ item: 'wheat', count: 10 },], award: [{ item: 'tomato', count: 1 },{ item: 'coin', count: 250 }], },
+            { collect: [{ item: 'wheat', count: 40 }, { item: 'tomato', count: 14 }], award: [{ item: 'carrot', count: 1 }, { item: 'coin', count: 550 }], },
+        ]
+        var dictSeedingCount = {
+            tomato: 0,
+            wheat: 10,
+            carrot: 0,
+        };
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         BasicGame.Boot.prototype =
         {
@@ -228,6 +300,7 @@
                         case dictPlatform.grass: this.gameAdd(yy, xx, 'grass', isoGroupPlatform, 0.5, 0); break;
                         case dictPlatform.noGrass: this.gameAdd(yy, xx, 'nograss', isoGroupPlatform, 0.5, 0); break;
                         case dictPlatform.wateringNoGrass: this.gameAdd(yy, xx, 'nograss', isoGroupPlatform, 0.5, 0, true); break;
+                        case dictPlatform.water: this.gameAdd(yy, xx, 'water', isoGroupPlatform, 0.5, 0, true); break;
                     };
                 };
             },
@@ -241,9 +314,11 @@
                     switch (map[parseInt(xx / size)][parseInt(yy / size)].platformSecond) {
                         case dictPlatformSecond.tree: this.gameAddWall(yy, xx, 'tree', isoGroupPlatformSecond, 0.5); break;
                         case dictPlatformSecond.rock: this.gameAddWall(yy, xx, 'rock', isoGroupPlatformSecond, 0.5); break;
+                        case dictPlatformSecond.transparent: this.gameAddWall(yy, xx, 'transparent', isoGroupPlatformSecond, 0.5); break;
                         case dictPlatformSecond.wheat: this.gameAdd(yy, xx, 'wheat', isoGroupPlatformSecond, 0.5); break;
                         case dictPlatformSecond.shoot: this.gameAdd(yy, xx, 'shoot', isoGroupPlatformSecond, 0.5); break;
                         case dictPlatformSecond.tomato: this.gameAdd(yy, xx, 'tomato', isoGroupPlatformSecond, 0.5); break;
+                        case dictPlatformSecond.carrot: this.gameAdd(yy, xx, 'carrot', isoGroupPlatformSecond, 0.5); break;
                     };
                 };
             },
@@ -260,6 +335,9 @@
                 game.load.image('tomato', 'assets/tomato.png');
                 game.load.image('shoot', 'assets/shoot.png');
                 game.load.image('rock', 'assets/rock.png');
+                game.load.image('water', 'assets/water.png');
+                game.load.image('transparent', 'assets/transparent.png');
+                game.load.image('carrot', 'assets/carrot.png');
 
                 //SET UP GAME
                 game.time.advancedTiming = true;
@@ -270,6 +348,19 @@
 
                 //LAYOUT SET UP COMUNICATION
                 document.getElementById("coins").innerHTML += coins;
+
+                //RANDOM MAP
+                for (var i = 0; i < walls; i++) {
+                    var num1 = Math.floor(Math.random() * map[0].length);
+                    var num2 = Math.floor(Math.random() * map.length);
+                    var num3 = Math.floor(Math.random() * 3);
+                    while (num1 === 10 || num2 === 10 || num1 < 10 && num2 < 10) {
+                        num1 = Math.floor(Math.random() * map[0].length);
+                        num2 = Math.floor(Math.random() * map.length);
+                    }
+                    map[num1][num2].platformSecond = parseInt(num3);
+                };
+
             },
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------
             //CREATE
@@ -350,8 +441,13 @@
                     };
                 };
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-                function plantIndide(y, x, tile, toDict) {
-                    if (coins >= plantCost && kindSeeding != dictKind.null) {                                          //check how many coins has player and protection before no tooken kind
+                function plantIndide(y, x, tile, to) {
+                    switch (kindSeeding) {
+                        case dictKind.tomato: count = dictSeedingCount.tomato; break;
+                        case dictKind.wheat: count = dictSeedingCount.wheat; break;
+                        case dictKind.carrot: count = dictSeedingCount.carrot; break;
+                    }
+                    if (coins >= plantCost && kindSeeding != dictKind.null && count > 0) {                                          //check how many coins has player and protection before no tooken kind
                         shoot = game.add.isoSprite(x * size, y * size, 0, 'shoot', 0, isoGroupPlatformSecond);  //add sprite
                         shoot.anchor.set(0.5);                                                                  //set anchor
 
@@ -360,19 +456,22 @@
                         switch (kindSeeding) {
                             case dictKind.tomato: minutes = Math.floor(dateCurrent / (60 * 1000) % 60) + dictSeedingTime.tomato; break;
                             case dictKind.wheat: minutes = Math.floor(dateCurrent / (60 * 1000) % 60) + dictSeedingTime.wheat; break;
+                            case dictKind.carrot: minutes = Math.floor(dateCurrent / (60 * 1000) % 60) + dictSeedingTime.carrot; break;
                         }
                         dateCurrent.setMinutes(minutes);
 
-                        map[y][x].platformSecond = toDict;                                                      //update map
+                        map[y][x].platformSecond = to;                                                      //update map
                         map[y][x].kindGrowing = kindSeeding;                                                                  //update map
                         map[y][x].dateStart = dateCurrent;
                         map[y][x].dateEnd = dateCurrent;
 
                         //console.log(dateCurrent+"|"+dateEnd+'|'+(dateEnd-dateCurrent))
                         coins -= plantCost;                                                                     //add coins
+                        count--;
                         switch (kindSeeding) {
-                            case dictKind.tomato: tomatoSeedingCount--; break;
-                            case dictKind.wheat: wheatSeedingCount--; break;
+                            case dictKind.tomato: dictSeedingCount.tomato = count; break;
+                            case dictKind.wheat: dictSeedingCount.wheat = count; break;
+                            case dictKind.carrot: dictSeedingCount.carrot = count; break;
                         }
                         document.getElementById("coins").innerHTML = coins;                                     //update coins
                     };
@@ -423,16 +522,21 @@
                         counter++;                                                              //add to counter
                     });
                     tile.loadTexture('grass');                                                  //change texture
+                    switch (map[y][x].platformSecond) {
+                        case dictPlatformSecond.tomato: dictSeedingCount.tomato += 2; break;
+                        case dictPlatformSecond.wheat: dictSeedingCount.wheat += 2; break;
+                        case dictPlatformSecond.carrot: dictSeedingCount.carrot += 2; break;
+                    };
                     map[y][x].platformSecond = dictPlatformSecond.null;                         //update map
                     map[y][x].platform = dictPlatform.grass;                                    //update map
-                    coins += cropsRevenue;                                                      //add to coins
-                    document.getElementById("coins").innerHTML = coins;                         //update coins
+
                     isoGroupPlatformSecond.children[index].destroy();                           //destroy element from gameplay
                 };
                 function crops(y, x, tile) {
                     switch (map[y][x].platformSecond) {
                         case dictPlatformSecond.wheat: cropsInside(y, x, tile, 'wheat'); break;
                         case dictPlatformSecond.tomato: cropsInside(y, x, tile, 'tomato'); break;
+                        case dictPlatformSecond.carrot: cropsInside(y, x, tile, 'carrot'); break;
                     };
                 };
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -464,7 +568,7 @@
                 for (var i = 0; i < map[0].length * map.length; i++) {
                     var y = Math.floor(i / map[0].length);
                     var x = (i % map[0].length);
-                    if (map[y][x].dateEnd.toString() == dateCurrent.toString()) {
+                    if ((dateCurrent - map[y][x].dateEnd > 0 && map[y][x].platformSecond.key == 'shoot') || (map[y][x].dateEnd.toString() == dateCurrent.toString())) {
                         tile = isoGroupPlatform.children[(x * map[0].length) + y]
                         tile.tint = 0xffffff;
                         tile.loadTexture('nograss');
@@ -487,9 +591,10 @@
                         });
 
                         map[y][x].platform = dictPlatform.noGrass;
-                        switch (map[y][x].kindGrowing){
-                            case dictKind.wheat: map[y][x].platformSecond = dictPlatformSecond.wheat;isoGroupPlatformSecond.children[index].loadTexture('wheat'); break;
-                            case dictKind.tomato: map[y][x].platformSecond = dictPlatformSecond.tomato;isoGroupPlatformSecond.children[index].loadTexture('tomato'); break;
+                        switch (map[y][x].kindGrowing) {
+                            case dictKind.wheat: map[y][x].platformSecond = dictPlatformSecond.wheat; isoGroupPlatformSecond.children[index].loadTexture('wheat'); break;
+                            case dictKind.tomato: map[y][x].platformSecond = dictPlatformSecond.tomato; isoGroupPlatformSecond.children[index].loadTexture('tomato'); break;
+                            case dictKind.carrot: map[y][x].platformSecond = dictPlatformSecond.carrot; isoGroupPlatformSecond.children[index].loadTexture('carrot'); break;
                         };
                         map[y][x].kindGrowing = dictKind.null;
                         map[y][x].dateStart = 0;
@@ -511,6 +616,8 @@
                 switch (map[Math.floor(yy)][Math.floor(xx)].platformSecond) {
                     case dictPlatformSecond.null: platformSecondInfo = 'Air'; platformSecondInfoColor = dictColor.normal; break;
                     case dictPlatformSecond.wheat: platformSecondInfo = 'Wheat'; platformSecondInfoColor = dictColor.green; break;
+                    case dictPlatformSecond.tomato: platformSecondInfo = 'Tomato'; platformSecondInfoColor = dictColor.green; break;
+                    case dictPlatformSecond.carrot: platformSecondInfo = 'Carrot'; platformSecondInfoColor = dictColor.green; break;
                     case dictPlatformSecond.shoot: platformSecondInfo = 'Shoot'; platformSecondInfoColor = dictColor.yellow;
 
                         let dateCurrent = new Date();
@@ -521,8 +628,6 @@
                         timeLeft = `${minutes}:${seconds}`;
                         timeLeftColor = dictColor.white;
                         break;
-
-                    case dictPlatformSecond.tomato: platformSecondInfo = 'Tomato'; platformSecondInfoColor = dictColor.green; break;
                 };
                 switch (map[Math.floor(yy)][Math.floor(xx)].platform) {
                     case dictPlatform.grass: platformInfo = 'Grass'; platformInfoColor = dictColor.normal; break;
@@ -533,11 +638,13 @@
                     case dictKind.null: kindGrowingInfo = null; kindGrowingInfoColor = dictColor.normal; break;
                     case dictKind.wheat: kindGrowingInfo = 'wheat'; kindGrowingInfoColor = dictColor.yellow; break;
                     case dictKind.tomato: kindGrowingInfo = 'tomato'; kindGrowingInfoColor = dictColor.red; break;
+                    case dictKind.carrot: kindGrowingInfo = 'carrot'; kindGrowingInfoColor = dictColor.red; break;
                 };
                 switch (kindSeeding) {
                     case dictKind.null: kindSeedingInfo = 'no selected!'; kindSeedingInfoColor = dictColor.red; break;
                     case dictKind.wheat: kindSeedingInfo = 'wheat'; kindSeedingInfoColor = dictColor.yellow; break;
                     case dictKind.tomato: kindSeedingInfo = 'tomato'; kindSeedingInfoColor = dictColor.red; break;
+                    case dictKind.carrot: kindSeedingInfo = 'carrot'; kindSeedingInfoColor = dictColor.red; break;
                 };
                 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -562,39 +669,146 @@
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------
         //LAYOUT
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-        //SIDE BAR
+        const dictButton = {
+            wheat: 'wheat-icon',
+            tomato: 'tomato-icon',
+            carrot: 'carrot-icon',
+        };
+
+
+        //WINDOW SEEDING
         document.getElementById("seeding").addEventListener("click", function () {
-            var div = document.getElementById('side-seeding');
+            var div = document.getElementById('window-seeding');
             if (div.style.visibility === "hidden") {
                 div.style.visibility = "visible";
+                document.getElementById("wheat-seeding-count").innerHTML = dictSeedingCount.wheat;
+                document.getElementById("tomato-seeding-count").innerHTML = dictSeedingCount.tomato;
+                document.getElementById("carrot-seeding-count").innerHTML = dictSeedingCount.carrot;
             } else {
                 div.style.visibility = "hidden";
             }
-            document.getElementById("wheat-seeding-count").innerHTML = wheatSeedingCount;
-            document.getElementById("tomato-seeding-count").innerHTML = tomatoSeedingCount;
         });
 
         document.addEventListener("click", function (event) {
-            var div = document.getElementById('side-seeding');
+            var div = document.getElementById('window-seeding');
             var buttom = document.getElementById('seeding');
-            var canvas = document.getElementById('seeding');
-            if (event.target != div && event.target.parentNode != div && event.target != buttom && event.target.parentNode != buttom) {
+            var canvas = document.getElementById('canvas');
+            if (event.target != buttom && event.target.parentNode != buttom) {
+                div.style.visibility = "hidden";
+            }
+        });
+
+        //WINDOW MISSION
+        document.getElementById("mission").addEventListener("click", function () {
+            var div = document.getElementById('window-mission');
+            var divMissions = document.getElementById('missions');
+            if (div.style.visibility === "hidden") {
+                div.style.visibility = "visible";
+                divMissions.innerHTML = '';
+                var counter = 0;
+                missions.forEach(function (mission) {
+                    var collect = '';
+                    var award = '';
+                    mission.collect.forEach(function (coll) {
+                        collect += `
+                    <buttom class="btn btn-outline-light p-2 m-2">
+                        <div style="text-transform: capitalize;">${coll.item}</div><img src="assets/${coll.item}-icon.png" class="img-fluid max-height-64"
+                            alt="${coll.item}-icon">
+                        <div>x<span>${coll.count}</span></div>
+                    </buttom>
+                    `;
+                    });
+                    mission.award.forEach(function (awa) {
+                        award += `
+                    <buttom class="btn btn-outline-light p-2 m-2">
+                        <div style="text-transform: capitalize;">${awa.item}</div><img src="assets/${awa.item}-icon.png" class="img-fluid max-height-64"
+                            alt="${awa.item}-icon">
+                        <div>x<span>${awa.count}</span></div>
+                    </buttom>
+                    `;
+                    });
+                    singleMission = `
+                    <div class="list-group-item list-group-item-action bg-transparent border-1 rounded-0 border-white text-white d-flex flex-column justify-content-between">
+                        <div class="d-flex flex-row">
+                            <div class="d-flex flex-column w-100 text-center">
+                                <h5 class="mb-1">Collect:</h5>
+                                <div class="w-100">
+                                    ${collect}
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column w-100 text-center">
+                                <h5 class="mb-1">Award:</h5>
+                                <div class="w-100">
+                                    ${award}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column text-center w-100">
+                            <div><button class="btn btn-light" onClick="missionChcek(${counter})">Do it!</button></div>
+                        </div>
+                    </div>
+                    `;
+                    divMissions.innerHTML += singleMission;
+                    counter++;
+                });
+            } else {
+                div.style.visibility = "hidden";
+            }
+        });
+
+        document.addEventListener("click", function (event) {
+            var div = document.getElementById('window-mission');
+            var buttom = document.getElementById('mission');
+            if (event.target != buttom && event.target.parentNode != buttom) {
                 div.style.visibility = "hidden";
             }
         });
         //BUTTONS
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-        function kindSeedingSet(newKindSeeding, id, id2) {
+        function kindSeedingSet(newKindSeeding, id) {
             kindSeeding = newKindSeeding;
+            for (var key in dictButton) {
+                document.getElementById(dictButton[key]).className = 'btn btn-outline-light p-2 m-2';
+            };
             document.getElementById(id).className = 'btn btn-outline-light p-2 m-2 active';
-            document.getElementById(id2).className = 'btn btn-outline-light p-2 m-2';
         };
-
+        function missionChcek(id) {
+            var have = false;
+            missions[id].collect.forEach(function (coll) {
+                switch (coll.item) {
+                    case 'wheat': if (dictSeedingCount.wheat >= coll.count) { have = true }; break;
+                    case 'tomato': if (dictSeedingCount.tomato >= coll.count) { have = true }; break;
+                    case 'carrot': if (dictSeedingCount.carrot >= coll.count) { have = true }; break;
+                    case 'coin': if (coins >= coll.count) { have = true }; break;
+                };
+            });
+            if (have) {
+                missions[id].award.forEach(function (awa) {
+                    switch (awa.item) {
+                        case 'wheat': dictSeedingCount.wheat += awa.count; break;
+                        case 'tomato': dictSeedingCount.tomato += awa.count; break;
+                        case 'carrot': dictSeedingCount.carrot += awa.count; break;
+                        case 'coin': coins += awa.count;document.getElementById("coins").innerHTML = coins; break;
+                    };
+                });
+                missions[id].collect.forEach(function (coll) {
+                switch (coll.item) {
+                    case 'wheat': dictSeedingCount.wheat -= coll.count; break;
+                    case 'tomato': dictSeedingCount.tomato -= coll.count; break;
+                    case 'carrot': dictSeedingCount.carrot -= coll.count; break;
+                    case 'coin': coins -= coll.count;document.getElementById("coins").innerHTML = coins; break;
+                };
+            });
+                missions.splice(id, id+1);
+                console.log(missions)
+            };
+        };
     </script>
 </body>
 
 </html>
 <!--
+    https://www.flaticon.com/search?word=carrot
     https://www.flaticon.com/search?word=watering%20can
     https://www.flaticon.com/search?word=scythe
     https://www.flaticon.com/search?word=coin
