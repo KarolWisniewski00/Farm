@@ -48,6 +48,10 @@ class UserController extends Controller
             $user->email = $request->email;                     //zapisz email
             $user->password = Hash::make($request->password);   //zapisz zaszyfrowane hasło korzystając z wbudowanej (w Laravel) metody make z klasy Hash
             $user->admin = false;                               //zapisz brak admina
+            $user->map_data = json_encode($this->map_default);
+            $user->coins = $this->coins_default;
+            $user->missions = json_encode($this->missions_default);
+            $user->dict_seeding_count = json_encode($this->dict_seeding_count_default);
             $res = $user->save();                               //ZAPISZ REKORD W BAZIE DANYCH
     
             if ($res) {

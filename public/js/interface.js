@@ -12,10 +12,12 @@ var divMission = document.getElementById('missions');
 var divMissionButtom = document.getElementById('mission');
 divMissionWindow.style.visibility = "hidden";
 
+var divSettingWindow = document.getElementById('window-settings');
+var divSetting = document.getElementById('settings');
+var divSettingButtom = document.getElementById('setting');
+divSettingWindow.style.visibility = "hidden";
+
 //WINDOW SEEDING
-//TO DO:
-//When click on the window, window shoud be still open
-//when click on the canvas, window shoud be close
 document.getElementById("seeding").addEventListener("click", function () {
     if (divSeedingWindow.style.visibility === "hidden") {
         divSeedingWindow.style.visibility = "visible";
@@ -108,6 +110,21 @@ document.addEventListener("click", function (event) {
     }
 });
 
+//WINDOW SETTINGS
+document.getElementById("setting").addEventListener("click", function () {
+    if (divSettingWindow.style.visibility === "hidden") {
+        divSettingWindow.style.visibility = "visible";
+    } else {
+        divSettingWindow.style.visibility = "hidden";
+    };
+});
+
+document.addEventListener("click", function (event) {
+    if (event.target != divSettingButtom && event.target.parentNode != divSettingButtom) {
+        divSettingWindow.style.visibility = "hidden";
+    }
+});
+
 //BUTTON KIND SEEDING
 function kindSeedingSet(newKindSeeding, id) {
     kindSeeding = newKindSeeding;
@@ -175,3 +192,23 @@ function changeGameMode(){
         document.getElementById('water').style.display = 'block';
     };
 };
+function save(){
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url: '/farm/public/game-update', // adres URL kontrolera
+        type: 'POST', // metoda HTTP, w tym przypadku POST
+        data: { // dane do wysłania
+            map: JSON.stringify(map),
+            coins: coins,
+            missions: JSON.stringify(missions),
+            count: JSON.stringify(dictSeedingCount),
+            _token: token,
+        },
+        success: function (response) {
+            console.log(response); // reakcja po sukcesie, np. wyświetlenie odpowiedzi w konsoli
+        },
+        error: function (error) {
+            console.error(error); // reakcja na błąd, np. wyświetlenie komunikatu o błędzie w konsoli
+        }
+    });
+}

@@ -14,7 +14,7 @@
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/" class="nav-link px-2 link-secondary">Strona główna</a></li>
+                <li><a href="{{url('')}}" class="nav-link px-2 link-secondary"></a></li>
             </ul>
 
         </header>
@@ -23,9 +23,6 @@
         <!--FOOTER-->
     <div class="container">
         <footer class="py-3 my-4">
-            <ul class="nav justify-content-center pb-3 mb-3">
-                <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Strona główna</a></li>
-            </ul>
             <p class="text-center text-muted">Karol Wiśniewski</p>
         </footer>
     </div>

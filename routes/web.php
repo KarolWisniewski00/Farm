@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GameController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,4 +18,6 @@ Route::get('/', function () {return view('index');})->middleware('AlreadyLoggedI
 Route::post('/register-user',[UserController::class,'register_user'])->name('register-user');
 Route::post('/login-user',[UserController::class,'login_user'])->name('login-user');
 Route::get('/logout',[UserController::class, 'logout'])->middleware('isLoggedIn');
-Route::get('/game', function () {return view('game');})->middleware('isLoggedIn');
+Route::get('/game', [GameController::class, 'game'])->middleware('isLoggedIn');
+Route::post('/game-update', [GameController::class, 'game_update'])->name('game-update');
+Route::get('/account', function () {return 'account';})->middleware('isLoggedIn');

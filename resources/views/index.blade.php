@@ -5,13 +5,13 @@
     <div class="row">
         <!--ALERTY-->
         @if(Session::has('success'))
-        <div><div class="alert alert-succes">{{Session::get('success')}}</div></div>
+        <div><div class="alert alert-success">{{Session::get('success')}}</div></div>
         @endif
 
         @if(Session::has('fail'))
         <div><div class="alert alert-danger">{{Session::get('fail')}}</div></div>
         @endif
-        <div class="col-6">
+        <div class="col-12 col-md-6 my-5">
             <form class="form text-center w-100 bg-white bg-white p-5 rounded" action="{{route('register-user')}}" method="POST">
                 <!--TOKEN-->
                 @csrf
@@ -44,7 +44,7 @@
                 <button class="w-100 btn btn-lg btn-primary my-3" type="submit">Zarejestruj</button>
             </form>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6 my-5">
             <form class="form text-center w-100 bg-white p-5 rounded" action="{{route('login-user')}}" method="POST">
                 <!--TOKEN-->
                 @csrf

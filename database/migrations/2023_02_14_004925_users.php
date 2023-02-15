@@ -20,6 +20,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('admin');
+            $table->json('map_data');
+            $table->integer('coins');
+            $table->json('missions');
+            $table->json('dict_seeding_count');
             $table->timestamps();
         });
     }
