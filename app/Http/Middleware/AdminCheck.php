@@ -17,7 +17,7 @@ class AdminCheck
     public function handle(Request $request, Closure $next)
     {
         if(!Session()->has('admin')){
-            return redirect('/')->with('fail','Nie jesteś administratorem.');
+            return redirect('/')->with('fail',"You aren't admin.");
         }
         return $next($request);
     }

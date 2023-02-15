@@ -17,7 +17,9 @@ var divSetting = document.getElementById('settings');
 var divSettingButtom = document.getElementById('setting');
 divSettingWindow.style.visibility = "hidden";
 
-//WINDOW SEEDING
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------
+//WINDOW SEEDING SHOW - HIDE LOGIC
+//this is a function to show - hide the window on click the button
 document.getElementById("seeding").addEventListener("click", function () {
     if (divSeedingWindow.style.visibility === "hidden") {
         divSeedingWindow.style.visibility = "visible";
@@ -41,14 +43,16 @@ document.getElementById("seeding").addEventListener("click", function () {
         divSeedingWindow.style.visibility = "hidden";
     };
 });
-
+//this is a function to show -hide the window on click the screen
 document.addEventListener("click", function (event) {
     if (event.target != divSeedingButtom && event.target.parentNode != divSeedingButtom) {
         divSeedingWindow.style.visibility = "hidden";
     }
 });
 
-//WINDOW MISSION
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------
+//WINDOW MISSION - HIDE LOGIC
+//this is a function to show - hide the window on click the button
 document.getElementById("mission").addEventListener("click", function () {
     if (divMissionWindow.style.visibility === "hidden") {
         divMissionWindow.style.visibility = "visible";
@@ -103,14 +107,16 @@ document.getElementById("mission").addEventListener("click", function () {
         divMissionWindow.style.visibility = "hidden";
     }
 });
-
+//this is a function to show -hide the window on click the screen
 document.addEventListener("click", function (event) {
     if (event.target != divMissionButtom && event.target.parentNode != divMissionButtom) {
         divMissionWindow.style.visibility = "hidden";
     }
 });
 
-//WINDOW SETTINGS
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------
+//WINDOW SETTINGS - HIDE LOGIC
+//this is a function to show - hide the window on click the button
 document.getElementById("setting").addEventListener("click", function () {
     if (divSettingWindow.style.visibility === "hidden") {
         divSettingWindow.style.visibility = "visible";
@@ -118,14 +124,15 @@ document.getElementById("setting").addEventListener("click", function () {
         divSettingWindow.style.visibility = "hidden";
     };
 });
-
+//this is a function to show -hide the window on click the screen
 document.addEventListener("click", function (event) {
     if (event.target != divSettingButtom && event.target.parentNode != divSettingButtom) {
         divSettingWindow.style.visibility = "hidden";
     }
 });
-
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------
 //BUTTON KIND SEEDING
+//this is a function to switch the kind of seeding
 function kindSeedingSet(newKindSeeding, id) {
     kindSeeding = newKindSeeding;
     for (var key in dictButton) {
@@ -133,40 +140,43 @@ function kindSeedingSet(newKindSeeding, id) {
     };
     document.getElementById(id).className = 'btn btn-outline-light p-2 m-2 active';
 };
-
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------
 //BUTTON MISSION
+//This is a function to check the missions and remove if the condition is met
 function missionChcek(id) {
     var have = false;
     missions[id].collect.forEach(function (coll) {
-        switch (coll.item) {
-            case 'wheat': if (dictSeedingCount.wheat >= coll.count) { have = true }; break;
-            case 'tomato': if (dictSeedingCount.tomato >= coll.count) { have = true }; break;
-            case 'carrot': if (dictSeedingCount.carrot >= coll.count) { have = true }; break;
-            case 'coin': if (coins >= coll.count) { have = true }; break;
+        switch (coll.item) {                                                                                    //chcek if user have all from mission
+            case 'wheat': if (dictSeedingCount.wheat >= coll.count) { have = true }; break;                     //then set have true
+            case 'tomato': if (dictSeedingCount.tomato >= coll.count) { have = true }; break;                   //then set have true
+            case 'carrot': if (dictSeedingCount.carrot >= coll.count) { have = true }; break;                   //then set have true
+            case 'coin': if (coins >= coll.count) { have = true }; break;                                       //then set have true
         };
     });
-    if (have) {
+    if (have) {                                                                                                 //if have is true 
         missions[id].award.forEach(function (awa) {
             switch (awa.item) {
-                case 'wheat': dictSeedingCount.wheat += awa.count; break;
-                case 'tomato': dictSeedingCount.tomato += awa.count; break;
-                case 'carrot': dictSeedingCount.carrot += awa.count; break;
-                case 'coin': coins += awa.count; document.getElementById("coins").innerHTML = coins; break;
+                case 'wheat': dictSeedingCount.wheat += awa.count; break;                                       //add award
+                case 'tomato': dictSeedingCount.tomato += awa.count; break;                                     //add award
+                case 'carrot': dictSeedingCount.carrot += awa.count; break;                                     //add award
+                case 'coin': coins += awa.count; document.getElementById("coins").innerHTML = coins; break;     //update view 
             };
         });
         missions[id].collect.forEach(function (coll) {
             switch (coll.item) {
-                case 'wheat': dictSeedingCount.wheat -= coll.count; break;
-                case 'tomato': dictSeedingCount.tomato -= coll.count; break;
-                case 'carrot': dictSeedingCount.carrot -= coll.count; break;
-                case 'coin': coins -= coll.count; document.getElementById("coins").innerHTML = coins; break;
+                case 'wheat': dictSeedingCount.wheat -= coll.count; break;                                      //remove collect
+                case 'tomato': dictSeedingCount.tomato -= coll.count; break;                                    //remove collect
+                case 'carrot': dictSeedingCount.carrot -= coll.count; break;                                    //remove collect
+                case 'coin': coins -= coll.count; document.getElementById("coins").innerHTML = coins; break;    //update view 
             };
         });
-        missions.splice(id, id + 1);
-        console.log(missions)
+        missions.splice(id, id + 1);                                                                            //remove mission
     };
 };
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------
 //BUTTON CHANGE GAMEMODE
+//This is a function to change the view of the layout 
 function changeGameMode(){
     if (gameMode){
         gameMode=false
@@ -192,12 +202,15 @@ function changeGameMode(){
         document.getElementById('water').style.display = 'block';
     };
 };
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------
+//This is a function to save the map of the game
 function save(){
     var token = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
-        url: '/farm/public/game-update', // adres URL kontrolera
-        type: 'POST', // metoda HTTP, w tym przypadku POST
-        data: { // dane do wysłania
+        url: '/farm/public/game-update',                        //adress URL controller
+        type: 'POST',                                           //metod HTTP
+        data: {                                                 //data to send
             map: JSON.stringify(map),
             coins: coins,
             missions: JSON.stringify(missions),
@@ -205,10 +218,10 @@ function save(){
             _token: token,
         },
         success: function (response) {
-            console.log(response); // reakcja po sukcesie, np. wyświetlenie odpowiedzi w konsoli
+            console.log(response);                              //success show
         },
         error: function (error) {
-            console.error(error); // reakcja na błąd, np. wyświetlenie komunikatu o błędzie w konsoli
+            console.error(error);                               //fail show
         }
     });
 }

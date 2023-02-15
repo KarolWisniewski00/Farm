@@ -125,6 +125,7 @@
         It's okey, it's also importart to comunication between backend and frontend
     -->
     <script>
+        //PASS THE VARIABLE FROM BACKEND TO FRONTEND
         var map = {!! json_encode($map) !!};
         var coins = {!! json_encode($coins) !!};
         var missions = {!! json_encode($missions) !!};

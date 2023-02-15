@@ -20,4 +20,4 @@ Route::post('/login-user',[UserController::class,'login_user'])->name('login-use
 Route::get('/logout',[UserController::class, 'logout'])->middleware('isLoggedIn');
 Route::get('/game', [GameController::class, 'game'])->middleware('isLoggedIn');
 Route::post('/game-update', [GameController::class, 'game_update'])->name('game-update');
-Route::get('/account', function () {return 'account';})->middleware('isLoggedIn');
+Route::get('/account', [UserController::class, 'account'])->middleware('isLoggedIn');

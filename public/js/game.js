@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-//CONFIG
+//CONFIG GAME
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
 var navTopHeight = document.getElementById("navtop").offsetHeight;          //Get height navbar top
 var navBotHeight = document.getElementById("navbot").offsetHeight;          //Get height navbar bottom
@@ -18,9 +18,8 @@ var game = new Phaser.Game({                                                //Co
 
 var BasicGame = function (game) { };
 BasicGame.Boot = function (game) { };
-var isoGroup, cursorPos, cursor;
 
-//CONST
+//CONST THAT WILL BE NOT CHANGE IN PROGRESS
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
 const dictPlatform = {
     grass: 0,
@@ -72,9 +71,8 @@ const infoX = 2;
 const walls = 100;
 const editorCost = 100;
 
-//VARIABLES
+//VARIABLES THAT WILL BE CHANGE IN PROGRESS
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-var count;
 var platformInfo = null;
 var platformSecondInfo = null;
 var lastX = null;
@@ -87,11 +85,12 @@ var platformInfoColor = dictColor.normal;
 var kindSeedingInfoColor = dictColor.normal;
 var kindGrowingInfoColor = dictColor.normal;
 var timeLeftColor = dictColor.normal;
-var timeLeft;
+var isoGroup, cursorPos, cursor, timeLeft, count;
 BasicGame.Boot.prototype =
 {
     //INSIDE CREATE FUNCTIONS
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //This is a function to add the object in the map that player can move on
     gameAdd: function (yy, xx, kind, group, asx, asy, wet = false) {    //Add block - player move on
         obj = game.add.isoSprite(yy, xx, 0, kind, 0, group);            //add sprite
         obj.anchor.set(asx, asy);                                       //set anchor
@@ -99,6 +98,8 @@ BasicGame.Boot.prototype =
             obj.tint = 0x86bfda;                                        //change color
         }
     },
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //This is a function to add the object in the map that player can not move on
     gameAddWall: function (yy, xx, kind, group, asx, asy) {             //Add block - player move off
         obj = game.add.isoSprite(yy, xx, 0, kind, 0, group);            //add sprite
         obj.anchor.set(asx, asy);                                       //set anchor
@@ -106,6 +107,8 @@ BasicGame.Boot.prototype =
         obj.body.collideWorldBounds = true;                             //turn on collide
         obj.body.immovable = true;                                      //turn off move
     },
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //This is a function that spawn platform - ground
     spawnTilesPlatform: function () {
         //LOOP TABLE
         for (var i = 0; i < map[0].length * map.length; i++) {
@@ -122,6 +125,7 @@ BasicGame.Boot.prototype =
         };
     },
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //This is a function that spawn platform second - walls and plants
     spawnTilesPlatformSecond: function () {
         //LOOP TABLE
         for (var i = 0; i < map[0].length * map.length; i++) {
@@ -143,6 +147,7 @@ BasicGame.Boot.prototype =
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
     //PRELOAD
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //This is a function to load all assets and confing the game
     preload: function () {
         //LOAD IMAGES
         game.load.image('grass', 'images/grass.png');
@@ -159,14 +164,15 @@ BasicGame.Boot.prototype =
         game.load.image('compass', 'images/compass_rose.png');
         game.load.image('touch_segment', 'images/touch_segment.png');
         game.load.image('touch', 'images/touch.png');
-        //SET UP GAME
-        game.time.advancedTiming = true;
-        game.plugins.add(new Phaser.Plugin.Isometric(game));            //add plugin
-        game.world.setBounds(0, 0, 1496, 1024);                         //add bounds word - need to camera
-        game.physics.startSystem(Phaser.Plugin.Isometric.ISOARCADE);    //add plugin physics
-        game.iso.anchor.setTo(0.5, 0.0);                                //set anchor
-        game.touchControl = game.plugins.add(Phaser.Plugin.TouchControl);
-        game.touchControl.inputEnable();
+
+        //SET UP GAME       
+        game.time.advancedTiming = true;                                    //set up timing
+        game.plugins.add(new Phaser.Plugin.Isometric(game));                //add plugin
+        game.world.setBounds(0, 0, 1496, 1024);                             //add bounds word - need to camera
+        game.physics.startSystem(Phaser.Plugin.Isometric.ISOARCADE);        //add plugin physics
+        game.iso.anchor.setTo(0.5, 0.0);                                    //set anchor
+        game.touchControl = game.plugins.add(Phaser.Plugin.TouchControl);   //add plugin
+        game.touchControl.inputEnable();                                    //turn on plugin
 
         //LAYOUT SET UP COINS
         document.getElementById("coins").innerHTML = coins;
@@ -175,14 +181,18 @@ BasicGame.Boot.prototype =
     //CREATE
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
     create: function () {
+        //This is a function to create the map and other functions in the game
+
         //GRAVITY
         game.physics.isoArcade.gravity.setTo(0, 0, -1000);
+
         //SPAWN
         isoGroupPlatform = game.add.group();                //create group
         this.spawnTilesPlatform();                          //spawn
         isoGroupPlatformSecond = game.add.group();          //create group
         this.spawnTilesPlatformSecond();                    //spawn
 
+        //SET UP THE VIRTUAL JOYSTICK
         game.touchControl.imageGroup[0].loadTexture('compass');
         game.touchControl.imageGroup[1].loadTexture('touch_segment');
         game.touchControl.imageGroup[2].loadTexture('touch_segment');
@@ -218,6 +228,7 @@ BasicGame.Boot.prototype =
     update: function () {
         //INSIDE FUNCTIONS
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //This is a function to find the tile on the map and pass the function in to "todo()" to make a action on click
         function actionOnClick(todo) {
             var counter = 0;                                                                                                        //helper variable to find coords
             isoGroupPlatform.forEach(function (tile) {                                                                              //loop for each element at platform
@@ -235,6 +246,7 @@ BasicGame.Boot.prototype =
             });
         };
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //This is a function to change the view and state of the map
         function digInside(y, x, tile, to, toDict, watering = false) {
             if (coins >= digCost) {                                     //check how many coins has player
                 tile.loadTexture(to);                                   //change texture
@@ -246,6 +258,7 @@ BasicGame.Boot.prototype =
                 };
             }
         };
+        //This is a function that declares changes
         function dig(y, x, tile) {
             if (map[y][x].platformSecond == dictPlatformSecond.null) {  //protection
                 switch (map[y][x].platform) {
@@ -259,10 +272,7 @@ BasicGame.Boot.prototype =
             };
         };
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-        //TO DO:
-        //Set up some bonus after watering the plant.
-        //Only when the plant is first.
-        //Alerts.
+        //This is a function to change the view and state of the map
         function plantIndide(y, x, tile, to, costGameMode = false) {
             //UPDATE KIND
             switch (kindSeeding) {
@@ -309,21 +319,23 @@ BasicGame.Boot.prototype =
                     case dictPlatformSecond.tree: obj = game.add.isoSprite(x * size, y * size, 0, 'tree', 0, isoGroupPlatformSecond); break;
                     case dictPlatformSecond.rock: obj = game.add.isoSprite(x * size, y * size, 0, 'rock', 0, isoGroupPlatformSecond); break;
                     case dictPlatformSecond.transparent:
-                        obj = game.add.isoSprite(x * size, y * size, 0, 'transparent', 0, isoGroupPlatformSecond);
-                        tile.loadTexture('water');
-                        map[y][x].platform = dictPlatform.water;
-                        tile.tint = 0x86bfda;
+                        obj = game.add.isoSprite(x * size, y * size, 0, 'transparent', 0, isoGroupPlatformSecond);//add new sprite
+                        tile.loadTexture('water');                              //load new texture
+                        map[y][x].platform = dictPlatform.water;                //update map
+                        tile.tint = 0x86bfda;                                   //add dark color
                         break;
                 };
                 obj.anchor.set(0.5);
                 game.physics.isoArcade.enable(obj);                             //turn on physics
                 obj.body.collideWorldBounds = true;                             //turn on collide
                 obj.body.immovable = true;                                      //turn off move
-                coins -= editorCost;
-                document.getElementById("coins").innerHTML = coins;
-                map[y][x].platformSecond = to;
+                coins -= editorCost;                                            //update
+                document.getElementById("coins").innerHTML = coins;             //update view
+                map[y][x].platformSecond = to;                                  //update map
             };
         };
+
+        //This is a function that declares changes
         function plant(y, x, tile) {
             if (map[y][x].platformSecond == dictPlatformSecond.null) {//protection
                 switch (map[y][x].platform) {
@@ -333,6 +345,7 @@ BasicGame.Boot.prototype =
             };
         };
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //This is a function to change the view and state of the map
         function wateringInside(y, x, tile, toDict) {
             if (coins >= wateringCost) {                                //check how many coins has player
                 tile.tint = 0x86bfda;                                   //change color
@@ -341,6 +354,7 @@ BasicGame.Boot.prototype =
                 document.getElementById("coins").innerHTML = coins;     //update coins
             };
         };
+        //This is a function that declares changes
         function watering(y, x, tile) {
             if ((map[y][x].platformSecond == dictPlatformSecond.null) || (map[y][x].platformSecond == dictPlatformSecond.shoot)) {
                 switch (map[y][x].platform) {
@@ -349,16 +363,18 @@ BasicGame.Boot.prototype =
             };
         };
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //This is a function to change the view and state of the map
         function cropsInside(y, x, tile, key, costGameMode = false) {
 
-            if (costGameMode && coins >= editorCost) {
-                coins -= editorCost;
-                document.getElementById("coins").innerHTML = coins;
-                change = true;
-            } else if (costGameMode) {
-                change = false;
-            } else {
-                change = true;
+            //this is a logic to switch the function between crop plant and crop the objects of the map (like a wall)
+            if (costGameMode && coins >= editorCost) {                                  //if game editor turn on and the coins is enough
+                coins -= editorCost;                                                    //update coins
+                document.getElementById("coins").innerHTML = coins;                     //update view
+                change = true;                                                          //set up the variable
+            } else if (costGameMode) {                                                  //if game editor turn on and the coins is not enough
+                change = false;                                                         //set up the variable
+            } else {                                                                    //if the editor is turn off
+                change = true;                                                          //set up the variable
             };
 
             var counter = 0;                                                            //helper variable
@@ -380,7 +396,7 @@ BasicGame.Boot.prototype =
                 counter++;                                                              //add to counter
             });
             if (change) {
-                tile.loadTexture('grass');                                                  //change texture
+                tile.loadTexture('grass');                                              //change texture
 
                 //update map
                 switch (map[y][x].platformSecond) {
@@ -396,6 +412,7 @@ BasicGame.Boot.prototype =
             };
 
         };
+        //This is a function that declares changes
         function crops(y, x, tile) {
             switch (map[y][x].platformSecond) {
                 case dictPlatformSecond.wheat: cropsInside(y, x, tile, 'wheat'); break;
@@ -403,6 +420,7 @@ BasicGame.Boot.prototype =
                 case dictPlatformSecond.carrot: cropsInside(y, x, tile, 'carrot'); break;
             };
         };
+        //This is a function that declares changes
         function grassGM(y, x, tile) {
             switch (map[y][x].platformSecond) {
                 case dictPlatformSecond.tree: cropsInside(y, x, tile, 'tree', true); break;
@@ -410,6 +428,7 @@ BasicGame.Boot.prototype =
                 case dictPlatformSecond.transparent: cropsInside(y, x, tile, 'transparent', true); break;
             };
         };
+        //This is a function that declares changes
         function treeGM(y, x, tile) {
             if (map[y][x].platformSecond == dictPlatformSecond.null) {//protection
                 switch (map[y][x].platform) {
@@ -417,6 +436,7 @@ BasicGame.Boot.prototype =
                 };
             };
         };
+        //This is a function that declares changes
         function rockGM(y, x, tile) {
             if (map[y][x].platformSecond == dictPlatformSecond.null) {//protection
                 switch (map[y][x].platform) {
@@ -424,6 +444,7 @@ BasicGame.Boot.prototype =
                 };
             };
         };
+        //This is a function that declares changes
         function waterGM(y, x, tile) {
             if (map[y][x].platformSecond == dictPlatformSecond.null) {//protection
                 switch (map[y][x].platform) {
@@ -433,26 +454,32 @@ BasicGame.Boot.prototype =
         };
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------
         //MOVE UPDATE PLAYER
+
+        //Virtual joystick
         player.body.velocity.y = -game.touchControl.speed.y;
         player.body.velocity.x = -game.touchControl.speed.x;
+        //keyboard
         if (player.body.velocity.y == 0 || player.body.velocity.x == 0) {
             player.body.velocity.y = (this.cursors.up.isDown ? -speed : (this.cursors.down.isDown ? speed : 0));            //move top down
             player.body.velocity.x = (this.cursors.left.isDown ? -speed : (this.cursors.right.isDown ? speed : 0));         //move left right
         }
 
+        //ACTION ON CLICK THE BUTTONS ON THE LAYOUT
         if (!gameMode) {
             document.getElementById("shovel").addEventListener("click", function () { actionOnClick(dig); });               //ON CLICK SHOVEL
             document.getElementById("plant").addEventListener("click", function () { actionOnClick(plant); });              //ON CLICK PLANT
             document.getElementById("watering-can").addEventListener("click", function () { actionOnClick(watering); });    //ON CLICK WATERING-CAN
             document.getElementById("scythe").addEventListener("click", function () { actionOnClick(crops); });             //ON CLICK SCYTHE
         } else {
-            document.getElementById("grass").addEventListener("click", function () { actionOnClick(grassGM); });
-            document.getElementById("tree").addEventListener("click", function () { actionOnClick(treeGM); });
-            document.getElementById("rock").addEventListener("click", function () { actionOnClick(rockGM); });
-            document.getElementById("water").addEventListener("click", function () { actionOnClick(waterGM); });
+            document.getElementById("grass").addEventListener("click", function () { actionOnClick(grassGM); });            //ON CLICK GRASS
+            document.getElementById("tree").addEventListener("click", function () { actionOnClick(treeGM); });              //ON CLICK TREE
+            document.getElementById("rock").addEventListener("click", function () { actionOnClick(rockGM); });              //ON CLICK ROCK
+            document.getElementById("water").addEventListener("click", function () { actionOnClick(waterGM); });            //ON CLICK WATER
         };
         //CHECK PLANTS
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //This is a fragment that is change the plants
+
         let dateCurrent = new Date();//get curent date
 
         //LOOP TABLE
@@ -460,10 +487,11 @@ BasicGame.Boot.prototype =
             var y = Math.floor(i / map[0].length);
             var x = (i % map[0].length);
 
+            //seclect the element to change - if the date end is older or same that current date
             if ((dateCurrent - map[y][x].dateEnd > 0 && map[y][x].platformSecond.key == 'shoot') || (map[y][x].dateEnd.toString() == dateCurrent.toString())) {
-                tile = isoGroupPlatform.children[(x * map[0].length) + y]
-                tile.tint = 0xffffff;
-                tile.loadTexture('nograss');
+                tile = isoGroupPlatform.children[(x * map[0].length) + y]                   //get the element to change
+                tile.tint = 0xffffff;                                                       //add white color
+                tile.loadTexture('nograss');                                                //load new texture
 
                 var counter = 0;                                                            //helper variable
                 var index = 0;                                                              //index of the object from isoGroupSecond
@@ -494,16 +522,21 @@ BasicGame.Boot.prototype =
                 map[y][x].dateEnd = 0;
             };
         };
+
         //ADD COLLLIDE AND TOPOLOGIC VIEW
         if (!gameMode) {
             game.physics.isoArcade.collide(isoGroupPlatform);
             game.physics.isoArcade.collide(isoGroupPlatformSecond);
 
         };
+
+        //ADD GOOD TOPOLOGIC VIEW
         game.iso.topologicalSort(isoGroupPlatformSecond);
     },
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
     render: function () {
+        //This is a function to render the info in the left top corner
+
         xx = (player.body.position.x / size);   //prepare coords
         yy = (player.body.position.y / size);   //prepare coords
 
@@ -514,6 +547,8 @@ BasicGame.Boot.prototype =
             case dictPlatformSecond.tomato: platformSecondInfo = 'Tomato'; platformSecondInfoColor = dictColor.green; break;
             case dictPlatformSecond.carrot: platformSecondInfo = 'Carrot'; platformSecondInfoColor = dictColor.green; break;
             case dictPlatformSecond.shoot: platformSecondInfo = 'Shoot'; platformSecondInfoColor = dictColor.yellow;
+
+                //UPDATE TIME LEFT
                 let dateCurrent = new Date();                               //get current date 
                 let dateEnd = map[Math.floor(yy)][Math.floor(xx)].dateEnd;  //get date end
                 dateEnd = new Date(dateEnd);
