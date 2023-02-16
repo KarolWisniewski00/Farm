@@ -4,6 +4,7 @@
 //VARIABLES
 var divSeedingWindow = document.getElementById('window-seeding');
 var divSeeding = document.getElementById('seedings');
+var divAnimal = document.getElementById('animals');
 var divSeedingButtom = document.getElementById('seeding');
 divSeedingWindow.style.visibility = "hidden";
 
@@ -24,6 +25,7 @@ document.getElementById("seeding").addEventListener("click", function () {
     if (divSeedingWindow.style.visibility === "hidden") {
         divSeedingWindow.style.visibility = "visible";
         divSeeding.innerHTML = '';
+        divAnimal.innerHTML = '';
         for (let key in dictSeedingCount) {
             if (dictSeedingCount[key] > 0) {
                 singleButton = `
@@ -38,6 +40,78 @@ document.getElementById("seeding").addEventListener("click", function () {
                 `;
                 divSeeding.innerHTML += singleButton;
             };
+        };
+        if (cowActive){
+            cowButton = `
+            <div class="list-group-item list-group-item-action bg-transparent border-1 rounded-0 border-white text-white d-flex flex-column justify-content-between">
+                <div class="d-flex flex-column text-center w-100">
+                    <div><h3>Feed Cow</h3><img src="images/cow-icon.png" class="img-fluid max-height-64"
+                    alt="cow-icon"></div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="d-flex flex-column w-100 text-center">
+                        <h5 class="mb-1">Collect:</h5>
+                        <div class="w-100">
+                            <buttom class="btn btn-outline-light p-2 m-2">
+                                <div>Wheat</div><img src="images/wheat-icon.png" class="img-fluid max-height-64"
+                                    alt="wheat-icon">
+                                <div>x<span>10</span></div>
+                            </buttom>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column w-100 text-center">
+                        <h5 class="mb-1">Award:</h5>
+                        <div class="w-100">
+                            <buttom class="btn btn-outline-light p-2 m-2">
+                                <div>Milk</div><img src="images/milk-icon.png" class="img-fluid max-height-64"
+                                    alt="milk-icon">
+                                <div>x<span>1</span></div>
+                            </buttom>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column text-center w-100">
+                    <div><button class="btn btn-light" onClick="feedCow()">Do it!</button></div>
+                </div>
+            </div>
+            `;
+            divAnimal.innerHTML += cowButton;
+        };
+        if (chickenActive){
+            chickenButton = `
+            <div class="list-group-item list-group-item-action bg-transparent border-1 rounded-0 border-white text-white d-flex flex-column justify-content-between">
+                <div class="d-flex flex-column text-center w-100">
+                    <div><h3>Feed Chicken</h3><img src="images/chicken-icon.png" class="img-fluid max-height-64"
+                    alt="chicken-icon"></div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="d-flex flex-column w-100 text-center">
+                        <h5 class="mb-1">Collect:</h5>
+                        <div class="w-100">
+                            <buttom class="btn btn-outline-light p-2 m-2">
+                                <div>Corn</div><img src="images/corn-icon.png" class="img-fluid max-height-64"
+                                    alt="corn-icon">
+                                <div>x<span>10</span></div>
+                            </buttom>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column w-100 text-center">
+                        <h5 class="mb-1">Award:</h5>
+                        <div class="w-100">
+                            <buttom class="btn btn-outline-light p-2 m-2">
+                                <div>Egg</div><img src="images/egg-icon.png" class="img-fluid max-height-64"
+                                    alt="egg-icon">
+                                <div>x<span>1</span></div>
+                            </buttom>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column text-center w-100">
+                    <div><button class="btn btn-light" onClick="feedChicken()">Do it!</button></div>
+                </div>
+            </div>
+            `;
+            divAnimal.innerHTML += chickenButton;
         };
     } else {
         divSeedingWindow.style.visibility = "hidden";
@@ -100,8 +174,8 @@ document.getElementById("mission").addEventListener("click", function () {
                         </div>
                     </div>
                     `;
-            divMission.innerHTML += singleMission;
             counter++;
+            divMission.innerHTML += singleMission;
         });
     } else {
         divMissionWindow.style.visibility = "hidden";
@@ -145,12 +219,16 @@ function kindSeedingSet(newKindSeeding, id) {
 //This is a function to check the missions and remove if the condition is met
 function missionChcek(id) {
     var have = false;
+    console.log(missions)   
     missions[id].collect.forEach(function (coll) {
         switch (coll.item) {                                                                                    //chcek if user have all from mission
             case 'wheat': if (dictSeedingCount.wheat >= coll.count) { have = true }; break;                     //then set have true
             case 'tomato': if (dictSeedingCount.tomato >= coll.count) { have = true }; break;                   //then set have true
             case 'carrot': if (dictSeedingCount.carrot >= coll.count) { have = true }; break;                   //then set have true
+            case 'corn': if (dictSeedingCount.corn >= coll.count) { have = true }; break;                   //then set have true
             case 'coin': if (coins >= coll.count) { have = true }; break;                                       //then set have true
+            case 'milk': if (dictSeedingCount.milk >= coll.count) { have = true }; break;                                       //then set have true
+            case 'egg': if (dictSeedingCount.egg >= coll.count) { have = true }; break;                                       //then set have true
         };
     });
     if (have) {                                                                                                 //if have is true 
@@ -159,7 +237,34 @@ function missionChcek(id) {
                 case 'wheat': dictSeedingCount.wheat += awa.count; break;                                       //add award
                 case 'tomato': dictSeedingCount.tomato += awa.count; break;                                     //add award
                 case 'carrot': dictSeedingCount.carrot += awa.count; break;                                     //add award
+                case 'corn': dictSeedingCount.corn += awa.count; break;                                     //add award
                 case 'coin': coins += awa.count; document.getElementById("coins").innerHTML = coins; break;     //update view 
+                case 'cow':
+                cowActive=true;
+                function direction() {
+                    randomNumber = Math.floor(Math.random() * 4) + 1;
+                    speedCowX = Math.floor(Math.random() * 60) + 30;
+                    speedCowY = Math.floor(Math.random() * 60) + 30;
+                };
+                setInterval(direction, 2000);
+                cow = game.add.isoSprite(characterStartX * size, (characterStartY + 1) * size, 0, 'cow', 0, isoGroupPlatformSecond);
+                cow.anchor.set(0.5);
+                game.physics.isoArcade.enable(cow);
+                cow.body.collideWorldBounds = true;
+                break;                                                              //update cow state 
+                case 'chicken':
+                    chickenActive=true;
+                    function direction() {
+                        randomNumber = Math.floor(Math.random() * 4) + 1;
+                        speedChickenX = Math.floor(Math.random() * 60) + 30;
+                        speedChickenY = Math.floor(Math.random() * 60) + 30;
+                    };
+                    setInterval(direction, 2000);
+                    chicken = game.add.isoSprite(characterStartX * size, (characterStartY + 1) * size, 0, 'chicken', 0, isoGroupPlatformSecond);
+                    chicken.anchor.set(0.5);
+                    game.physics.isoArcade.enable(chicken);
+                    chicken.body.collideWorldBounds = true;
+                    break; 
             };
         });
         missions[id].collect.forEach(function (coll) {
@@ -167,10 +272,26 @@ function missionChcek(id) {
                 case 'wheat': dictSeedingCount.wheat -= coll.count; break;                                      //remove collect
                 case 'tomato': dictSeedingCount.tomato -= coll.count; break;                                    //remove collect
                 case 'carrot': dictSeedingCount.carrot -= coll.count; break;                                    //remove collect
+                case 'corn': dictSeedingCount.corn -= coll.count; break;                                    //remove collect
+                case 'milk': dictSeedingCount.milk -= coll.count; break;                                    //remove collect
+                case 'egg': dictSeedingCount.egg -= coll.count; break;                                    //remove collect
                 case 'coin': coins -= coll.count; document.getElementById("coins").innerHTML = coins; break;    //update view 
             };
         });
-        missions.splice(id, id + 1);                                                                            //remove mission
+        missions.splice(id, 1); 
+        console.log(missions)                                                                           //remove mission
+    };
+};
+function feedCow(){
+    if (cowActive && dictSeedingCount.wheat>=10){
+        dictSeedingCount.wheat-=10;
+        dictSeedingCount.milk+=1;
+    };
+};
+function feedChicken(){
+    if (chickenActive && dictSeedingCount.wheat>=10){
+        dictSeedingCount.corn-=10;
+        dictSeedingCount.egg+=1;
     };
 };
 
@@ -215,6 +336,8 @@ function save(){
             coins: coins,
             missions: JSON.stringify(missions),
             count: JSON.stringify(dictSeedingCount),
+            cow: cowActive,
+            chicken: chickenActive,
             _token: token,
         },
         success: function (response) {

@@ -36,12 +36,14 @@ const dictPlatformSecond = {
     tomato: 5,
     transparent: 6,
     carrot: 7,
+    corn:8,
 };
 const dictKind = {
     null: 0,
     wheat: 1,
     tomato: 2,
     carrot: 4,
+    corn:5,
 };
 const dictColor = {
     normal: '#a7aebe',
@@ -57,6 +59,7 @@ const dictSeedingTime = {
     tomato: 2,
     wheat: 1,
     carrot: 5,
+    corn: 10,
 };
 const dictCharacter = {
     default: 0,
@@ -65,9 +68,9 @@ const dictCharacter = {
 }
 const size = 35.8;
 const speed = 200;
-const digCost = 10;
-const plantCost = 5;
-const wateringCost = 5;
+const digCost = 1;
+const plantCost = 1;
+const wateringCost = 0;
 const cropsRevenue = 30;
 const characterStartX = 10;
 const characterStartY = 10;
@@ -84,6 +87,16 @@ var lastX = null;
 var lastY = null;
 var gameMode = false;
 var kindSeeding = dictKind.null;
+var directionChickenX = 1;
+var directionCowX = -1;
+var directionChickenY = 1;
+var directionCowY = -1;
+var randomNumber = 2;
+var randomNumberChicken = 1;
+var speedChickenX = 50;
+var speedCowX = 50;
+var speedChickenY = 50;
+var speedCowY = 50;
 
 var platformSecondInfoColor = dictColor.normal;
 var platformInfoColor = dictColor.normal;
@@ -146,6 +159,7 @@ BasicGame.Boot.prototype =
                 case dictPlatformSecond.shoot: this.gameAdd(yy, xx, 'shoot', isoGroupPlatformSecond, 0.5); break;
                 case dictPlatformSecond.tomato: this.gameAdd(yy, xx, 'tomato', isoGroupPlatformSecond, 0.5); break;
                 case dictPlatformSecond.carrot: this.gameAdd(yy, xx, 'carrot', isoGroupPlatformSecond, 0.5); break;
+                case dictPlatformSecond.corn: this.gameAdd(yy, xx, 'corn', isoGroupPlatformSecond, 0.5); break;
             };
         };
     },
@@ -170,9 +184,12 @@ BasicGame.Boot.prototype =
         game.load.image('water', 'images/water.png');
         game.load.image('transparent', 'images/transparent.png');
         game.load.image('carrot', 'images/carrot.png');
+        game.load.image('corn', 'images/corn.png');
         game.load.image('compass', 'images/compass_rose.png');
         game.load.image('touch_segment', 'images/touch_segment.png');
         game.load.image('touch', 'images/touch.png');
+        game.load.image('cow', 'images/cow.png');
+        game.load.image('chicken', 'images/chicken.png');
 
         //SET UP GAME       
         game.time.advancedTiming = true;                                    //set up timing
@@ -185,6 +202,22 @@ BasicGame.Boot.prototype =
 
         //LAYOUT SET UP COINS
         document.getElementById("coins").innerHTML = coins;
+        function direction() {
+            randomNumber = Math.floor(Math.random() * 4) + 1;
+            speedCowX = Math.floor(Math.random() * 60) + 30;
+            speedCowY = Math.floor(Math.random() * 60) + 30;
+            randomNumberChicken = Math.floor(Math.random() * 4) + 1;
+            speedChickenX = Math.floor(Math.random() * 60) + 30;
+            speedChickenY = Math.floor(Math.random() * 90) + 60;
+        };
+        function directionChicken() {
+            randomNumberChicken = Math.floor(Math.random() * 4) + 1;
+            speedChickenX = Math.floor(Math.random() * 60) + 30;
+            speedChickenY = Math.floor(Math.random() * 90) + 60;
+        };
+        setInterval(direction, 2000);
+        setInterval(directionChicken, 1000);
+
     },
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
     //CREATE
@@ -217,6 +250,20 @@ BasicGame.Boot.prototype =
         player.anchor.set(0.5);                                                                                                 //set anchor
         game.physics.isoArcade.enable(player);                                                                                  //turn on physics
         player.body.collideWorldBounds = true;                                                                                  //turn on collide
+
+        if (cowActive) {
+            cow = game.add.isoSprite(characterStartX * size, (characterStartY + 1) * size, 0, 'cow', 0, isoGroupPlatformSecond);
+            cow.anchor.set(0.5);
+            game.physics.isoArcade.enable(cow);
+            cow.body.collideWorldBounds = true;
+        }
+
+        if (chickenActive) {
+            chicken = game.add.isoSprite(characterStartX * size, (characterStartY + 1) * size, 0, 'chicken', 0, isoGroupPlatformSecond);
+            chicken.anchor.set(0.5);
+            game.physics.isoArcade.enable(chicken);
+            chicken.body.collideWorldBounds = true;
+        }
 
         //ADD KEY TO MOVE
         this.cursors = game.input.keyboard.createCursorKeys();  //add keyboard
@@ -288,6 +335,7 @@ BasicGame.Boot.prototype =
                 case dictKind.tomato: count = dictSeedingCount.tomato; break;
                 case dictKind.wheat: count = dictSeedingCount.wheat; break;
                 case dictKind.carrot: count = dictSeedingCount.carrot; break;
+                case dictKind.corn: count = dictSeedingCount.corn; break;
             }
 
             //LOGIC
@@ -301,6 +349,7 @@ BasicGame.Boot.prototype =
                     case dictKind.tomato: minutes = Math.floor(dateCurrent / (60 * 1000) % 60) + dictSeedingTime.tomato; break;
                     case dictKind.wheat: minutes = Math.floor(dateCurrent / (60 * 1000) % 60) + dictSeedingTime.wheat; break;
                     case dictKind.carrot: minutes = Math.floor(dateCurrent / (60 * 1000) % 60) + dictSeedingTime.carrot; break;
+                    case dictKind.corn: minutes = Math.floor(dateCurrent / (60 * 1000) % 60) + dictSeedingTime.corn; break;
                 }
                 dateCurrent.setMinutes(minutes);                                                        //update minutes
 
@@ -317,6 +366,7 @@ BasicGame.Boot.prototype =
                     case dictKind.tomato: dictSeedingCount.tomato = count; break;
                     case dictKind.wheat: dictSeedingCount.wheat = count; break;
                     case dictKind.carrot: dictSeedingCount.carrot = count; break;
+                    case dictKind.cirn: dictSeedingCount.corn = count; break;
                 }
 
                 //update in layout
@@ -412,6 +462,7 @@ BasicGame.Boot.prototype =
                     case dictPlatformSecond.tomato: dictSeedingCount.tomato += 2; break;
                     case dictPlatformSecond.wheat: dictSeedingCount.wheat += 2; break;
                     case dictPlatformSecond.carrot: dictSeedingCount.carrot += 2; break;
+                    case dictPlatformSecond.corn: dictSeedingCount.corn += 2; break;
                     case dictPlatformSecond.transparent: tile.tint = 0xffffff; break;
                 };
                 map[y][x].platformSecond = dictPlatformSecond.null;
@@ -427,6 +478,7 @@ BasicGame.Boot.prototype =
                 case dictPlatformSecond.wheat: cropsInside(y, x, tile, 'wheat'); break;
                 case dictPlatformSecond.tomato: cropsInside(y, x, tile, 'tomato'); break;
                 case dictPlatformSecond.carrot: cropsInside(y, x, tile, 'carrot'); break;
+                case dictPlatformSecond.corn: cropsInside(y, x, tile, 'corn'); break;
             };
         };
         //This is a function that declares changes
@@ -485,6 +537,31 @@ BasicGame.Boot.prototype =
             document.getElementById("rock").addEventListener("click", function () { actionOnClick(rockGM); });              //ON CLICK ROCK
             document.getElementById("water").addEventListener("click", function () { actionOnClick(waterGM); });            //ON CLICK WATER
         };
+
+        if (cowActive){
+            //COW MOVE
+            switch (randomNumber) {
+                case 1: directionCowX = 1; directionCowY = 1; break;
+                case 2: directionCowX = -1; directionCowY = 1; break;
+                case 3: directionCowX = -1; directionCowY = -1; break;
+                case 4: directionCowX = 1; directionCowY = -1; break;
+            };
+            cow.body.velocity.x = speedCowX * directionCowX;
+            cow.body.velocity.y = speedCowY * directionCowY;
+        }
+
+        if (chickenActive){
+            //CHICKEN MOVE
+            switch (randomNumber) {
+                case 1: directionChickenX = 1; directionChickenY = 1; break;
+                case 2: directionChickenX = -1; directionChickenY = 1; break;
+                case 3: directionChickenX = -1; directionChickenY = -1; break;
+                case 4: directionChickenX = 1; directionChickenY = -1; break;
+            };
+            chicken.body.velocity.x = speedChickenX * directionChickenX;
+            chicken.body.velocity.y = speedChickenY * directionChickenY;
+        }
+
         //CHECK PLANTS
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------
         //This is a fragment that is change the plants
@@ -525,6 +602,7 @@ BasicGame.Boot.prototype =
                     case dictKind.wheat: map[y][x].platformSecond = dictPlatformSecond.wheat; isoGroupPlatformSecond.children[index].loadTexture('wheat'); break;
                     case dictKind.tomato: map[y][x].platformSecond = dictPlatformSecond.tomato; isoGroupPlatformSecond.children[index].loadTexture('tomato'); break;
                     case dictKind.carrot: map[y][x].platformSecond = dictPlatformSecond.carrot; isoGroupPlatformSecond.children[index].loadTexture('carrot'); break;
+                    case dictKind.corn: map[y][x].platformSecond = dictPlatformSecond.corn; isoGroupPlatformSecond.children[index].loadTexture('corn'); break;
                 };
                 map[y][x].kindGrowing = dictKind.null;
                 map[y][x].dateStart = 0;
@@ -555,6 +633,7 @@ BasicGame.Boot.prototype =
             case dictPlatformSecond.wheat: platformSecondInfo = 'Wheat'; platformSecondInfoColor = dictColor.green; break;
             case dictPlatformSecond.tomato: platformSecondInfo = 'Tomato'; platformSecondInfoColor = dictColor.green; break;
             case dictPlatformSecond.carrot: platformSecondInfo = 'Carrot'; platformSecondInfoColor = dictColor.green; break;
+            case dictPlatformSecond.corn: platformSecondInfo = 'Corn'; platformSecondInfoColor = dictColor.green; break;
             case dictPlatformSecond.shoot: platformSecondInfo = 'Shoot'; platformSecondInfoColor = dictColor.yellow;
 
                 //UPDATE TIME LEFT
@@ -578,12 +657,14 @@ BasicGame.Boot.prototype =
             case dictKind.wheat: kindGrowingInfo = 'wheat'; kindGrowingInfoColor = dictColor.yellow; break;
             case dictKind.tomato: kindGrowingInfo = 'tomato'; kindGrowingInfoColor = dictColor.red; break;
             case dictKind.carrot: kindGrowingInfo = 'carrot'; kindGrowingInfoColor = dictColor.red; break;
+            case dictKind.corn: kindGrowingInfo = 'corn'; kindGrowingInfoColor = dictColor.yellow; break;
         };
         switch (kindSeeding) {
             case dictKind.null: kindSeedingInfo = 'no selected!'; kindSeedingInfoColor = dictColor.red; break;
             case dictKind.wheat: kindSeedingInfo = 'wheat'; kindSeedingInfoColor = dictColor.yellow; break;
             case dictKind.tomato: kindSeedingInfo = 'tomato'; kindSeedingInfoColor = dictColor.red; break;
             case dictKind.carrot: kindSeedingInfo = 'carrot'; kindSeedingInfoColor = dictColor.red; break;
+            case dictKind.corn: kindSeedingInfo = 'corn'; kindSeedingInfoColor = dictColor.yellow; break;
         };
 
         //INFO PRINT

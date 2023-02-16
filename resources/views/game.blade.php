@@ -38,12 +38,18 @@
     <div class="position-absolute w-auto mx-3 p-3 bg-dark bg-opacity-50 text-bg-dark overflow-auto d-flex flex-column align-items-center px-5 shadow window"
         id="window-seeding">
         <div class="w-100 text-center my-3">
-            <h2>Seeding</h2>
+            <h2>Seeds + items</h2>
         </div>
         <div class="container">
             <div class="row" id="seedings">
                 <!--Generate by JS-->
             </div>
+        </div>
+        <div class="w-100 text-center my-3">
+            <h2>Animals actions</h2>
+        </div>
+        <div class="list-group mb-5" id="animals">
+            <!--Generate by JS-->
         </div>
     </div>
     <!--WINDOW MISSION-->
@@ -131,6 +137,8 @@
         var missions = {!! json_encode($missions) !!};
         var dictSeedingCount = {!! json_encode($dict_seeding_count) !!};
         var characterKind = {!! json_encode($character) !!};
+        var cowActive = {!! json_encode($cow) !!};
+        var chickenActive = {!! json_encode($chicken) !!};
     </script>
     <script src="js/game.js"></script>
     <script src="js/interface.js"></script>
@@ -138,6 +146,7 @@
 
 </html>
 <!--
+    https://www.flaticon.com/search?word=corn
     https://www.flaticon.com/search?word=carrot
     https://www.flaticon.com/search?word=watering%20can
     https://www.flaticon.com/search?word=scythe
@@ -155,4 +164,6 @@
     https://www.flaticon.com/search?word=settings
     https://www.flaticon.com/search?word=edit
     https://www.flaticon.com/search?word=delete
+    https://www.flaticon.com/search?word=milk
+    https://www.flaticon.com/search?word=chicken
 -->

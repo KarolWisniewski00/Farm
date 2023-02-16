@@ -50,6 +50,8 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);                               //hash the password
         $user->admin = false;
+        $user->cow = false;
+        $user->chicken = false;
         $user->character = 0;
         $user->map_data = json_encode($this->map_default);
         $user->coins = $this->coins_default;

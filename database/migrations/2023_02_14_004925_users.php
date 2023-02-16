@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('admin');
+            $table->boolean('cow');
+            $table->boolean('chicken');
             $table->integer('character');
             $table->json('map_data');
             $table->integer('coins');
