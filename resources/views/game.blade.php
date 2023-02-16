@@ -130,6 +130,7 @@
         var coins = {!! json_encode($coins) !!};
         var missions = {!! json_encode($missions) !!};
         var dictSeedingCount = {!! json_encode($dict_seeding_count) !!};
+        var characterKind = {!! json_encode($character) !!};
     </script>
     <script src="js/game.js"></script>
     <script src="js/interface.js"></script>
@@ -152,4 +153,6 @@
     https://www.flaticon.com/search?word=logout
     https://www.flaticon.com/search?word=save
     https://www.flaticon.com/search?word=settings
+    https://www.flaticon.com/search?word=edit
+    https://www.flaticon.com/search?word=delete
 -->

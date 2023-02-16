@@ -58,6 +58,11 @@ const dictSeedingTime = {
     wheat: 1,
     carrot: 5,
 };
+const dictCharacter = {
+    default: 0,
+    male: 1,
+    female: 2,
+}
 const size = 35.8;
 const speed = 200;
 const digCost = 10;
@@ -152,7 +157,11 @@ BasicGame.Boot.prototype =
         //LOAD IMAGES
         game.load.image('grass', 'images/grass.png');
         game.load.image('nograss', 'images/nograss.png');
-        game.load.image('character', 'images/character.png');
+        switch (characterKind) {
+            case dictCharacter.default: game.load.image('character', 'images/character.png'); break;
+            case dictCharacter.male: game.load.image('character', 'images/male.png'); break;
+            case dictCharacter.female: game.load.image('character', 'images/female.png'); break;
+        };
         game.load.image('tree', 'images/tree.png');
         game.load.image('wheat', 'images/wheat.png');
         game.load.image('tomato', 'images/tomato.png');

@@ -31,6 +31,12 @@
                 </div>
 
                 <div class="form-floating my-3">
+                    <input type="text" class="form-control" id="floating_nickname" value="{{old('nickname')}}" name="nickname" required>
+                    <label for="floating_nickname">Nickname</label>
+                    <span class="text-danger">@error('nickname') {{$message}} @enderror</span>
+                </div>
+
+                <div class="form-floating my-3">
                     <input type="email" class="form-control" id="floating_email" value="{{old('email')}}" name="email" required>
                     <label for="floating_email">Email</label>
                     <span class="text-danger">@error('email') {{$message}} @enderror</span>

@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table){
             $table->id();
             $table->string('name');
+            $table->string('nickname');
             $table->string('surname');
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('admin');
+            $table->integer('character');
             $table->json('map_data');
             $table->integer('coins');
             $table->json('missions');

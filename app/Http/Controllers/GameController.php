@@ -16,6 +16,7 @@ class GameController extends Controller
         $coins = $user['coins'];                                                //save help variable
         $missions = $user['missions'];                                          //save help variable
         $dict_seeding_count = $user['dict_seeding_count'];                      //save help variable
+        $character = $user['character'];                                        //save help variable
         
         $currentDate = date('Y-m-d\TH:i:s.v\Z');                                //get current date
 
@@ -44,6 +45,7 @@ class GameController extends Controller
                 'coins'=>json_decode($coins),
                 'missions'=>json_decode($missions),
                 'dict_seeding_count'=>json_decode($dict_seeding_count),
+                'character'=>$character,
             ]);
         }else{                                                              //else retunr error - the game screen will not be loaded
             return 'some error';

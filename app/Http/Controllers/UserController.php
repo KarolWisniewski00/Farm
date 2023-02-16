@@ -26,10 +26,10 @@ class UserController extends Controller
                 }
                 return redirect('/game');                                               //if all ok return view
             }else{
-                return redirect('/')->with('fail', 'Hasła nie pasują do siebie!');      //if passwords aren't match
+                return redirect('/')->with('fail', "The passwords don't match!");       //if passwords aren't match
             }
         }else{
-            return redirect('/')->with('fail', 'Nie ma takiego użytkownika!');          //if user doesn't exist
+            return redirect('/')->with('fail', 'There is no such user!');               //if user doesn't exist
         }
     }
 
@@ -37,6 +37,7 @@ class UserController extends Controller
     public function register_user(Request $request){                                    //Request - take data from form
         $request->validate([                                                            //validation
             'name' => 'required',
+            'nickname' => 'required|unique:users',
             'surname' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8'
@@ -44,10 +45,12 @@ class UserController extends Controller
 
         $user = new User();                                                             //create new object from class User (model)
         $user->name = $request->name;
+        $user->nickname = $request->nickname;
         $user->surname = $request->surname;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);                               //hash the password
         $user->admin = false;
+        $user->character = 0;
         $user->map_data = json_encode($this->map_default);
         $user->coins = $this->coins_default;
         $user->missions = json_encode($this->missions_default);
@@ -55,9 +58,9 @@ class UserController extends Controller
         $res = $user->save();                                                           //save record in database
 
         if ($res) {
-            return redirect('/')->with('success', 'Zarejestrowałeś się z powodzeniem!');//if all ok return message
+            return redirect('/')->with('success', 'You have successfully registered!'); //if all ok return message
         } else {
-            return redirect('/')->with('fail', 'Coś poszło nie tak!');                  //else also return message
+            return redirect('/')->with('fail', 'Some error!');                          //else also return message
         }
     }
 
@@ -68,5 +71,74 @@ class UserController extends Controller
             Session::pull('admin');
             return redirect('/');       //return main route
         }
+    }
+
+    public function account(){
+        $user = User::where('id' ,'=', Session::get('login_id'))->first();
+        return view('account.account',[
+            'user'=>$user,
+            'page'=>0,
+        ]);   
+    }
+
+    public function friends(){
+        $user = User::where('id' ,'=', Session::get('login_id'))->first();
+        return view('account.account',[
+            'user'=>$user,
+            'page'=>1,
+        ]);   
+    }
+
+    public function characters(){
+        $user = User::where('id' ,'=', Session::get('login_id'))->first();
+        return view('account.account',[
+            'user'=>$user,
+            'page'=>2,
+        ]);   
+    }
+
+    public function character($id){
+        User::where('id' ,'=', Session::get('login_id'))->update(['character' => $id]);
+        return redirect('characters');
+    }
+
+    public function account_edit(){
+        $user = User::where('id' ,'=', Session::get('login_id'))->first();
+        return view('account.edit',[
+            'user'=>$user
+        ]);   
+    }
+
+    public function account_edit_user(Request $request){
+        $user = User::where('id' ,'=', Session::get('login_id'))->first();
+        $request->validate([
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'nickname' => 'required|unique:users,nickname,'.$user->id,
+            'password' => 'nullable|min:8'
+        ]);
+
+        User::where('id', '=', $user->id)->update([
+            'email' => $request->email,
+            'nickname' => $request->nickname,
+        ]);
+
+        if ($request->password != null){
+            User::where('id', '=', $user->id)->update([
+                'password' => Hash::make($request->password),
+            ]);
+        }
+
+        return redirect('account')->with('success', 'Account editing completed to an average degree!'); 
+    }
+
+    public function account_delete(){
+        $user = User::where('id' ,'=', Session::get('login_id'))->first();
+
+        if (Session::has('login_id')){
+            Session::pull('login_id');
+            Session::pull('admin');
+        }
+        User::where('id', '=', $user->id)->delete();
+        return redirect('/')->with('success', 'Your account has been deleted!');
     }
 }
