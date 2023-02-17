@@ -6,7 +6,6 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -44,7 +43,7 @@ class Controller extends BaseController
         [ 'collect'=> [[ 'item'=> 'wheat', 'count'=> 40 ], [ 'item'=>'tomato', 'count'=> 14 ]], 'award'=> [[ 'item'=> 'carrot', 'count'=> 1 ], [ 'item'=> 'coin', 'count'=> 248 ]]],
         [ 'collect'=> [[ 'item'=> 'carrot', 'count'=> 9 ], [ 'item'=>'tomato', 'count'=> 2 ]], 'award'=> [[ 'item'=> 'cow', 'count'=> 1 ], [ 'item'=> 'coin', 'count'=> 151 ]]],
         [ 'collect'=> [[ 'item'=> 'milk', 'count'=> 2 ], [ 'item'=>'tomato', 'count'=> 7 ],[ 'item'=>'carrot', 'count'=> 6 ]], 'award'=> [[ 'item'=> 'coin', 'count'=> 394 ]]],
-        [ 'collect'=> [[ 'item'=> 'milk', 'count'=> 1 ], [ 'item'=>'carrot', 'count'=> 3 ],[ 'item'=>'coins', 'count'=> 10 ]], 'award'=> [[ 'item'=> 'corn', 'count'=> 3 ],[ 'item'=> 'coin', 'count'=> 860 ]]],
+        [ 'collect'=> [[ 'item'=> 'milk', 'count'=> 1 ], [ 'item'=>'carrot', 'count'=> 3 ],[ 'item'=>'coin', 'count'=> 10 ]], 'award'=> [[ 'item'=> 'corn', 'count'=> 3 ],[ 'item'=> 'coin', 'count'=> 860 ]]],
         [ 'collect'=> [[ 'item'=> 'corn', 'count'=> 18 ], [ 'item'=>'tomato', 'count'=> 10 ],[ 'item'=>'milk', 'count'=> 1 ]], 'award'=> [[ 'item'=> 'coin', 'count'=> 696 ]]],
         [ 'collect'=> [[ 'item'=> 'corn', 'count'=> 10 ], [ 'item'=>'wheat', 'count'=> 10 ]], 'award'=> [[ 'item'=> 'chicken', 'count'=> 1 ]]],
         [ 'collect'=> [[ 'item'=> 'corn', 'count'=> 4 ], [ 'item'=>'egg', 'count'=> 7 ]], 'award'=> [[ 'item'=> 'coin', 'count'=> 788 ]]],

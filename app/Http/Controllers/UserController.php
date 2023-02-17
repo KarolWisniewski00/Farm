@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Friendship;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -75,35 +76,7 @@ class UserController extends Controller
         }
     }
 
-    public function account(){
-        $user = User::where('id' ,'=', Session::get('login_id'))->first();
-        return view('account.account',[
-            'user'=>$user,
-            'page'=>0,
-        ]);   
-    }
-
-    public function friends(){
-        $user = User::where('id' ,'=', Session::get('login_id'))->first();
-        return view('account.account',[
-            'user'=>$user,
-            'page'=>1,
-        ]);   
-    }
-
-    public function characters(){
-        $user = User::where('id' ,'=', Session::get('login_id'))->first();
-        return view('account.account',[
-            'user'=>$user,
-            'page'=>2,
-        ]);   
-    }
-
-    public function character($id){
-        User::where('id' ,'=', Session::get('login_id'))->update(['character' => $id]);
-        return redirect('characters');
-    }
-
+    /*VIEW EDIT*/
     public function account_edit(){
         $user = User::where('id' ,'=', Session::get('login_id'))->first();
         return view('account.edit',[
@@ -111,6 +84,7 @@ class UserController extends Controller
         ]);   
     }
 
+    /*UPDATE EDIT ACCOUNT*/
     public function account_edit_user(Request $request){
         $user = User::where('id' ,'=', Session::get('login_id'))->first();
         $request->validate([
@@ -133,6 +107,7 @@ class UserController extends Controller
         return redirect('account')->with('success', 'Account editing completed to an average degree!'); 
     }
 
+    /*DELETE ACCOUNT*/
     public function account_delete(){
         $user = User::where('id' ,'=', Session::get('login_id'))->first();
 
@@ -142,5 +117,66 @@ class UserController extends Controller
         }
         User::where('id', '=', $user->id)->delete();
         return redirect('/')->with('success', 'Your account has been deleted!');
+    }
+
+    public function account(){
+        $user = User::where('id' ,'=', Session::get('login_id'))->first();
+        $users = User::get();
+        $pending = Friendship::where('friend_id', Session::get('login_id'))->where('status', false)->get();
+        $accepted = Friendship::where('friend_id', Session::get('login_id'))->orWhere('user_id', Session::get('login_id'))->where('status', true)->get();
+
+
+        return view('account.account',[
+            'user'=>$user,
+            'page'=>0,
+            'pending'=>$pending,
+            'users'=>$users,
+            'accepted' => $accepted
+        ]);   
+    }
+
+    public function friends(){
+        $user = User::where('id' ,'=', Session::get('login_id'))->first();
+        $users = User::get();
+        $pending = Friendship::where('friend_id', Session::get('login_id'))->where('status', false)->get();
+        $accepted = Friendship::where('friend_id', Session::get('login_id'))->where('status', true)->orWhere('user_id', Session::get('login_id'))->where('status', true)->get();
+
+        return view('account.account',[
+            'user'=>$user,
+            'page'=>1,
+            'pending'=>$pending,
+            'users'=>$users,
+            'accepted' => $accepted
+        ]);  
+    }
+
+    public function characters(){
+        $user = User::where('id' ,'=', Session::get('login_id'))->first();
+        $users = User::get();
+        $pending = Friendship::where('friend_id', Session::get('login_id'))->where('status', false)->get();
+        $accepted = Friendship::where('friend_id', Session::get('login_id'))->orWhere('user_id', Session::get('login_id'))->where('status', true)->get();
+
+        return view('account.account',[
+            'user'=>$user,
+            'page'=>2,
+            'pending'=>$pending,
+            'users'=>$users,
+            'accepted' => $accepted
+        ]);  
+    }
+
+    public function admin(){
+        $user = User::where('id' ,'=', Session::get('login_id'))->first();
+        $users = User::get();
+        $pending = Friendship::where('friend_id', Session::get('login_id'))->where('status', false)->get();
+        $accepted = Friendship::where('friend_id', Session::get('login_id'))->orWhere('user_id', Session::get('login_id'))->where('status', true)->get();
+
+        return view('account.account',[
+            'user'=>$user,
+            'page'=>3,
+            'pending'=>$pending,
+            'users'=>$users,
+            'accepted' => $accepted
+        ]);  
     }
 }

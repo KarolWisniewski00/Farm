@@ -76,4 +76,10 @@ class GameController extends Controller
         }
         return ['ok'=>'ok'];
     }
+    
+    /*CHANGE CHARACTER*/
+    public function character($id){
+        User::where('id' ,'=', Session::get('login_id'))->update(['character' => $id]);
+        return redirect('characters');
+    }
 }

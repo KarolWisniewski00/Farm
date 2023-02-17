@@ -23,6 +23,7 @@
                 <a href="{{ route('account')}}" class="list-group-item list-group-item-action active" aria-current="true">Account</a>
                 <a href="{{ route('friends')}}" class="list-group-item list-group-item-action">Friends</a>
                 <a href="{{ route('characters')}}" class="list-group-item list-group-item-action">Characters</a>
+                @if(Session::has('admin'))<a href="{{ route('admin')}}" class="list-group-item list-group-item-action">Admin</a>@endif
             </div>
         </div>
         @elseif ($page == 1)
@@ -31,6 +32,7 @@
                 <a href="{{ route('account')}}" class="list-group-item list-group-item-action">Account</a>
                 <a href="{{ route('friends')}}" class="list-group-item list-group-item-action active" aria-current="true">Friends</a>
                 <a href="{{ route('characters')}}" class="list-group-item list-group-item-action">Characters</a>
+                @if(Session::has('admin'))<a href="{{ route('admin')}}" class="list-group-item list-group-item-action">Admin</a>@endif
             </div>
         </div>
         @elseif ($page == 2)
@@ -39,6 +41,16 @@
                 <a href="{{ route('account')}}" class="list-group-item list-group-item-action">Account</a>
                 <a href="{{ route('friends')}}" class="list-group-item list-group-item-action">Friends</a>
                 <a href="{{ route('characters')}}" class="list-group-item list-group-item-action active" aria-current="true">Characters</a>
+                @if(Session::has('admin'))<a href="{{ route('admin')}}" class="list-group-item list-group-item-action">Admin</a>@endif
+            </div>
+        </div>
+        @elseif ($page == 3)
+        <div class="col-5">
+            <div class="list-group text-break">
+                <a href="{{ route('account')}}" class="list-group-item list-group-item-action">Account</a>
+                <a href="{{ route('friends')}}" class="list-group-item list-group-item-action">Friends</a>
+                <a href="{{ route('characters')}}" class="list-group-item list-group-item-action" aria-current="true">Characters</a>
+                @if(Session::has('admin'))<a href="{{ route('admin')}}" class="list-group-item list-group-item-action active">Admin</a>@endif
             </div>
         </div>
         @endif
@@ -54,14 +66,14 @@
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
-                        <div class="fw-bold">Nickname</div>
-                        {{$user->nickname}}
+                        <div class="fw-bold">Surname</div>
+                        {{$user->surname}}
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
-                        <div class="fw-bold">Surname</div>
-                        {{$user->surname}}
+                        <div class="fw-bold">Nickname</div>
+                        {{$user->nickname}}
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -93,9 +105,49 @@
             </div>
         </div>
         @elseif ($page == 1)
+        <div class="col-7">
+            <div class="bg-white rounded p-3">
+                <h1>Invitation:</h1>
+                <form class="form-floating" method="POST" action="{{route('friend-add')}}">
+                    @csrf
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Nickname" name="nickname">
+                    <label for="floatingInput">Nickname</label>
+                    <button class="btn btn-primary my-2" type="submit">Add</button>
+                </form>
+                <hr>
+                <h1>Pending:</h1>
+                <ol class="list-group list-group text-break mb-3">
+                    @foreach($pending as $p)
+                    <li class="list-group-item d-flex flex-row justify-content-between align-items-center">
+                        <form method="POST" action="{{ route('friend-update') }}">
+                        @csrf
+                        <div class="fw-bold mx-1">{{$users[$p->user_id-1]->nickname}}</div>
+                        <input type="hidden" name="friend" value="{{$p->user_id}}">
+                        <button type="submit" name="status" value="accept" class="btn btn-primary">Accept</button>
+                        <button type="submit" name="status" value="reject" class="btn btn-danger">Reject</button>
+                        </form>
+                    </li>
+                    @endforeach
+                </ol>
+                <hr>
+                <h1>Friends:</h1>
+                <ol class="list-group list-group text-break mb-3">
+                    @foreach($accepted as $a)
+                    <li class="list-group-item d-flex flex-row justify-content-between align-items-center">
+                        @if($a->user_id-1 == Session::get('login_id'))
+                        <div class="fw-bold mx-1">{{$users[$a->user_id-1]->nickname}}</div>
+                        @else
+                        <div class="fw-bold mx-1">{{$users[$a->friend_id-1]->nickname}}</div>
+                        @endif
+                        <button class="btn btn-primary">View farm</button>
+                    </li>
+                    @endforeach
+                </ol>
+            </div>
+        </div>
         @elseif ($page == 2)
-        <div class="col-7 bg-white rounded">
-            <div class="text-center mt-3">
+        <div class="col-7">
+            <div class="text-center mt-3 bg-white rounded">
                 <h1>Characters</h1>
                 <!--CHARACTER 0-->
                 @if ($user->character == 0)
@@ -133,6 +185,21 @@
                     <div>Female</div>
                 </a>
                 @endif
+            </div>
+        </div>
+        @elseif ($page == 3)
+        <div class="col-7">
+            <div class="text-center mt-3 bg-white rounded">
+                <h1>Users</h1>
+                <ol class="list-group list-group text-break mb-3">
+                    @foreach($users as $user)
+                    <li class="list-group-item d-flex flex-row justify-content-between align-items-center">
+                        <div class="fw-bold mx-1">{{$user->name}}</div>
+                        <div class="fw-bold mx-1">{{$user->surname}}</div>
+                        <div class="fw-bold mx-1">{{$user->nickname}}</div>
+                    </li>
+                    @endforeach
+                </ol>
             </div>
         </div>
         @endif
