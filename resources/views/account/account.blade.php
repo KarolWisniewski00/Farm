@@ -24,6 +24,7 @@
                 <a href="{{ route('friends')}}" class="list-group-item list-group-item-action">Friends</a>
                 <a href="{{ route('characters')}}" class="list-group-item list-group-item-action">Characters</a>
                 @if(Session::has('admin'))<a href="{{ route('admin')}}" class="list-group-item list-group-item-action">Admin</a>@endif
+                <a href="{{ route('marketplace')}}" class="list-group-item list-group-item-action" aria-current="true">Marketplace</a>
             </div>
         </div>
         @elseif ($page == 1)
@@ -33,6 +34,7 @@
                 <a href="{{ route('friends')}}" class="list-group-item list-group-item-action active" aria-current="true">Friends</a>
                 <a href="{{ route('characters')}}" class="list-group-item list-group-item-action">Characters</a>
                 @if(Session::has('admin'))<a href="{{ route('admin')}}" class="list-group-item list-group-item-action">Admin</a>@endif
+                <a href="{{ route('marketplace')}}" class="list-group-item list-group-item-action" aria-current="true">Marketplace</a>
             </div>
         </div>
         @elseif ($page == 2)
@@ -42,6 +44,7 @@
                 <a href="{{ route('friends')}}" class="list-group-item list-group-item-action">Friends</a>
                 <a href="{{ route('characters')}}" class="list-group-item list-group-item-action active" aria-current="true">Characters</a>
                 @if(Session::has('admin'))<a href="{{ route('admin')}}" class="list-group-item list-group-item-action">Admin</a>@endif
+                <a href="{{ route('marketplace')}}" class="list-group-item list-group-item-action" aria-current="true">Marketplace</a>
             </div>
         </div>
         @elseif ($page == 3)
@@ -51,6 +54,17 @@
                 <a href="{{ route('friends')}}" class="list-group-item list-group-item-action">Friends</a>
                 <a href="{{ route('characters')}}" class="list-group-item list-group-item-action" aria-current="true">Characters</a>
                 @if(Session::has('admin'))<a href="{{ route('admin')}}" class="list-group-item list-group-item-action active">Admin</a>@endif
+                <a href="{{ route('marketplace')}}" class="list-group-item list-group-item-action" aria-current="true">Marketplace</a>
+            </div>
+        </div>
+        @elseif ($page == 4)
+        <div class="col-2">
+            <div class="list-group text-break">
+                <a href="{{ route('account')}}" class="list-group-item list-group-item-action">Account</a>
+                <a href="{{ route('friends')}}" class="list-group-item list-group-item-action">Friends</a>
+                <a href="{{ route('characters')}}" class="list-group-item list-group-item-action" aria-current="true">Characters</a>
+                @if(Session::has('admin'))<a href="{{ route('admin')}}" class="list-group-item list-group-item-action">Admin</a>@endif
+                <a href="{{ route('marketplace')}}" class="list-group-item list-group-item-action active" aria-current="true">Marketplace</a>
             </div>
         </div>
         @endif
@@ -136,9 +150,9 @@
                     <li class="list-group-item d-flex flex-row justify-content-between align-items-center">
                         @if($a->user_id == Session::get('login_id'))
                         @foreach ($users as $user)
-                            @if ($user->id == $a->friend_id)
-                            <div class="fw-bold mx-1">{{$user->nickname}}</div>
-                            @endif
+                        @if ($user->id == $a->friend_id)
+                        <div class="fw-bold mx-1">{{$user->nickname}}</div>
+                        @endif
                         @endforeach
                         <form method="POST" action="{{ route('friend-update') }}">
                             @csrf
@@ -150,9 +164,9 @@
                         @else
 
                         @foreach ($users as $user)
-                            @if ($user->id == $a->user_id)
-                            <div class="fw-bold mx-1">{{$user->nickname}}</div>
-                            @endif
+                        @if ($user->id == $a->user_id)
+                        <div class="fw-bold mx-1">{{$user->nickname}}</div>
+                        @endif
                         @endforeach
                         <form method="POST" action="{{ route('friend-update') }}">
                             @csrf
@@ -235,6 +249,205 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+        @elseif ($page == 4)
+        <div class="col-10">
+            <div class="text-center bg-white rounded">
+                <h1>Add new</h1>
+                <form method="POST" action="{{route('marketplace-add')}}">
+                    @csrf
+                    <ol class="list-group list-group text-break mb-3">
+                        <div class="list-group-item list-group-item-action bg-transparent border-1 rounded-0 border-white text-white d-flex flex-column justify-content-between">
+                            <div class="d-flex flex-row">
+                                <div class="d-flex flex-column w-100 text-center text-black">
+                                    <h5 class="mb-1">Sell:</h5>
+                                    <div class="w-100">
+                                        <buttom class="btn btn-outline-light p-2 m-2 text-black">
+                                            <div>wheat</div><img src="images/wheat-icon.png" class="img-fluid max-height-64" alt="wheat-icon">
+                                            <div>
+                                                <div class="form-group">
+                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <input class="form-control" type="number" id="example-number-input" name="sell_wheat">
+                                                </div>
+                                            </div>
+                                        </buttom>
+                                        <buttom class="btn btn-outline-light p-2 m-2 text-black">
+                                            <div>tomato</div><img src="images/tomato-icon.png" class="img-fluid max-height-64" alt="tomato-icon">
+                                            <div>
+                                                <div class="form-group">
+                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <input class="form-control" type="number" id="example-number-input" name="sell_tomato">
+                                                </div>
+                                            </div>
+                                        </buttom>
+                                        <buttom class="btn btn-outline-light p-2 m-2 text-black">
+                                            <div>carrot</div><img src="images/carrot-icon.png" class="img-fluid max-height-64" alt="carrot-icon">
+                                            <div>
+                                                <div class="form-group">
+                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <input class="form-control" type="number" id="example-number-input" name="sell_carrot">
+                                                </div>
+                                            </div>
+                                        </buttom>
+                                        <buttom class="btn btn-outline-light p-2 m-2 text-black">
+                                            <div>corn</div><img src="images/corn-icon.png" class="img-fluid max-height-64" alt="corn-icon">
+                                            <div>
+                                                <div class="form-group">
+                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <input class="form-control" type="number" id="example-number-input" name="sell_corn">
+                                                </div>
+                                            </div>
+                                        </buttom>
+                                        <buttom class="btn btn-outline-light p-2 m-2 text-black">
+                                            <div>milk</div><img src="images/milk-icon.png" class="img-fluid max-height-64" alt="milk-icon">
+                                            <div>
+                                                <div class="form-group">
+                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <input class="form-control" type="number" id="example-number-input" name="sell_milk">
+                                                </div>
+                                            </div>
+                                        </buttom>
+                                        <buttom class="btn btn-outline-light p-2 m-2 text-black">
+                                            <div>egg</div><img src="images/egg-icon.png" class="img-fluid max-height-64" alt="egg-icon">
+                                            <div>
+                                                <div class="form-group">
+                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <input class="form-control" type="number" id="example-number-input" name="sell_egg">
+                                                </div>
+                                            </div>
+                                        </buttom>
+                                        <buttom class="btn btn-outline-light p-2 m-2 text-black">
+                                            <div>coin</div><img src="images/coin-icon.png" class="img-fluid max-height-64" alt="coin-icon">
+                                            <div>
+                                                <div class="form-group">
+                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <input class="form-control" type="number" id="example-number-input" name="sell_coin">
+                                                </div>
+                                            </div>
+                                        </buttom>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column w-100 text-center text-black">
+                                    <h5 class="mb-1">For:</h5>
+                                    <div class="w-100">
+                                        <buttom class="btn btn-outline-light p-2 m-2 text-black">
+                                            <div>wheat</div><img src="images/wheat-icon.png" class="img-fluid max-height-64" alt="wheat-icon">
+                                            <div>
+                                                <div class="form-group">
+                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <input class="form-control" type="number" id="example-number-input" name="for_wheat">
+                                                </div>
+                                            </div>
+                                        </buttom>
+                                        <buttom class="btn btn-outline-light p-2 m-2 text-black">
+                                            <div>tomato</div><img src="images/tomato-icon.png" class="img-fluid max-height-64" alt="tomato-icon">
+                                            <div>
+                                                <div class="form-group">
+                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <input class="form-control" type="number" id="example-number-input" name="for_tomato">
+                                                </div>
+                                            </div>
+                                        </buttom>
+                                        <buttom class="btn btn-outline-light p-2 m-2 text-black">
+                                            <div>carrot</div><img src="images/carrot-icon.png" class="img-fluid max-height-64" alt="carrot-icon">
+                                            <div>
+                                                <div class="form-group">
+                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <input class="form-control" type="number" id="example-number-input" name="for_carrot">
+                                                </div>
+                                            </div>
+                                        </buttom>
+                                        <buttom class="btn btn-outline-light p-2 m-2 text-black">
+                                            <div>corn</div><img src="images/corn-icon.png" class="img-fluid max-height-64" alt="corn-icon">
+                                            <div>
+                                                <div class="form-group">
+                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <input class="form-control" type="number" id="example-number-input" name="for_corn">
+                                                </div>
+                                            </div>
+                                        </buttom>
+                                        <buttom class="btn btn-outline-light p-2 m-2 text-black">
+                                            <div>milk</div><img src="images/milk-icon.png" class="img-fluid max-height-64" alt="milk-icon">
+                                            <div>
+                                                <div class="form-group">
+                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <input class="form-control" type="number" id="example-number-input" name="for_milk">
+                                                </div>
+                                            </div>
+                                        </buttom>
+                                        <buttom class="btn btn-outline-light p-2 m-2 text-black">
+                                            <div>egg</div><img src="images/egg-icon.png" class="img-fluid max-height-64" alt="egg-icon">
+                                            <div>
+                                                <div class="form-group">
+                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <input class="form-control" type="number" id="example-number-input" name="for_egg">
+                                                </div>
+                                            </div>
+                                        </buttom>
+                                        <buttom class="btn btn-outline-light p-2 m-2 text-black">
+                                            <div>coin</div><img src="images/coin-icon.png" class="img-fluid max-height-64" alt="coin-icon">
+                                            <div>
+                                                <div class="form-group">
+                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <input class="form-control" type="number" id="example-number-input" name="for_coin">
+                                                </div>
+                                            </div>
+                                        </buttom>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column text-center w-100">
+                                <div><button class="btn btn-primary" type="submit">Put up for sale!</button></div>
+                            </div>
+                        </div>
+                    </ol>
+                </form>
+                <hr>
+                <h1>Marketplace</h1>
+                <ol class="list-group list-group text-break pb-3">
+                    <div class="list-group-item list-group-item-action bg-transparent border-1 rounded-0 border-white text-white d-flex flex-column justify-content-between">
+                        @foreach($marketplace as $m)
+                        <div class="d-flex flex-row">
+                            <div class="d-flex flex-column w-100 text-center text-black">
+                                <h5 class="mb-1">Sell:</h5>
+                                <div class="w-100">
+                                    @foreach($m['sell'] as $key => $value)
+                                    @if($value>0)
+                                    <buttom class="btn btn-outline-dark p-2 m-2">
+                                        <div></div><img src="images/{{$key}}-icon.png" class="img-fluid max-height-64" alt="{{$key}}-icon">
+                                        <div>x{{$value}}</div>
+                                    </buttom>
+                                    @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column w-100 text-center text-black">
+                                <h5 class="mb-1">For:</h5>
+                                <div class="w-100">
+                                    @foreach($m['for'] as $key => $value)
+                                    @if($value>0)
+                                    <buttom class="btn btn-outline-dark p-2 m-2">
+                                        <div></div><img src="images/{{$key}}-icon.png" class="img-fluid max-height-64" alt="{{$key}}-icon">
+                                        <div>x{{$value}}</div>
+                                    </buttom>
+                                    @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        @if($m['user_id']==Session::get('login_id'))
+                        <div class="d-flex flex-column text-center w-100">
+                            <div><a href="marketplace-cancel-{{$m['id']}}" class="btn btn-danger" type="submit">Cancel!</a></div>
+                        </div>
+                        @else
+                        <div class="d-flex flex-column text-center w-100 my-2">
+                            <div><a href="marketplace-accept-{{$m['id']}}" class="btn btn-primary" type="submit">Accept!</a></div>
+                        </div>
+                        @endif
+                        @endforeach
+                    </div>
+                </ol>
             </div>
         </div>
         @endif

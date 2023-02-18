@@ -12,4 +12,8 @@ class User extends Model
     {
         return $this->hasMany(Friendship::class,);
     }
+    public function marketplaces()
+    {
+        return $this->hasMany(Friendship::class,);
+    }
 }

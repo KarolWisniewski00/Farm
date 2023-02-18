@@ -6,6 +6,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\FriendshipsController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\MarketplaceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,10 @@ Route::get('/account', [AccountController::class, 'account'])->name('account')->
 Route::get('/friends', [AccountController::class, 'friends'])->name('friends')->middleware('isLoggedIn');
 Route::get('/characters', [AccountController::class, 'characters'])->name('characters')->middleware('isLoggedIn');
 Route::get('/admin', [AccountController::class, 'admin'])->name('admin')->middleware('AdminCheck');
+Route::get('/marketplace', [AccountController::class, 'marketplace'])->name('marketplace')->middleware('isLoggedIn');
+Route::post('/marketplace-add', [MarketplaceController::class, 'marketplace_add'])->name('marketplace-add')->middleware('isLoggedIn');
+Route::get('/marketplace-cancel-{id}', [MarketplaceController::class, 'marketplace_cancel'])->name('marketplace-cancel-{id}')->middleware('isLoggedIn');
+Route::get('/marketplace-accept-{id}', [MarketplaceController::class, 'marketplace_accept'])->name('marketplace-accept-{id}')->middleware('isLoggedIn');
 
 Route::get('/character-{id}', [GameController::class, 'character'])->name('character-{id}')->middleware('isLoggedIn');
 Route::get('/account-edit', [AccountController::class, 'account_edit'])->name('account-edit')->middleware('isLoggedIn');

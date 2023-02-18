@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Marketplace;
 use App\Models\Friendship;
 use Illuminate\Support\Facades\Session;
 
@@ -96,13 +97,14 @@ class AccountController extends Controller
         $pending = Friendship::where('friend_id', Session::get('login_id'))->where('status', false)->get();
         $accepted = Friendship::where('friend_id', Session::get('login_id'))->orWhere('user_id', Session::get('login_id'))->where('status', true)->get();
 
-
+        $marketplace = Marketplace::get();
         return view('account.account',[
             'user'=>$user,
             'page'=>0,
             'pending'=>$pending,
             'users'=>$users,
-            'accepted' => $accepted
+            'accepted' => $accepted,
+            'marketplace'=>$marketplace,
         ]);   
     }
 
@@ -111,13 +113,14 @@ class AccountController extends Controller
         $users = User::get();
         $pending = Friendship::where('friend_id', Session::get('login_id'))->where('status', false)->get();
         $accepted = Friendship::where('friend_id', Session::get('login_id'))->where('status', true)->orWhere('user_id', Session::get('login_id'))->where('status', true)->get();
-
+        $marketplace = Marketplace::get();
         return view('account.account',[
             'user'=>$user,
             'page'=>1,
             'pending'=>$pending,
             'users'=>$users,
-            'accepted' => $accepted
+            'accepted' => $accepted,
+            'marketplace'=>$marketplace,
         ]);  
     }
 
@@ -126,13 +129,14 @@ class AccountController extends Controller
         $users = User::get();
         $pending = Friendship::where('friend_id', Session::get('login_id'))->where('status', false)->get();
         $accepted = Friendship::where('friend_id', Session::get('login_id'))->orWhere('user_id', Session::get('login_id'))->where('status', true)->get();
-
+        $marketplace = Marketplace::get();
         return view('account.account',[
             'user'=>$user,
             'page'=>2,
             'pending'=>$pending,
             'users'=>$users,
-            'accepted' => $accepted
+            'accepted' => $accepted,
+            'marketplace'=>$marketplace,
         ]);  
     }
 
@@ -141,13 +145,36 @@ class AccountController extends Controller
         $users = User::get();
         $pending = Friendship::where('friend_id', Session::get('login_id'))->where('status', false)->get();
         $accepted = Friendship::where('friend_id', Session::get('login_id'))->orWhere('user_id', Session::get('login_id'))->where('status', true)->get();
-
+        $marketplace = Marketplace::get();
         return view('account.account',[
             'user'=>$user,
             'page'=>3,
             'pending'=>$pending,
             'users'=>$users,
-            'accepted' => $accepted
+            'accepted' => $accepted,
+            'marketplace'=>$marketplace,
+        ]);  
+    }
+    public function marketplace(){
+        $user = User::where('id' ,'=', Session::get('login_id'))->first();
+        $users = User::get();
+        $pending = Friendship::where('friend_id', Session::get('login_id'))->where('status', false)->get();
+        $accepted = Friendship::where('friend_id', Session::get('login_id'))->orWhere('user_id', Session::get('login_id'))->where('status', true)->get();
+        $marketplace = Marketplace::get();
+        
+        foreach ($marketplace as $market){
+            $market['sell'] = json_decode($market['sell']);
+        }
+        foreach ($marketplace as $market){
+            $market['for'] = json_decode($market['for']);
+        }
+        return view('account.account',[
+            'user'=>$user,
+            'page'=>4,
+            'pending'=>$pending,
+            'users'=>$users,
+            'accepted' => $accepted,
+            'marketplace'=>$marketplace,
         ]);  
     }
 }
