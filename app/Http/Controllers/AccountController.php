@@ -18,13 +18,21 @@ class AccountController extends Controller
         ]);   
     }
 
+    public function account_edit_admin($id){
+        $user = User::where('id' ,'=',$id)->first();
+        return view('account.edit',[
+            'user'=>$user,
+            'admin'=>true
+        ]);   
+    }
+
     /*UPDATE EDIT ACCOUNT*/
     public function account_edit_user(Request $request){
-        $user = User::where('id' ,'=', Session::get('login_id'))->first();
+        $user = User::where('id' ,'=', $request->id)->first();
         $request->validate([
             'email' => 'required|email|unique:users,email,'.$user->id,
             'nickname' => 'required|unique:users,nickname,'.$user->id,
-            'password' => 'nullable|min:8'
+            'password' => 'nullable|min:8',
         ]);
 
         User::where('id', '=', $user->id)->update([
@@ -41,6 +49,30 @@ class AccountController extends Controller
         return redirect('account')->with('success', 'Account editing completed to an average degree!'); 
     }
 
+    /*UPDATE EDIT ACCOUNT*/
+    public function account_edit_user_admin(Request $request){
+        $user = User::where('id' ,'=', $request->id)->first();
+        $request->validate([
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'nickname' => 'required|unique:users,nickname,'.$user->id,
+        ]);
+
+        User::where('id', '=', $user->id)->update([
+            'email' => $request->email,
+            'nickname' => $request->nickname,
+        ]);
+        if(isset($request->name)){
+            User::where('id', '=', $user->id)->update([
+                'name' => $request->name,
+            ]);
+        }
+        if(isset($request->surname)){
+            User::where('id', '=', $user->id)->update([
+                'surname' => $request->surname,
+            ]);
+        }
+        return redirect('admin')->with('success', 'Account editing completed to an average degree!'); 
+    }
     /*DELETE ACCOUNT*/
     public function account_delete(){
         $user = User::where('id' ,'=', Session::get('login_id'))->first();
@@ -52,7 +84,12 @@ class AccountController extends Controller
         User::where('id', '=', $user->id)->delete();
         return redirect('/')->with('success', 'Your account has been deleted!');
     }
-
+    /*DELETE ACCOUNT*/
+    public function delete($id){
+        $user = User::where('id' ,'=', $id)->first();
+        User::where('id', '=', $user->id)->delete();
+        return redirect('/')->with('success', 'You deleted account!');
+    }
     public function account(){
         $user = User::where('id' ,'=', Session::get('login_id'))->first();
         $users = User::get();

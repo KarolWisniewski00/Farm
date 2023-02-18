@@ -121,10 +121,10 @@
                     <li class="list-group-item d-flex flex-row justify-content-between align-items-center">
                         <div class="fw-bold mx-1">{{$users[$p->user_id-1]->nickname}}</div>
                         <form method="POST" action="{{ route('friend-update') }}">
-                        @csrf
-                        <input type="hidden" name="friend" value="{{$p->user_id}}">
-                        <button type="submit" name="status" value="accept" class="btn btn-primary">Accept</button>
-                        <button type="submit" name="status" value="reject" class="btn btn-danger">Reject</button>
+                            @csrf
+                            <input type="hidden" name="friend" value="{{$p->user_id}}">
+                            <button type="submit" name="status" value="accept" class="btn btn-primary">Accept</button>
+                            <button type="submit" name="status" value="reject" class="btn btn-danger">Reject</button>
                         </form>
                     </li>
                     @endforeach
@@ -135,22 +135,31 @@
                     @foreach($accepted as $a)
                     <li class="list-group-item d-flex flex-row justify-content-between align-items-center">
                         @if($a->user_id == Session::get('login_id'))
-                        <div class="fw-bold mx-1">{{$users[$a->friend_id-1]->nickname}}</div>
+                        @foreach ($users as $user)
+                            @if ($user->id == $a->friend_id)
+                            <div class="fw-bold mx-1">{{$user->nickname}}</div>
+                            @endif
+                        @endforeach
                         <form method="POST" action="{{ route('friend-update') }}">
-                        @csrf
-                        <input type="hidden" name="user" value="{{$a->user_id}}">
-                        <input type="hidden" name="friend" value="{{$a->friend_id}}">
-                        <a href="game-{{$a->friend_id}}" class="btn btn-primary">View farm</a>
-                        <button type="submit" name="status" value="delete" class="btn btn-danger">Delete</button>
+                            @csrf
+                            <input type="hidden" name="user" value="{{$a->user_id}}">
+                            <input type="hidden" name="friend" value="{{$a->friend_id}}">
+                            <a href="game-{{$a->friend_id}}" class="btn btn-primary">View farm</a>
+                            <button type="submit" name="status" value="delete" class="btn btn-danger">Delete</button>
                         </form>
                         @else
-                        <div class="fw-bold mx-1">{{$users[$a->user_id-1]->nickname}}</div>
+
+                        @foreach ($users as $user)
+                            @if ($user->id == $a->user_id)
+                            <div class="fw-bold mx-1">{{$user->nickname}}</div>
+                            @endif
+                        @endforeach
                         <form method="POST" action="{{ route('friend-update') }}">
-                        @csrf
-                        <input type="hidden" name="user" value="{{$a->user_id}}">
-                        <input type="hidden" name="friend" value="{{$a->friend_id}}">
-                        <a href="game-{{$a->user_id}}" class="btn btn-primary">View farm</a>
-                        <button type="submit" name="status" value="delete" class="btn btn-danger">Delete</button>
+                            @csrf
+                            <input type="hidden" name="user" value="{{$a->user_id}}">
+                            <input type="hidden" name="friend" value="{{$a->friend_id}}">
+                            <a href="game-{{$a->user_id}}" class="btn btn-primary">View farm</a>
+                            <button type="submit" name="status" value="delete" class="btn btn-danger">Delete</button>
                         </form>
                         @endif
                     </li>
@@ -160,7 +169,7 @@
         </div>
         @elseif ($page == 2)
         <div class="col-10">
-            <div class="text-center mt-3 bg-white rounded">
+            <div class="text-center bg-white rounded">
                 <h1>Characters</h1>
                 <!--CHARACTER 0-->
                 @if ($user->character == 0)
@@ -202,17 +211,30 @@
         </div>
         @elseif ($page == 3)
         <div class="col-10">
-            <div class="text-center mt-3 bg-white rounded">
+            <div class="text-center bg-white rounded">
                 <h1>Users</h1>
-                <ol class="list-group list-group text-break mb-3">
-                    @foreach($users as $user)
-                    <li class="list-group-item d-flex flex-row justify-content-between align-items-center">
-                        <div class="fw-bold mx-1">{{$user->name}}</div>
-                        <div class="fw-bold mx-1">{{$user->surname}}</div>
-                        <div class="fw-bold mx-1">{{$user->nickname}}</div>
-                    </li>
-                    @endforeach
-                </ol>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Surname</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Nickname</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($users as $user)
+                        <tr>
+                            <th>{{$user->name}}</th>
+                            <td>{{$user->surname}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>{{$user->name}}</td>
+                            <td><a href="edit-{{$user->id}}" class="btn btn-primary">Edit</a></td>
+                            <td><a href="delete-{{$user->id}}" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
         @endif

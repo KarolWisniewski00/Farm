@@ -15,6 +15,9 @@ class GameController extends Controller
             $id = Session::get('login_id');
         }
         $user =  User::where('id' ,'=', $id)->first();     //get data about the user
+        if ($user == 0){
+            return back()->with(['fail'=>'user no exist!']);
+        }
         $map = json_decode($user['map_data']);                                  //decode map - change string to json
         $coins = $user['coins'];                                                //save help variable
         $missions = $user['missions'];                                          //save help variable

@@ -37,7 +37,7 @@ Route::get('/game-{id}', [GameController::class, 'game'])->name('game-update')->
 Route::get('/account', [AccountController::class, 'account'])->name('account')->middleware('isLoggedIn');
 Route::get('/friends', [AccountController::class, 'friends'])->name('friends')->middleware('isLoggedIn');
 Route::get('/characters', [AccountController::class, 'characters'])->name('characters')->middleware('isLoggedIn');
-Route::get('/admin', [AccountController::class, 'admin'])->name('admin')->middleware('isLoggedIn');
+Route::get('/admin', [AccountController::class, 'admin'])->name('admin')->middleware('AdminCheck');
 
 Route::get('/character-{id}', [GameController::class, 'character'])->name('character-{id}')->middleware('isLoggedIn');
 Route::get('/account-edit', [AccountController::class, 'account_edit'])->name('account-edit')->middleware('isLoggedIn');
@@ -46,3 +46,7 @@ Route::get('/account-delete', [AccountController::class, 'account_delete'])->nam
 
 Route::post('/friend-add', [FriendshipsController::class, 'friend_add'])->name('friend-add')->middleware('isLoggedIn');
 Route::post('/friend-update', [FriendshipsController::class, 'friend_update'])->name('friend-update')->middleware('isLoggedIn');
+
+Route::get('/edit-{id}', [AccountController::class, 'account_edit_admin'])->name('edit-{id}')->middleware('AdminCheck');
+Route::post('/edit', [AccountController::class, 'account_edit_user_admin'])->name('edit')->middleware('AdminCheck');
+Route::get('/delete-{id}', [AccountController::class, 'delete'])->name('edit')->middleware('AdminCheck');
