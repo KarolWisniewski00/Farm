@@ -18,7 +18,7 @@
         @endif
         <!--SIDE ON THE LEFT-->
         @if ($page == 0)
-        <div class="col-5">
+        <div class="col-2">
             <div class="list-group text-break">
                 <a href="{{ route('account')}}" class="list-group-item list-group-item-action active" aria-current="true">Account</a>
                 <a href="{{ route('friends')}}" class="list-group-item list-group-item-action">Friends</a>
@@ -27,7 +27,7 @@
             </div>
         </div>
         @elseif ($page == 1)
-        <div class="col-5">
+        <div class="col-2">
             <div class="list-group text-break">
                 <a href="{{ route('account')}}" class="list-group-item list-group-item-action">Account</a>
                 <a href="{{ route('friends')}}" class="list-group-item list-group-item-action active" aria-current="true">Friends</a>
@@ -36,7 +36,7 @@
             </div>
         </div>
         @elseif ($page == 2)
-        <div class="col-5">
+        <div class="col-2">
             <div class="list-group text-break">
                 <a href="{{ route('account')}}" class="list-group-item list-group-item-action">Account</a>
                 <a href="{{ route('friends')}}" class="list-group-item list-group-item-action">Friends</a>
@@ -45,7 +45,7 @@
             </div>
         </div>
         @elseif ($page == 3)
-        <div class="col-5">
+        <div class="col-2">
             <div class="list-group text-break">
                 <a href="{{ route('account')}}" class="list-group-item list-group-item-action">Account</a>
                 <a href="{{ route('friends')}}" class="list-group-item list-group-item-action">Friends</a>
@@ -56,7 +56,7 @@
         @endif
         <!--SIDE ON THE RIGHT-->
         @if ($page == 0)
-        <div class="col-7">
+        <div class="col-10">
             <ol class="list-group list-group text-break">
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
@@ -105,7 +105,7 @@
             </div>
         </div>
         @elseif ($page == 1)
-        <div class="col-7">
+        <div class="col-10">
             <div class="bg-white rounded p-3">
                 <h1>Invitation:</h1>
                 <form class="form-floating" method="POST" action="{{route('friend-add')}}">
@@ -119,9 +119,9 @@
                 <ol class="list-group list-group text-break mb-3">
                     @foreach($pending as $p)
                     <li class="list-group-item d-flex flex-row justify-content-between align-items-center">
+                        <div class="fw-bold mx-1">{{$users[$p->user_id-1]->nickname}}</div>
                         <form method="POST" action="{{ route('friend-update') }}">
                         @csrf
-                        <div class="fw-bold mx-1">{{$users[$p->user_id-1]->nickname}}</div>
                         <input type="hidden" name="friend" value="{{$p->user_id}}">
                         <button type="submit" name="status" value="accept" class="btn btn-primary">Accept</button>
                         <button type="submit" name="status" value="reject" class="btn btn-danger">Reject</button>
@@ -134,19 +134,32 @@
                 <ol class="list-group list-group text-break mb-3">
                     @foreach($accepted as $a)
                     <li class="list-group-item d-flex flex-row justify-content-between align-items-center">
-                        @if($a->user_id-1 == Session::get('login_id'))
-                        <div class="fw-bold mx-1">{{$users[$a->user_id-1]->nickname}}</div>
-                        @else
+                        @if($a->user_id == Session::get('login_id'))
                         <div class="fw-bold mx-1">{{$users[$a->friend_id-1]->nickname}}</div>
+                        <form method="POST" action="{{ route('friend-update') }}">
+                        @csrf
+                        <input type="hidden" name="user" value="{{$a->user_id}}">
+                        <input type="hidden" name="friend" value="{{$a->friend_id}}">
+                        <a href="game-{{$a->friend_id}}" class="btn btn-primary">View farm</a>
+                        <button type="submit" name="status" value="delete" class="btn btn-danger">Delete</button>
+                        </form>
+                        @else
+                        <div class="fw-bold mx-1">{{$users[$a->user_id-1]->nickname}}</div>
+                        <form method="POST" action="{{ route('friend-update') }}">
+                        @csrf
+                        <input type="hidden" name="user" value="{{$a->user_id}}">
+                        <input type="hidden" name="friend" value="{{$a->friend_id}}">
+                        <a href="game-{{$a->user_id}}" class="btn btn-primary">View farm</a>
+                        <button type="submit" name="status" value="delete" class="btn btn-danger">Delete</button>
+                        </form>
                         @endif
-                        <button class="btn btn-primary">View farm</button>
                     </li>
                     @endforeach
                 </ol>
             </div>
         </div>
         @elseif ($page == 2)
-        <div class="col-7">
+        <div class="col-10">
             <div class="text-center mt-3 bg-white rounded">
                 <h1>Characters</h1>
                 <!--CHARACTER 0-->
@@ -188,7 +201,7 @@
             </div>
         </div>
         @elseif ($page == 3)
-        <div class="col-7">
+        <div class="col-10">
             <div class="text-center mt-3 bg-white rounded">
                 <h1>Users</h1>
                 <ol class="list-group list-group text-break mb-3">

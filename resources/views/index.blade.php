@@ -69,7 +69,7 @@
                     <label for="floating_password_login">Password</label>
                     <span class="text-danger">@error('password_login') {{$message}} @enderror</span>
                 </div>
-
+                <a href="{{route('forget')}}">Forget password?</a>
                 <button class="w-100 btn btn-lg btn-primary my-3" type="submit">Log in</button>
             </form>
         </div>

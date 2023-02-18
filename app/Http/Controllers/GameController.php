@@ -9,9 +9,12 @@ use Illuminate\Support\Facades\Session;
 class GameController extends Controller
 {
     /*GAME*/
-    public function game()
+    public function game($id=0)
     {
-        $user =  User::where('id' ,'=', Session::get('login_id'))->first();     //get data about the user
+        if ($id==0){
+            $id = Session::get('login_id');
+        }
+        $user =  User::where('id' ,'=', $id)->first();     //get data about the user
         $map = json_decode($user['map_data']);                                  //decode map - change string to json
         $coins = $user['coins'];                                                //save help variable
         $missions = $user['missions'];                                          //save help variable
@@ -41,7 +44,17 @@ class GameController extends Controller
                 }
             };
         };
-
+        if ($id !=Session::get('login_id')){
+            return view('game_guest',[
+                'map'=>$map,
+                'coins'=>json_decode($coins),
+                'missions'=>json_decode($missions),
+                'dict_seeding_count'=>json_decode($dict_seeding_count),
+                'character'=>$character,
+                'cow'=>$cow,
+                'chicken'=>$chicken,
+            ]);
+        }
         if ($map != null){                                                  //if all good return view
             return view('game',[
                 'map'=>$map,
@@ -60,7 +73,7 @@ class GameController extends Controller
 
     /*GAME UPDATE/SAVE*/
     public function game_update(Request $request){
-        User::where('id' ,'=', Session::get('login_id'))->update(['map_data' => $this->map_default]);
+        User::where('id' ,'=', Session::get('login_id'))->update(['map_data' => $request->map]);
         User::where('id' ,'=', Session::get('login_id'))->update(['coins' => $request->coins]);
         User::where('id' ,'=', Session::get('login_id'))->update(['missions' => $request->missions]);
         User::where('id' ,'=', Session::get('login_id'))->update(['dict_seeding_count' => $request->count]);
@@ -76,7 +89,7 @@ class GameController extends Controller
         }
         return ['ok'=>'ok'];
     }
-    
+
     /*CHANGE CHARACTER*/
     public function character($id){
         User::where('id' ,'=', Session::get('login_id'))->update(['character' => $id]);

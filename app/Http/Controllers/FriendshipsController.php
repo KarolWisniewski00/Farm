@@ -49,13 +49,17 @@ class FriendshipsController extends Controller
     public function friend_update(Request $request){
         $status = $request->input('status');
         $friend = $request->input('friend');
-        
+        $user = $request->input('user');
+
         if ($status == 'accept') {
             Friendship::where('friend_id', Session::get('login_id'))->where('user_id', $friend)->update(['status' => true]);
             return redirect('friends')->with('success', "Accepted!");
         } elseif ($status == 'reject') {
             Friendship::where('friend_id', '=', Session::get('login_id'))->where('user_id', '=', $friend)->delete();
             return redirect('friends')->with('success', "Rejected!");
+        } elseif ($status == 'delete') {
+            Friendship::where('friend_id', '=', $friend)->where('user_id', '=', $user)->delete();
+            return redirect('friends')->with('success', "Deleted!");
         }
     }
 }
