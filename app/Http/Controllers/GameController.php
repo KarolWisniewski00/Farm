@@ -42,7 +42,6 @@ class GameController extends Controller
                         };
                         $value->dateEnd = 0;
                         $value->startEnd = 0;
-                        $value->platform = 1;
                         $value->kindGrowing = 0;
                     }
                 }

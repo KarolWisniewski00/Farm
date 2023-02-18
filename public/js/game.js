@@ -458,13 +458,27 @@ BasicGame.Boot.prototype =
                 tile.loadTexture('grass');                                              //change texture
 
                 //update map
-                switch (map[y][x].platformSecond) {
-                    case dictPlatformSecond.tomato: dictSeedingCount.tomato += 2; break;
-                    case dictPlatformSecond.wheat: dictSeedingCount.wheat += 2; break;
-                    case dictPlatformSecond.carrot: dictSeedingCount.carrot += 2; break;
-                    case dictPlatformSecond.corn: dictSeedingCount.corn += 2; break;
-                    case dictPlatformSecond.transparent: tile.tint = 0xffffff; break;
-                };
+                switch (map[y][x].platform){
+                    case dictPlatform.wateringNoGrass:
+                        switch (map[y][x].platformSecond) {
+                            case dictPlatformSecond.tomato: dictSeedingCount.tomato += 3; break;
+                            case dictPlatformSecond.wheat: dictSeedingCount.wheat += 3; break;
+                            case dictPlatformSecond.carrot: dictSeedingCount.carrot += 3; break;
+                            case dictPlatformSecond.corn: dictSeedingCount.corn += 3; break;
+                            case dictPlatformSecond.transparent: tile.tint = 0xffffff; break;
+                        };
+                        tile.tint = 0xffffff;
+                        break;
+                    case dictPlatform.noGrass:
+                        switch (map[y][x].platformSecond) {
+                            case dictPlatformSecond.tomato: dictSeedingCount.tomato += 2; break;
+                            case dictPlatformSecond.wheat: dictSeedingCount.wheat += 2; break;
+                            case dictPlatformSecond.carrot: dictSeedingCount.carrot += 2; break;
+                            case dictPlatformSecond.corn: dictSeedingCount.corn += 2; break;
+                            case dictPlatformSecond.transparent: tile.tint = 0xffffff; break;
+                        };
+                        break;
+                }
                 map[y][x].platformSecond = dictPlatformSecond.null;
                 map[y][x].platform = dictPlatform.grass;
 
@@ -576,8 +590,6 @@ BasicGame.Boot.prototype =
             //seclect the element to change - if the date end is older or same that current date
             if ((dateCurrent - map[y][x].dateEnd > 0 && map[y][x].platformSecond.key == 'shoot') || (map[y][x].dateEnd.toString() == dateCurrent.toString())) {
                 tile = isoGroupPlatform.children[(x * map[0].length) + y]                   //get the element to change
-                tile.tint = 0xffffff;                                                       //add white color
-                tile.loadTexture('nograss');                                                //load new texture
 
                 var counter = 0;                                                            //helper variable
                 var index = 0;                                                              //index of the object from isoGroupSecond
