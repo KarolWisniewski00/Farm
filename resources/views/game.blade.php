@@ -86,12 +86,42 @@
                     </a>
                 </div>
                 <div class="col d-flex justify-content-center align-items-center">
+                    <button class="btn btn-outline-light p-2 m-2" id="chats">
+                        <img src="images/chat.png" class="img-fluid max-height-64"
+                            alt="chat">
+                        <div>Chat</div>
+                    </button>
+                </div>
+                <div class="col d-flex justify-content-center align-items-center">
                     <a href="{{url('logout')}}" class="btn btn-outline-light p-2 m-2" id="logout-icon">
                         <img src="images/logout-icon.png" class="img-fluid max-height-64"
                             alt="logout-icon">
                         <div>Logout</div>
                     </a>
                 </div>
+            </div>
+        </div>
+    </div>
+    <!--WINDOW CHAT-->
+    <div class="position-absolute w-75 mx-3 p-3 bg-dark bg-opacity-50 text-bg-dark overflow-auto d-flex flex-column align-items-center px-5 shadow window" id="window-chat">
+        <div class="w-100 text-center my-3">
+            <h2>Chat</h2>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="overflow-auto" id="chat">
+                    
+                </div>
+                <form method="POST" action="{{route('chat-post')}}">
+                    @csrf
+                    <div class="form-floating my-3 d-flex justify-content-center align-items-center">
+                        <input type="text" class="form-control bg-transparent text-white" id="chat" name="chat" placeholder="text..." required>
+                        <label for="chat">Chat</label>
+                        <span class="text-danger">@error('chat') {{$message}} @enderror</span>
+                        <button class="btn btn-outline-light m-2 h-100">Send</button>
+                        <button class="btn btn-danger m-2 h-100" id="chats1">Close</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -142,6 +172,19 @@
     </script>
     <script src="js/game.js"></script>
     <script src="js/interface.js"></script>
+    @if(Session::has('chat'))
+    <script>
+        var chatList = {!! json_encode(Session::get('chat')) !!};
+        divChatWindow.style.visibility = "visible";
+        divChat.innerHTML = '';
+        chatList.forEach(element => {
+            singleChat = `
+            <div style="word-break: break-all;">[USER${element.user_id}] : ${element.content}</div>
+            `;
+            divChat.innerHTML += singleChat;
+        });
+    </script>
+    @endif
 </body>
 
 </html>
@@ -166,4 +209,5 @@
     https://www.flaticon.com/search?word=delete
     https://www.flaticon.com/search?word=milk
     https://www.flaticon.com/search?word=chicken
+    https://www.flaticon.com/search?word=chat
 -->

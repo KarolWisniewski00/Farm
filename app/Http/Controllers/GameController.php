@@ -87,8 +87,6 @@ class GameController extends Controller
         }
         if ($request->chicken == 'true'){
             User::where('id' ,'=', Session::get('login_id'))->update(['chicken' => true]);
-        }else{
-            User::where('id' ,'=', Session::get('login_id'))->update(['chicken' => false]);
         }
         return ['ok'=>'ok'];
     }

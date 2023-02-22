@@ -18,7 +18,7 @@
         @endif
         <!--SIDE ON THE LEFT-->
         @if ($page == 0)
-        <div class="col-2">
+        <div class="col-12 col-md-2 mb-5">
             <div class="list-group text-break">
                 <a href="{{ route('account')}}" class="list-group-item list-group-item-action active" aria-current="true">Account</a>
                 <a href="{{ route('friends')}}" class="list-group-item list-group-item-action">Friends</a>
@@ -28,7 +28,7 @@
             </div>
         </div>
         @elseif ($page == 1)
-        <div class="col-2">
+        <div class="col-12 col-md-2 mb-5">
             <div class="list-group text-break">
                 <a href="{{ route('account')}}" class="list-group-item list-group-item-action">Account</a>
                 <a href="{{ route('friends')}}" class="list-group-item list-group-item-action active" aria-current="true">Friends</a>
@@ -38,7 +38,7 @@
             </div>
         </div>
         @elseif ($page == 2)
-        <div class="col-2">
+        <div class="col-12 col-md-2 mb-5">
             <div class="list-group text-break">
                 <a href="{{ route('account')}}" class="list-group-item list-group-item-action">Account</a>
                 <a href="{{ route('friends')}}" class="list-group-item list-group-item-action">Friends</a>
@@ -48,7 +48,7 @@
             </div>
         </div>
         @elseif ($page == 3)
-        <div class="col-2">
+        <div class="col-12 col-md-2 mb-5">
             <div class="list-group text-break">
                 <a href="{{ route('account')}}" class="list-group-item list-group-item-action">Account</a>
                 <a href="{{ route('friends')}}" class="list-group-item list-group-item-action">Friends</a>
@@ -58,7 +58,7 @@
             </div>
         </div>
         @elseif ($page == 4)
-        <div class="col-2">
+        <div class="col-12 col-md-2 mb-5">
             <div class="list-group text-break">
                 <a href="{{ route('account')}}" class="list-group-item list-group-item-action">Account</a>
                 <a href="{{ route('friends')}}" class="list-group-item list-group-item-action">Friends</a>
@@ -70,7 +70,7 @@
         @endif
         <!--SIDE ON THE RIGHT-->
         @if ($page == 0)
-        <div class="col-10">
+        <div class="col-12 col-md-10">
             <ol class="list-group list-group text-break">
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
@@ -119,7 +119,7 @@
             </div>
         </div>
         @elseif ($page == 1)
-        <div class="col-10">
+        <div class="col-12 col-md-10">
             <div class="bg-white rounded p-3">
                 <h1>Invitation:</h1>
                 <form class="form-floating" method="POST" action="{{route('friend-add')}}">
@@ -182,7 +182,7 @@
             </div>
         </div>
         @elseif ($page == 2)
-        <div class="col-10">
+        <div class="col-12 col-md-10">
             <div class="text-center bg-white rounded">
                 <h1>Characters</h1>
                 <!--CHARACTER 0-->
@@ -224,25 +224,25 @@
             </div>
         </div>
         @elseif ($page == 3)
-        <div class="col-10">
+        <div class="col-12 col-md-10">
             <div class="text-center bg-white rounded">
                 <h1>Users</h1>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Surname</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Nickname</th>
+                            <th scope="col" style="word-break: break-all;">Name</th>
+                            <th scope="col" style="word-break: break-all;">Surname</th>
+                            <th scope="col" style="word-break: break-all;">Email</th>
+                            <th scope="col" style="word-break: break-all;">Nickname</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($users as $user)
                         <tr>
-                            <th>{{$user->name}}</th>
-                            <td>{{$user->surname}}</td>
-                            <td>{{$user->email}}</td>
-                            <td>{{$user->name}}</td>
+                            <td style="word-break: break-all;">{{$user->name}}</td>
+                            <td style="word-break: break-all;">{{$user->surname}}</td>
+                            <td style="word-break: break-all;">{{$user->email}}</td>
+                            <td style="word-break: break-all;">{{$user->nickname}}</td>
                             <td><a href="edit-{{$user->id}}" class="btn btn-primary">Edit</a></td>
                             <td><a href="delete-{{$user->id}}" class="btn btn-danger">Delete</a></td>
                         </tr>
@@ -252,7 +252,7 @@
             </div>
         </div>
         @elseif ($page == 4)
-        <div class="col-10">
+        <div class="col-12 col-md-10">
             <div class="text-center bg-white rounded">
                 <h1>Add new</h1>
                 <form method="POST" action="{{route('marketplace-add')}}">
@@ -267,7 +267,7 @@
                                             <div>wheat</div><img src="images/wheat-icon.png" class="img-fluid max-height-64" alt="wheat-icon">
                                             <div>
                                                 <div class="form-group">
-                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <label for="example-number-input">Choose a number</label>
                                                     <input class="form-control" type="number" id="example-number-input" name="sell_wheat">
                                                 </div>
                                             </div>
@@ -276,7 +276,7 @@
                                             <div>tomato</div><img src="images/tomato-icon.png" class="img-fluid max-height-64" alt="tomato-icon">
                                             <div>
                                                 <div class="form-group">
-                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <label for="example-number-input">Choose a number</label>
                                                     <input class="form-control" type="number" id="example-number-input" name="sell_tomato">
                                                 </div>
                                             </div>
@@ -285,7 +285,7 @@
                                             <div>carrot</div><img src="images/carrot-icon.png" class="img-fluid max-height-64" alt="carrot-icon">
                                             <div>
                                                 <div class="form-group">
-                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <label for="example-number-input">Choose a number</label>
                                                     <input class="form-control" type="number" id="example-number-input" name="sell_carrot">
                                                 </div>
                                             </div>
@@ -294,7 +294,7 @@
                                             <div>corn</div><img src="images/corn-icon.png" class="img-fluid max-height-64" alt="corn-icon">
                                             <div>
                                                 <div class="form-group">
-                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <label for="example-number-input">Choose a number</label>
                                                     <input class="form-control" type="number" id="example-number-input" name="sell_corn">
                                                 </div>
                                             </div>
@@ -303,7 +303,7 @@
                                             <div>milk</div><img src="images/milk-icon.png" class="img-fluid max-height-64" alt="milk-icon">
                                             <div>
                                                 <div class="form-group">
-                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <label for="example-number-input">Choose a number</label>
                                                     <input class="form-control" type="number" id="example-number-input" name="sell_milk">
                                                 </div>
                                             </div>
@@ -312,7 +312,7 @@
                                             <div>egg</div><img src="images/egg-icon.png" class="img-fluid max-height-64" alt="egg-icon">
                                             <div>
                                                 <div class="form-group">
-                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <label for="example-number-input">Choose a number</label>
                                                     <input class="form-control" type="number" id="example-number-input" name="sell_egg">
                                                 </div>
                                             </div>
@@ -321,7 +321,7 @@
                                             <div>coin</div><img src="images/coin-icon.png" class="img-fluid max-height-64" alt="coin-icon">
                                             <div>
                                                 <div class="form-group">
-                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <label for="example-number-input">Choose a number</label>
                                                     <input class="form-control" type="number" id="example-number-input" name="sell_coin">
                                                 </div>
                                             </div>
@@ -335,7 +335,7 @@
                                             <div>wheat</div><img src="images/wheat-icon.png" class="img-fluid max-height-64" alt="wheat-icon">
                                             <div>
                                                 <div class="form-group">
-                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <label for="example-number-input">Choose a number</label>
                                                     <input class="form-control" type="number" id="example-number-input" name="for_wheat">
                                                 </div>
                                             </div>
@@ -344,7 +344,7 @@
                                             <div>tomato</div><img src="images/tomato-icon.png" class="img-fluid max-height-64" alt="tomato-icon">
                                             <div>
                                                 <div class="form-group">
-                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <label for="example-number-input">Choose a number</label>
                                                     <input class="form-control" type="number" id="example-number-input" name="for_tomato">
                                                 </div>
                                             </div>
@@ -353,7 +353,7 @@
                                             <div>carrot</div><img src="images/carrot-icon.png" class="img-fluid max-height-64" alt="carrot-icon">
                                             <div>
                                                 <div class="form-group">
-                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <label for="example-number-input">Choose a number</label>
                                                     <input class="form-control" type="number" id="example-number-input" name="for_carrot">
                                                 </div>
                                             </div>
@@ -362,7 +362,7 @@
                                             <div>corn</div><img src="images/corn-icon.png" class="img-fluid max-height-64" alt="corn-icon">
                                             <div>
                                                 <div class="form-group">
-                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <label for="example-number-input">Choose a number</label>
                                                     <input class="form-control" type="number" id="example-number-input" name="for_corn">
                                                 </div>
                                             </div>
@@ -371,7 +371,7 @@
                                             <div>milk</div><img src="images/milk-icon.png" class="img-fluid max-height-64" alt="milk-icon">
                                             <div>
                                                 <div class="form-group">
-                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <label for="example-number-input">Choose a number</label>
                                                     <input class="form-control" type="number" id="example-number-input" name="for_milk">
                                                 </div>
                                             </div>
@@ -380,7 +380,7 @@
                                             <div>egg</div><img src="images/egg-icon.png" class="img-fluid max-height-64" alt="egg-icon">
                                             <div>
                                                 <div class="form-group">
-                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <label for="example-number-input">Choose a number</label>
                                                     <input class="form-control" type="number" id="example-number-input" name="for_egg">
                                                 </div>
                                             </div>
@@ -389,7 +389,7 @@
                                             <div>coin</div><img src="images/coin-icon.png" class="img-fluid max-height-64" alt="coin-icon">
                                             <div>
                                                 <div class="form-group">
-                                                    <label for="example-number-input">Wybierz liczbę</label>
+                                                    <label for="example-number-input">Choose a number</label>
                                                     <input class="form-control" type="number" id="example-number-input" name="for_coin">
                                                 </div>
                                             </div>

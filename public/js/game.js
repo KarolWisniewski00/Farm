@@ -103,7 +103,7 @@ var platformInfoColor = dictColor.normal;
 var kindSeedingInfoColor = dictColor.normal;
 var kindGrowingInfoColor = dictColor.normal;
 var timeLeftColor = dictColor.normal;
-var isoGroup, cursorPos, cursor, timeLeft, count;
+var isoGroup, cursorPos, cursor, timeLeft, count; chatList
 BasicGame.Boot.prototype =
 {
     //INSIDE CREATE FUNCTIONS
@@ -216,7 +216,9 @@ BasicGame.Boot.prototype =
             speedChickenY = Math.floor(Math.random() * 90) + 60;
         };
         setInterval(direction, 2000);
-        setInterval(directionChicken, 1000);
+        setInterval(directionChicken, 500);
+        setInterval(save, 500);
+        setInterval(chatGet, 500);
 
     },
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------

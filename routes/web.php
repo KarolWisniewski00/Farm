@@ -7,6 +7,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\FriendshipsController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\MarketplaceController;
+use App\Http\Controllers\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,10 @@ Route::post('/forget-mail',[ResetPasswordController::class, 'forget_mail'])->nam
 Route::get('/game', [GameController::class, 'game'])->name('game')->middleware('isLoggedIn');
 Route::post('/game-update', [GameController::class, 'game_update'])->name('game-update')->middleware('isLoggedIn');
 Route::get('/game-{id}', [GameController::class, 'game'])->name('game-update')->middleware('isLoggedIn');
+
+//CHAT
+Route::get('/chat-get', [ChatController::class, 'get']);
+Route::post('/chat-post', [ChatController::class, 'post'])->name('chat-post');
 
 //ACCOUNT
 Route::get('/account', [AccountController::class, 'account'])->name('account')->middleware('isLoggedIn');

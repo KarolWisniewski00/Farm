@@ -18,6 +18,11 @@ var divSetting = document.getElementById('settings');
 var divSettingButtom = document.getElementById('setting');
 divSettingWindow.style.visibility = "hidden";
 
+var divChatWindow = document.getElementById('window-chat');
+var divChat = document.getElementById('chat');
+var divChatButtom = document.getElementById('chats');
+divChatWindow.style.visibility = "hidden";
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
 //WINDOW SEEDING SHOW - HIDE LOGIC
 //this is a function to show - hide the window on click the button
@@ -41,7 +46,7 @@ document.getElementById("seeding").addEventListener("click", function () {
                 divSeeding.innerHTML += singleButton;
             };
         };
-        if (cowActive){
+        if (cowActive) {
             cowButton = `
             <div class="list-group-item list-group-item-action bg-transparent border-1 rounded-0 border-white text-white d-flex flex-column justify-content-between">
                 <div class="d-flex flex-column text-center w-100">
@@ -77,7 +82,7 @@ document.getElementById("seeding").addEventListener("click", function () {
             `;
             divAnimal.innerHTML += cowButton;
         };
-        if (chickenActive){
+        if (chickenActive) {
             chickenButton = `
             <div class="list-group-item list-group-item-action bg-transparent border-1 rounded-0 border-white text-white d-flex flex-column justify-content-between">
                 <div class="d-flex flex-column text-center w-100">
@@ -205,6 +210,28 @@ document.addEventListener("click", function (event) {
     }
 });
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+//WINDOW CHAT - HIDE LOGIC
+//this is a function to show - hide the window on click the button
+document.getElementById("chats").addEventListener("click", function () {
+    if (divChatWindow.style.visibility === "hidden") {
+        divChatWindow.style.visibility = "visible";
+        divChat.innerHTML = '';
+        chatList.forEach(element => {
+            singleChat = `
+            <div style="word-break: break-all;">[USER${element.user_id}] : ${element.content}</div>
+            `;
+            divChat.innerHTML += singleChat;
+        });
+    } else {
+        divChatWindow.style.visibility = "hidden";
+    }
+});
+document.getElementById("chats1").addEventListener("click", function () {
+    if (divChatWindow.style.visibility === "hidden") {} else {
+        divChatWindow.style.visibility = "hidden";
+    }
+});
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------
 //BUTTON KIND SEEDING
 //this is a function to switch the kind of seeding
 function kindSeedingSet(newKindSeeding, id) {
@@ -219,16 +246,16 @@ function kindSeedingSet(newKindSeeding, id) {
 //This is a function to check the missions and remove if the condition is met
 function missionChcek(id) {
     var have = false;
-    console.log(missions)   
+    console.log(missions)
     missions[id].collect.forEach(function (coll) {
         switch (coll.item) {                                                                                    //chcek if user have all from mission
-            case 'wheat': if (dictSeedingCount.wheat >= coll.count) { have = true }; break;                     //then set have true
-            case 'tomato': if (dictSeedingCount.tomato >= coll.count) { have = true }; break;                   //then set have true
-            case 'carrot': if (dictSeedingCount.carrot >= coll.count) { have = true }; break;                   //then set have true
-            case 'corn': if (dictSeedingCount.corn >= coll.count) { have = true }; break;                   //then set have true
-            case 'coin': if (coins >= coll.count) { have = true }; break;                                       //then set have true
-            case 'milk': if (dictSeedingCount.milk >= coll.count) { have = true }; break;                                       //then set have true
-            case 'egg': if (dictSeedingCount.egg >= coll.count) { have = true }; break;                                       //then set have true
+            case 'wheat': if (dictSeedingCount.wheat >= coll.count) { have = true } else { have = false }; break;                     //then set have true
+            case 'tomato': if (dictSeedingCount.tomato >= coll.count) { have = true } else { have = false }; break;                   //then set have true
+            case 'carrot': if (dictSeedingCount.carrot >= coll.count) { have = true } else { have = false }; break;                   //then set have true
+            case 'corn': if (dictSeedingCount.corn >= coll.count) { have = true } else { have = false }; break;                   //then set have true
+            case 'coin': if (coins >= coll.count) { have = true } else { have = false }; break;                                       //then set have true
+            case 'milk': if (dictSeedingCount.milk >= coll.count) { have = true } else { have = false }; break;                                       //then set have true
+            case 'egg': if (dictSeedingCount.egg >= coll.count) { have = true } else { have = false }; break;                                       //then set have true
         };
     });
     if (have) {                                                                                                 //if have is true 
@@ -240,20 +267,20 @@ function missionChcek(id) {
                 case 'corn': dictSeedingCount.corn += awa.count; break;                                     //add award
                 case 'coin': coins += awa.count; document.getElementById("coins").innerHTML = coins; break;     //update view 
                 case 'cow':
-                cowActive=true;
-                function direction() {
-                    randomNumber = Math.floor(Math.random() * 4) + 1;
-                    speedCowX = Math.floor(Math.random() * 60) + 30;
-                    speedCowY = Math.floor(Math.random() * 60) + 30;
-                };
-                setInterval(direction, 2000);
-                cow = game.add.isoSprite(characterStartX * size, (characterStartY + 1) * size, 0, 'cow', 0, isoGroupPlatformSecond);
-                cow.anchor.set(0.5);
-                game.physics.isoArcade.enable(cow);
-                cow.body.collideWorldBounds = true;
-                break;                                                              //update cow state 
+                    cowActive = true;
+                    function direction() {
+                        randomNumber = Math.floor(Math.random() * 4) + 1;
+                        speedCowX = Math.floor(Math.random() * 60) + 30;
+                        speedCowY = Math.floor(Math.random() * 60) + 30;
+                    };
+                    setInterval(direction, 2000);
+                    cow = game.add.isoSprite(characterStartX * size, (characterStartY + 1) * size, 0, 'cow', 0, isoGroupPlatformSecond);
+                    cow.anchor.set(0.5);
+                    game.physics.isoArcade.enable(cow);
+                    cow.body.collideWorldBounds = true;
+                    break;                                                              //update cow state 
                 case 'chicken':
-                    chickenActive=true;
+                    chickenActive = true;
                     function direction() {
                         randomNumber = Math.floor(Math.random() * 4) + 1;
                         speedChickenX = Math.floor(Math.random() * 60) + 30;
@@ -264,7 +291,7 @@ function missionChcek(id) {
                     chicken.anchor.set(0.5);
                     game.physics.isoArcade.enable(chicken);
                     chicken.body.collideWorldBounds = true;
-                    break; 
+                    break;
             };
         });
         missions[id].collect.forEach(function (coll) {
@@ -278,29 +305,29 @@ function missionChcek(id) {
                 case 'coin': coins -= coll.count; document.getElementById("coins").innerHTML = coins; break;    //update view 
             };
         });
-        missions.splice(id, 1); 
+        missions.splice(id, 1);
         console.log(missions)                                                                           //remove mission
     };
 };
-function feedCow(){
-    if (cowActive && dictSeedingCount.wheat>=10){
-        dictSeedingCount.wheat-=10;
-        dictSeedingCount.milk+=1;
+function feedCow() {
+    if (cowActive && dictSeedingCount.wheat >= 10) {
+        dictSeedingCount.wheat -= 10;
+        dictSeedingCount.milk += 1;
     };
 };
-function feedChicken(){
-    if (chickenActive && dictSeedingCount.wheat>=10){
-        dictSeedingCount.corn-=10;
-        dictSeedingCount.egg+=1;
+function feedChicken() {
+    if (chickenActive && dictSeedingCount.wheat >= 10) {
+        dictSeedingCount.corn -= 10;
+        dictSeedingCount.egg += 1;
     };
 };
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
 //BUTTON CHANGE GAMEMODE
 //This is a function to change the view of the layout 
-function changeGameMode(){
-    if (gameMode){
-        gameMode=false
+function changeGameMode() {
+    if (gameMode) {
+        gameMode = false;
         document.getElementById('change-type').className = 'btn btn-outline-light p-2 m-2';
         document.getElementById('plant').style.display = 'block';
         document.getElementById('watering-can').style.display = 'block';
@@ -310,8 +337,10 @@ function changeGameMode(){
         document.getElementById('tree').style.display = 'none';
         document.getElementById('rock').style.display = 'none';
         document.getElementById('water').style.display = 'none';
-    }else{
-        gameMode=true
+    } else {
+        gameMode = true;
+        kindSeeding = dictKind.null;
+        count = 0;
         document.getElementById('change-type').className = 'btn btn-outline-light p-2 m-2 active';
         document.getElementById('plant').style.display = 'none';
         document.getElementById('watering-can').style.display = 'none';
@@ -326,7 +355,7 @@ function changeGameMode(){
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
 //This is a function to save the map of the game
-function save(){
+function save() {
     var token = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
         url: '/farm/public/game-update',                        //adress URL controller
@@ -342,6 +371,20 @@ function save(){
         },
         success: function (response) {
             console.log(response);                              //success show
+        },
+        error: function (error) {
+            console.error(error);                               //fail show
+        }
+    });
+}
+function chatGet() {
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url: 'test2/farm/public/chat-get',                        //adress URL controller
+        type: 'GET',                                           //metod HTTP
+        data: {},
+        success: function (response) {
+            chatList = response;                              //success show
         },
         error: function (error) {
             console.error(error);                               //fail show

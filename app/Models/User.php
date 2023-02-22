@@ -16,4 +16,8 @@ class User extends Model
     {
         return $this->hasMany(Friendship::class,);
     }
+    public function chats()
+    {
+        return $this->hasMany(Chat::class,);
+    }
 }
