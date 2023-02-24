@@ -103,7 +103,7 @@ var platformInfoColor = dictColor.normal;
 var kindSeedingInfoColor = dictColor.normal;
 var kindGrowingInfoColor = dictColor.normal;
 var timeLeftColor = dictColor.normal;
-var isoGroup, cursorPos, cursor, timeLeft, count; chatList
+var isoGroup, cursorPos, cursor, timeLeft, count;
 BasicGame.Boot.prototype =
 {
     //INSIDE CREATE FUNCTIONS

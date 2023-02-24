@@ -358,7 +358,7 @@ function changeGameMode() {
 function save() {
     var token = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
-        url: '/farm/public/game-update',                        //adress URL controller
+        url: '/test2/farm/public/game-update',                        //adress URL controller
         type: 'POST',                                           //metod HTTP
         data: {                                                 //data to send
             map: JSON.stringify(map),
@@ -380,7 +380,7 @@ function save() {
 function chatGet() {
     var token = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
-        url: 'test2/farm/public/chat-get',                        //adress URL controller
+        url: '/test2/farm/public/chat-get',                        //adress URL controller
         type: 'GET',                                           //metod HTTP
         data: {},
         success: function (response) {
