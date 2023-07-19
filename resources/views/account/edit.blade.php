@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-12 col-md-6 offset-md-3">
             @if (isset($admin))
-            <form class="form text-center w-100 bg-white rounded p-5" action="{{route('edit')}}" method="POST">
+            <form class="form text-center w-100 bg-white rounded p-5" action="{{route('edit-admin')}}" method="POST">
             @else
             <form class="form text-center w-100 bg-white rounded p-5" action="{{route('account-edit-user')}}" method="POST">
             @endif

@@ -245,20 +245,51 @@ function kindSeedingSet(newKindSeeding, id) {
 //BUTTON MISSION
 //This is a function to check the missions and remove if the condition is met
 function missionChcek(id) {
-    var have = false;
-    console.log(missions)
+    var allHave = true;
     missions[id].collect.forEach(function (coll) {
-        switch (coll.item) {                                                                                    //chcek if user have all from mission
-            case 'wheat': if (dictSeedingCount.wheat >= coll.count) { have = true } else { have = false }; break;                     //then set have true
-            case 'tomato': if (dictSeedingCount.tomato >= coll.count) { have = true } else { have = false }; break;                   //then set have true
-            case 'carrot': if (dictSeedingCount.carrot >= coll.count) { have = true } else { have = false }; break;                   //then set have true
-            case 'corn': if (dictSeedingCount.corn >= coll.count) { have = true } else { have = false }; break;                   //then set have true
-            case 'coin': if (coins >= coll.count) { have = true } else { have = false }; break;                                       //then set have true
-            case 'milk': if (dictSeedingCount.milk >= coll.count) { have = true } else { have = false }; break;                                       //then set have true
-            case 'egg': if (dictSeedingCount.egg >= coll.count) { have = true } else { have = false }; break;                                       //then set have true
-        };
+        var have = false;
+        switch (coll.item) {
+            case 'wheat':
+                if (dictSeedingCount.wheat >= coll.count) {
+                    have = true;
+                }
+                break;
+            case 'tomato':
+                if (dictSeedingCount.tomato >= coll.count) {
+                    have = true;
+                }
+                break;
+            case 'carrot':
+                if (dictSeedingCount.carrot >= coll.count) {
+                    have = true;
+                }
+                break;
+            case 'corn':
+                if (dictSeedingCount.corn >= coll.count) {
+                    have = true;
+                }
+                break;
+            case 'coin':
+                if (coins >= coll.count) {
+                    have = true;
+                }
+                break;
+            case 'milk':
+                if (dictSeedingCount.milk >= coll.count) {
+                    have = true;
+                }
+                break;
+            case 'egg':
+                if (dictSeedingCount.egg >= coll.count) {
+                    have = true;
+                }
+                break;
+        }
+        if (!have) {
+            allHave = false;
+        }
     });
-    if (have) {                                                                                                 //if have is true 
+    if (allHave) {                                                                                                 //if have is true 
         missions[id].award.forEach(function (awa) {
             switch (awa.item) {
                 case 'wheat': dictSeedingCount.wheat += awa.count; break;                                       //add award
@@ -378,7 +409,6 @@ function save() {
     });
 }
 function chatGet() {
-    var token = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
         url: '/test2/farm/public/chat-get',                        //adress URL controller
         type: 'GET',                                           //metod HTTP

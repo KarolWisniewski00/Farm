@@ -131,21 +131,36 @@
             <div class="d-flex justify-content-between w-100">
                 <buttom class="btn btn-outline-light p-2 m-2" id="shovel" style="display: block;" onclick="save()"><img
                         src="images/shovel.png" class="img-fluid max-height-64" alt="shovel" style="display: block;">
+                        1 <img src="images/coin-icon.png" alt="coin-icon" width="15" height="15">
                 </buttom>
                 <buttom class="btn btn-outline-light p-2 m-2" id="plant" style="display: block;" onclick="save()"><img
-                        src="images/plant.png" alt="plant" class="img-fluid max-height-64"></buttom>
+                        src="images/plant.png" alt="plant" class="img-fluid max-height-64" style="display: block;">
+                        1 <img src="images/coin-icon.png" alt="coin-icon" width="15" height="15">
+                </buttom>
                 <buttom class="btn btn-outline-light p-2 m-2" id="watering-can" style="display: block;" onclick="save()"><img
-                        src="images/watering-can.png" alt="watering-can" class="img-fluid max-height-64"></buttom>
+                        src="images/watering-can.png" alt="watering-can" class="img-fluid max-height-64" style="display: block;">
+                        Free
+                </buttom>
                 <buttom class="btn btn-outline-light p-2 m-2" id="scythe" style="display: block;" onclick="save()"><img
-                        src="images/scythe.png" alt="scythe" class="img-fluid max-height-64"></buttom>
+                        src="images/scythe.png" alt="scythe" class="img-fluid max-height-64" style="display: block;">
+                        Free
+                </buttom>
                 <buttom class="btn btn-outline-light p-2 m-2" id="grass" style="display: none;" onclick="save()"><img
-                        src="images/grass-icon.png" alt="grass" class="img-fluid max-height-64"></buttom>
+                        src="images/grass-icon.png" alt="grass" class="img-fluid max-height-64" style="display: block;">
+                        100 <img src="images/coin-icon.png" alt="coin-icon" width="15" height="15">
+                </buttom>
                 <buttom class="btn btn-outline-light p-2 m-2" id="tree" style="display: none;" onclick="save()"><img
-                        src="images/tree-icon.png" alt="tree" class="img-fluid max-height-64"></buttom>
+                        src="images/tree-icon.png" alt="tree" class="img-fluid max-height-64" style="display: block;">
+                        100 <img src="images/coin-icon.png" alt="coin-icon" width="15" height="15">
+                </buttom>
                 <buttom class="btn btn-outline-light p-2 m-2" id="rock" style="display: none;" onclick="save()"><img
-                        src="images/rock-icon.png" alt="rock" class="img-fluid max-height-64"></buttom>
+                        src="images/rock-icon.png" alt="rock" class="img-fluid max-height-64" style="display: block;">
+                        100 <img src="images/coin-icon.png" alt="coin-icon" width="15" height="15">
+                </buttom>
                 <buttom class="btn btn-outline-light p-2 m-2" id="water" style="display: none;" onclick="save()"><img
-                        src="images/water-icon.png" alt="water" class="img-fluid max-height-64"></buttom>
+                        src="images/water-icon.png" alt="water" class="img-fluid max-height-64" style="display: block;">
+                        100 <img src="images/coin-icon.png" alt="coin-icon" width="15" height="15">
+                </buttom>
             </div>
         </div>
     </nav>

@@ -58,5 +58,5 @@ Route::post('/friend-add', [FriendshipsController::class, 'friend_add'])->name('
 Route::post('/friend-update', [FriendshipsController::class, 'friend_update'])->name('friend-update')->middleware('isLoggedIn');
 
 Route::get('/edit-{id}', [AccountController::class, 'account_edit_admin'])->name('edit-{id}')->middleware('AdminCheck');
-Route::post('/edit', [AccountController::class, 'account_edit_user_admin'])->name('edit')->middleware('AdminCheck');
+Route::post('/edit-admin', [AccountController::class, 'account_edit_user_admin'])->name('edit-admin')->middleware('AdminCheck');
 Route::get('/delete-{id}', [AccountController::class, 'delete'])->name('edit')->middleware('AdminCheck');
